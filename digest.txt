@@ -1,0 +1,521 @@
+Directory structure:
+└── src/
+    ├── config.py
+    ├── main.py
+    ├── server.py
+    ├── chains/
+    │   ├── arbitrum.py
+    │   ├── base.py
+    │   ├── binance_smart_chain.py
+    │   ├── ethereum.py
+    │   ├── evm.py
+    │   ├── solana.py
+    │   ├── sonic.py
+    │   └── __pycache__/
+    ├── core/
+    │   ├── adapter_registry.py
+    │   ├── client.py
+    │   ├── interfaces.py
+    │   ├── rpc.py
+    │   └── __pycache__/
+    ├── prompts/
+    │   ├── transaction.py
+    │   └── __pycache__/
+    ├── tests/
+    │   ├── test_client.py
+    │   ├── test_ethereum_adapter.py
+    │   ├── test_solana_adapter.py
+    │   ├── test_tools.py
+    │   └── __pycache__/
+    └── tools/
+        ├── transaction.py
+        └── __pycache__/
+
+================================================
+File: config.py
+================================================
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+
+class Settings:
+    def __init__(self):
+        for key, value in os.environ.items():
+            setattr(self, key, value)
+
+
+settings = Settings()
+
+
+
+================================================
+File: main.py
+================================================
+import chains.arbitrum
+import chains.base
+import chains.binance_smart_chain
+import chains.ethereum
+import chains.solana
+import chains.sonic
+import prompts.transaction
+import tools.transaction
+from server import mcp
+
+if __name__ == "__main__":
+    mcp.run()
+
+
+
+================================================
+File: server.py
+================================================
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("RPCNodeMCP")
+
+
+
+================================================
+File: chains/arbitrum.py
+================================================
+"""
+Arbitrum-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from chains.evm import EvmAdapter
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import RpcClient
+
+
+@register_adapter("arbitrum")
+class ArbitrumAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.ARBITRUM_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: chains/base.py
+================================================
+"""
+Base-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from chains.evm import EvmAdapter
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import RpcClient
+
+
+@register_adapter("base")
+class BaseChainAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.BASE_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: chains/binance_smart_chain.py
+================================================
+"""
+BSC-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from chains.evm import EvmAdapter
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import RpcClient
+
+
+@register_adapter("binance smart chain")
+class BinanceSmartChainAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.BINANCE_SMART_CHAIN_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: chains/ethereum.py
+================================================
+"""
+Ethereum-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from chains.evm import EvmAdapter
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import RpcClient
+
+
+@register_adapter("ethereum")
+class EthereumAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.ETHEREUM_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: chains/evm.py
+================================================
+"""
+Reusable base class for all EVM-compatible blockchain adapters.
+"""
+
+from core.interfaces import BlockchainAdapter, RpcClient
+from core.rpc import HttpxRpcClient
+
+
+class EvmAdapter(BlockchainAdapter):
+    def __init__(self, rpc_url: str, rpc_client: RpcClient = None):
+        self.rpc_url = rpc_url
+        self.rpc_client = rpc_client or HttpxRpcClient()
+
+    async def fetch_transaction(self, tx_id: str) -> dict:
+        if not tx_id.startswith("0x"):
+            tx_id = "0x" + tx_id
+
+        result = await self.rpc_client.post(
+            method="eth_getTransactionByHash", params=[tx_id], endpoint=self.rpc_url
+        )
+        return result
+
+
+
+================================================
+File: chains/solana.py
+================================================
+"""
+Solana-specific implementation of the BlockchainAdapter using shared JSON-RPC logic.
+"""
+
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import BlockchainAdapter, RpcClient
+from core.rpc import HttpxRpcClient
+
+
+@register_adapter("solana")
+class SolanaAdapter(BlockchainAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        self.rpc_client = rpc_client or HttpxRpcClient()
+        self.rpc_url = settings.SOLANA_RPC_URL
+
+    async def fetch_transaction(self, sig: str) -> dict:
+        return await self.rpc_client.post(
+            "getTransaction",
+            [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0}],
+            endpoint=self.rpc_url,
+        )
+
+
+
+================================================
+File: chains/sonic.py
+================================================
+"""
+Sonic-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from chains.evm import EvmAdapter
+from config import settings
+from core.adapter_registry import register_adapter
+from core.interfaces import RpcClient
+
+
+@register_adapter("sonic")
+class SonicAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.SONIC_RPC_URL, rpc_client=rpc_client)
+
+
+
+
+================================================
+File: core/adapter_registry.py
+================================================
+"""
+Decorator-based registry for automatically registering blockchain adapters.
+"""
+
+from core.interfaces import BlockchainAdapter
+
+registry: dict[str, BlockchainAdapter] = {}
+
+
+def register_adapter(chain: str):
+    def wrapper(adapter_cls):
+        registry[chain] = adapter_cls()
+        return adapter_cls
+
+    return wrapper
+
+
+
+================================================
+File: core/client.py
+================================================
+"""
+Client dispatcher that routes blockchain transaction requests
+through registered BlockchainAdapter instances.
+"""
+
+from core.adapter_registry import registry
+
+
+async def fetch_transaction(blockchain: str, tx_id: str) -> dict:
+    adapter = registry.get(blockchain)
+    if not adapter:
+        raise ValueError(f"Unsupported blockchain: {blockchain}")
+    return await adapter.fetch_transaction(tx_id)
+
+
+
+================================================
+File: core/interfaces.py
+================================================
+"""
+Abstract base class defining the interface all blockchain adapters must implement.
+"""
+
+from abc import ABC, abstractmethod
+
+
+class RpcClient(ABC):
+    @abstractmethod
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        pass
+
+
+class BlockchainAdapter(ABC):
+    @abstractmethod
+    async def fetch_transaction(self, tx_id: str) -> dict:
+        pass
+
+
+
+================================================
+File: core/rpc.py
+================================================
+"""
+Shared JSON-RPC helper to reduce duplication across blockchain adapters.
+"""
+
+import httpx
+
+from .interfaces import RpcClient
+
+
+class HttpxRpcClient(RpcClient):
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                endpoint, json={"jsonrpc": "2.0", "method": method, "params": params, "id": 1}
+            )
+
+            response_data = resp.json()
+
+            if "error" in response_data:
+                error_data = response_data["error"]
+                error_message = error_data.get("message", "Unknown RPC error")
+                error_code = error_data.get("code", -1)
+                raise ValueError(f"RPC Error ({error_code}): {error_message}")
+
+            return response_data.get("result")
+
+
+
+
+================================================
+File: prompts/transaction.py
+================================================
+"""
+MCP prompt that provides a natural language entry point for transaction analysis.
+"""
+
+from mcp.server.fastmcp.prompts import base
+
+from server import mcp
+
+
+@mcp.prompt(name="review_transaction")
+def review_transaction(tx_signature: str) -> list[base.Message]:
+    return [
+        base.UserMessage(
+            "I want you to analyze this transaction from a Web3 developer perspective:"
+        ),
+        base.UserMessage(tx_signature),
+    ]
+
+
+
+
+================================================
+File: tests/test_client.py
+================================================
+from unittest.mock import AsyncMock, MagicMock
+
+import pytest
+
+from core.adapter_registry import registry
+from core.client import fetch_transaction
+
+
+async def test_fetch_transaction_delegates_to_adapter():
+    mock_adapter = MagicMock()
+    mock_adapter.fetch_transaction = AsyncMock(return_value={"tx": "data"})
+
+    original_adapter = registry.get("ethereum")
+    registry["ethereum"] = mock_adapter
+
+    try:
+        result = await fetch_transaction("ethereum", "0x123")
+        assert result == {"tx": "data"}
+        mock_adapter.fetch_transaction.assert_called_once_with("0x123")
+    finally:
+        if original_adapter:
+            registry["ethereum"] = original_adapter
+        else:
+            del registry["ethereum"]
+
+
+async def test_fetch_transaction_unsupported_blockchain():
+    with pytest.raises(ValueError, match="Unsupported blockchain: nonexistent"):
+        await fetch_transaction("nonexistent", "0x123")
+
+
+
+================================================
+File: tests/test_ethereum_adapter.py
+================================================
+from unittest.mock import AsyncMock
+
+from chains.ethereum import EthereumAdapter
+from core.interfaces import RpcClient
+
+
+class MockRpcClient(RpcClient):
+    def __init__(self, mock_response=None):
+        self.mock_response = mock_response or {
+            "hash": "0x123",
+            "from": "0xabc",
+            "to": "0xdef",
+        }
+        self.post_mock = AsyncMock(return_value=self.mock_response)
+
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        return await self.post_mock(method=method, params=params, endpoint=endpoint)
+
+
+async def test_ethereum_fetch_transaction():
+    mock_client = MockRpcClient()
+    adapter = EthereumAdapter(rpc_client=mock_client)
+    result = await adapter.fetch_transaction("0x123abc")
+
+    assert result == mock_client.mock_response
+    mock_client.post_mock.assert_called_once()
+
+    call_args = mock_client.post_mock.call_args.kwargs
+    assert call_args["method"] == "eth_getTransactionByHash"
+    assert call_args["params"] == ["0x123abc"]
+    assert call_args["endpoint"] == adapter.rpc_url
+
+
+
+================================================
+File: tests/test_solana_adapter.py
+================================================
+from unittest.mock import AsyncMock
+
+from chains.solana import SolanaAdapter
+from core.interfaces import RpcClient
+
+
+class MockRpcClient(RpcClient):
+    def __init__(self, mock_response=None):
+        self.mock_response = mock_response or {"signature": "sig123", "slot": 12345}
+        self.post_mock = AsyncMock(return_value=self.mock_response)
+
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        return await self.post_mock(method=method, params=params, endpoint=endpoint)
+
+
+async def test_solana_fetch_transaction():
+    mock_client = MockRpcClient()
+    adapter = SolanaAdapter(rpc_client=mock_client)
+    result = await adapter.fetch_transaction("sig123")
+
+    assert result == mock_client.mock_response
+    mock_client.post_mock.assert_called_once()
+
+    call_args = mock_client.post_mock.call_args.kwargs
+    assert call_args["method"] == "getTransaction"
+    assert call_args["params"] == [
+        "sig123",
+        {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0},
+    ]
+    assert call_args["endpoint"] == adapter.rpc_url
+
+
+
+================================================
+File: tests/test_tools.py
+================================================
+from unittest.mock import AsyncMock, patch
+
+from tools.transaction import get_transaction
+
+
+async def test_get_transaction_success():
+    mock_tx_data = {"hash": "0x123", "from": "0xabc"}
+
+    with patch("tools.transaction.fetch_transaction", new=AsyncMock(return_value=mock_tx_data)):
+        result = await get_transaction("ethereum", "0x123")
+
+        assert not result.isError
+        assert len(result.content) == 1
+        assert result.content[0].text == str(mock_tx_data)
+
+
+async def test_get_transaction_error():
+    with patch(
+        "tools.transaction.fetch_transaction", new=AsyncMock(side_effect=ValueError("Test error"))
+    ):
+        result = await get_transaction("ethereum", "0x123")
+
+        assert result.isError
+        assert result.content[0].text.startswith("Error:")
+
+
+
+
+================================================
+File: tools/transaction.py
+================================================
+"""
+MCP tool for retrieving transaction data from blockchains.
+"""
+
+from mcp.types import CallToolResult, TextContent
+
+from core.client import fetch_transaction
+from server import mcp
+
+
+def error_result(message: str) -> CallToolResult:
+    return CallToolResult(isError=True, content=[TextContent(type="text", text=message)])
+
+
+@mcp.tool(name="get_transaction")
+async def get_transaction(blockchain_name: str, tx_id: str) -> CallToolResult:
+    try:
+        tx_data = await fetch_transaction(blockchain_name, tx_id)
+        return CallToolResult(content=[TextContent(type="text", text=str(tx_data))])
+    except Exception as e:
+        return error_result(f"Error: {str(e)}")
+
+
+
