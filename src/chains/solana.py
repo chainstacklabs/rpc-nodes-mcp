@@ -17,6 +17,6 @@ class SolanaAdapter(BlockchainAdapter):
     async def fetch_transaction(self, sig: str) -> dict:
         return await self.rpc_client.post(
             "getTransaction",
-            [sig, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0}],
+            [sig, {"encoding": "base64", "maxSupportedTransactionVersion": 0}],
             endpoint=self.rpc_url,
         )
