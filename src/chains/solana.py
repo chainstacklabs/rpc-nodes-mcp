@@ -28,3 +28,22 @@ class SolanaAdapter(BlockchainAdapter):
         self, block_number: str, index: str
     ) -> dict:
         raise NotImplementedError("Unavailable for Solana RPC")
+
+    # TODO: implement/review them
+    async def get_block_number(self) -> str:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def get_block_by_hash(self, block_hash: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def get_block_by_number(self, block_number: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def get_balance(self, address: str, block: str = "latest") -> str:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def call(self, payload: dict, block: str = "latest") -> str:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def gas_price(self) -> str:
+        raise NotImplementedError("Unavailable for Solana RPC")

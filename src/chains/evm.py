@@ -25,3 +25,22 @@ class EvmAdapter(BlockchainAdapter):
             [hex(int(block_number)), hex(int(index))],
             self.rpc_url,
         )
+
+    # TODO: implement them
+    async def get_block_number(self) -> str:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_block_by_hash(self, block_hash: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_block_by_number(self, block_number: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_balance(self, address: str, block: str = "latest") -> str:
+        raise NotImplementedError("TODO: implement it")
+
+    async def call(self, payload: dict, block: str = "latest") -> str:
+        raise NotImplementedError("TODO: implement it")
+
+    async def gas_price(self) -> str:
+        raise NotImplementedError("TODO: implement it")

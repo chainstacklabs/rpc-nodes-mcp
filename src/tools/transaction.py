@@ -54,3 +54,77 @@ async def eth_get_tx_by_blk_num_idx(chain: str, block_number: str, index: str) -
         )
     except Exception as e:
         return _err(str(e))
+
+
+@mcp.tool(
+    name="Get latest block number",
+    description="Returns the most recent block number.",
+    annotations={"title": "Get block number", "readOnlyHint": True},
+)
+async def get_block_number(chain: str) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_number(chain.lower()))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get block by hash",
+    description="Returns a block object by block hash.",
+    annotations={"title": "Get block by hash", "readOnlyHint": True},
+)
+async def get_block_by_hash(chain: str, block_hash: str, full_tx: bool = False) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_by_hash(chain.lower(), block_hash, full_tx))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get block by number",
+    description="Returns a block object by block number.",
+    annotations={"title": "Get block by number", "readOnlyHint": True},
+)
+async def get_block_by_number(
+    chain: str, block_number: str, full_tx: bool = False
+) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_by_number(chain.lower(), block_number, full_tx))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get balance",
+    description="Returns the account balance at a given block tag.",
+    annotations={"title": "Get balance", "readOnlyHint": True},
+)
+async def get_balance(chain: str, address: str, block: str = "latest") -> CallToolResult:
+    try:
+        return _ok(await client.get_balance(chain.lower(), address, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Call contract",
+    description="Performs a stateless contract call.",
+    annotations={"title": "Call contract (eth_call, simulateTransaction)", "readOnlyHint": True},
+)
+async def eth_call(chain: str, payload: dict, block: str = "latest") -> CallToolResult:
+    try:
+        return _ok(await client.eth_call(chain.lower(), payload, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get gas price",
+    description="Returns the current gas price.",
+    annotations={"title": "Get gas price", "readOnlyHint": True},
+)
+async def get_gas_price(chain: str) -> CallToolResult:
+    try:
+        return _ok(await client.gas_price(chain.lower()))
+    except Exception as e:
+        return _err(str(e))
