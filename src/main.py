@@ -1,11 +1,6 @@
-import chains.arbitrum
-import chains.base
-import chains.binance_smart_chain
-import chains.ethereum
-import chains.solana
-import chains.sonic
-import prompts.transaction
-import tools.transaction
+import chains
+import prompts
+import tools
 from server import mcp
 
 if __name__ == "__main__":
