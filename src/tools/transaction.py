@@ -16,7 +16,7 @@ def error_result(message: str) -> CallToolResult:
     name="get_transaction",
     description="Returns the full transaction object",
     annotations={
-        "title": "",
+        "title": "Get transaction details",
         "readOnlyHint": True,
         "destructiveHint": False,
     },
