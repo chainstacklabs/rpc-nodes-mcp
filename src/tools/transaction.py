@@ -1,29 +1,56 @@
-"""
-MCP tool for retrieving transaction data from blockchains.
-"""
+"""MCP tools for transaction-related JSON-RPC calls (EVM and other chains)."""
 
 from mcp.types import CallToolResult, TextContent
 
-from core.client import fetch_transaction
+import core.client as client
 from server import mcp
 
 
-def error_result(message: str) -> CallToolResult:
-    return CallToolResult(isError=True, content=[TextContent(type="text", text=message)])
+def _err(msg: str) -> CallToolResult:
+    return CallToolResult(isError=True, content=[TextContent(type="text", text=msg)])
+
+
+def _ok(data) -> CallToolResult:
+    return CallToolResult(content=[TextContent(type="text", text=str(data))])
 
 
 @mcp.tool(
-    name="get_transaction",
-    description="Returns the full transaction object",
-    annotations={
-        "title": "Get transaction details",
-        "readOnlyHint": True,
-        "destructiveHint": False,
-    },
+    name="Get transaction by hash / signature",
+    description="Returns the full transaction object for the provided transaction hash / signature.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
 )
-async def get_transaction(blockchain_name: str, tx_id: str) -> CallToolResult:
+async def eth_get_tx_by_hash(chain: str, tx_hash: str) -> CallToolResult:
     try:
-        tx_data = await fetch_transaction(blockchain_name.lower(), tx_id)
-        return CallToolResult(content=[TextContent(type="text", text=str(tx_data))])
+        return _ok(await client.get_transaction_by_hash(chain.lower(), tx_hash))
     except Exception as e:
-        return error_result(f"Error: {str(e)}")
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get transaction by block hash and transaction index",
+    description="Returns the full transaction object identified by block hash and transaction index.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
+)
+async def eth_get_tx_by_blk_hash_idx(chain: str, block_hash: str, index: str) -> CallToolResult:
+    try:
+        return _ok(
+            await client.get_transaction_by_block_hash_and_index(chain.lower(), block_hash, index)
+        )
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="Get transaction by block number and transaction index",
+    description="Returns the full transaction object identified by block number and transaction index.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
+)
+async def eth_get_tx_by_blk_num_idx(chain: str, block_number: str, index: str) -> CallToolResult:
+    try:
+        return _ok(
+            await client.get_transaction_by_block_number_and_index(
+                chain.lower(), block_number, index
+            )
+        )
+    except Exception as e:
+        return _err(str(e))

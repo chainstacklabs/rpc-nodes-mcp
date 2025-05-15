@@ -12,6 +12,17 @@ class RpcClient(ABC):
 
 
 class BlockchainAdapter(ABC):
+    """Unified interface every chain‑specific adapter must provide."""
+
     @abstractmethod
-    async def fetch_transaction(self, tx_id: str) -> dict:
-        pass
+    async def get_transaction_by_hash(self, tx_hash: str) -> dict: ...
+
+    @abstractmethod
+    async def get_transaction_by_block_hash_and_index(
+        self, block_hash: str, index: str
+    ) -> dict: ...
+
+    @abstractmethod
+    async def get_transaction_by_block_number_and_index(
+        self, block_number: str, index: str
+    ) -> dict: ...

@@ -14,9 +14,17 @@ class SolanaAdapter(BlockchainAdapter):
         self.rpc_client = rpc_client or HttpxRpcClient()
         self.rpc_url = settings.SOLANA_RPC_URL
 
-    async def fetch_transaction(self, sig: str) -> dict:
+    async def get_transaction_by_hash(self, sig: str) -> dict:
         return await self.rpc_client.post(
             "getTransaction",
             [sig, {"encoding": "base64", "maxSupportedTransactionVersion": 0}],
             endpoint=self.rpc_url,
         )
+
+    async def get_transaction_by_block_hash_and_index(self, block_hash: str, index: str) -> dict:
+        raise NotImplementedError("Unavailable for Solana RPC")
+
+    async def get_transaction_by_block_number_and_index(
+        self, block_number: str, index: str
+    ) -> dict:
+        raise NotImplementedError("Unavailable for Solana RPC")
