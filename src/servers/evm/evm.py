@@ -2,8 +2,9 @@
 Reusable base class for all EVM-compatible blockchain adapters.
 """
 
-from core.interfaces import BlockchainAdapter, RpcClient
-from core.rpc import HttpxRpcClient
+from common.interfaces import RpcClient
+from common.rpc import HttpxRpcClient
+from servers.evm.common.interfaces import BlockchainAdapter
 
 
 class EvmAdapter(BlockchainAdapter):

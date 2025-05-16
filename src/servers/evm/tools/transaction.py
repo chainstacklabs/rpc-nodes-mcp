@@ -1,17 +1,10 @@
 """MCP tools for transaction-related JSON-RPC calls (EVM and other chains)."""
 
-from mcp.types import CallToolResult, TextContent
-
-import core.client as client
+from mcp.types import CallToolResult
 from server import mcp
 
-
-def _err(msg: str) -> CallToolResult:
-    return CallToolResult(isError=True, content=[TextContent(type="text", text=msg)])
-
-
-def _ok(data) -> CallToolResult:
-    return CallToolResult(content=[TextContent(type="text", text=str(data))])
+import common.client as client
+from common.utils import _err, _ok
 
 
 @mcp.tool(

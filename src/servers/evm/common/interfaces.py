@@ -5,12 +5,6 @@ Abstract base class defining the interface all blockchain adapters must implemen
 from abc import ABC, abstractmethod
 
 
-class RpcClient(ABC):
-    @abstractmethod
-    async def post(self, method: str, params: list, endpoint: str) -> dict:
-        pass
-
-
 class BlockchainAdapter(ABC):
     """Unified interface every chain‑specific adapter must provide."""
 
