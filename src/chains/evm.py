@@ -37,7 +37,7 @@ class EvmAdapter(BlockchainAdapter):
         raise NotImplementedError("TODO: implement it")
 
     async def get_balance(self, address: str, block: str = "latest") -> str:
-        raise NotImplementedError("TODO: implement it")
+        return int(await self.rpc_client.post("eth_getBalance", [address, block], self.rpc_url), 16)
 
     async def call(self, payload: dict, block: str = "latest") -> str:
         raise NotImplementedError("TODO: implement it")
