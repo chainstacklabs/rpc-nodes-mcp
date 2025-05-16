@@ -22,7 +22,10 @@ cd repo
 ```bash
 npx @modelcontextprotocol/inspector uv run src/main.py
 ```
-Visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector).
+For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector). There is also a client example which interacts with the MCP server.
+```bash
+uv run src/client_example.py
+```
 
 ## 🧪 Run Tests
 ```bash
