@@ -7,7 +7,7 @@ Supports Ethereum, Solana, and EVM-compatible chains via a clean adapter interfa
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your/repo.git
+git clone https://github.com/chainstacklabs/rpc-nodes-mcp.git
 cd repo
 ```
 
