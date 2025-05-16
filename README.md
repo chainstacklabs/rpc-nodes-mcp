@@ -22,7 +22,7 @@ cd repo
 ```bash
 npx @modelcontextprotocol/inspector uv run src/main.py
 ```
-For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector). There is also a client example which interacts with the MCP server.
+For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector). There is also a client example which interacts with the MCP server (it requires `OPENAI_API_KEY` env var).
 ```bash
 uv run src/client_example.py
 ```
