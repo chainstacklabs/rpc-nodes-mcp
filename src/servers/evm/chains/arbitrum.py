@@ -3,8 +3,8 @@ Arbitrum-specific implementation of the BlockchainAdapter using EVM base logic.
 """
 
 from common.config import settings
-from core.adapter_registry import register_adapter
-from core.interfaces import RpcClient
+from common.interfaces import RpcClient
+from servers.evm.common.adapter_registry import register_adapter
 from servers.evm.evm import EvmAdapter
 
 

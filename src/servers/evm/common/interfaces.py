@@ -23,24 +23,24 @@ class BlockchainAdapter(ABC):
 
     @abstractmethod
     async def get_block_number(self) -> str:
-        """eth_blockNumber  – Solana: getSlot"""
+        """eth_blockNumber"""
 
     @abstractmethod
     async def get_block_by_hash(self, block_hash: str, full_tx: bool = False) -> dict:
-        """eth_getBlockByHash – Solana: getBlock"""
+        """eth_getBlockByHash"""
 
     @abstractmethod
     async def get_block_by_number(self, block_number: str, full_tx: bool = False) -> dict:
-        """eth_getBlockByNumber – Solana: getBlock"""
+        """eth_getBlockByNumber"""
 
     @abstractmethod
     async def get_balance(self, address: str, block: str = "latest") -> str:
-        """eth_getBalance – Solana: getBalance"""
+        """eth_getBalance"""
 
     @abstractmethod
     async def call(self, payload: dict, block: str = "latest") -> str:
-        """eth_call – Solana: simulateTransaction"""
+        """eth_call"""
 
     @abstractmethod
     async def gas_price(self) -> str:
-        """eth_gasPrice – Solana: getFeeForMessage (lamports/compute-unit)"""
+        """eth_gasPrice"""

@@ -1,0 +1,644 @@
+Directory structure:
+└── src/
+    ├── client_example.py
+    ├── common/
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── interfaces.py
+    │   ├── rpc.py
+    │   └── utils.py
+    └── servers/
+        └── evm/
+            ├── evm.py
+            ├── main.py
+            ├── server.py
+            ├── __pycache__/
+            ├── chains/
+            │   ├── __init__.py
+            │   ├── arbitrum.py
+            │   ├── base.py
+            │   ├── binance_smart_chain.py
+            │   ├── ethereum.py
+            │   ├── sonic.py
+            │   └── __pycache__/
+            ├── common/
+            │   ├── adapter_registry.py
+            │   ├── client.py
+            │   ├── interfaces.py
+            │   └── __pycache__/
+            └── tools/
+                ├── __init__.py
+                ├── transaction.py
+                └── __pycache__/
+
+================================================
+File: client_example.py
+================================================
+import asyncio
+
+from langchain_mcp_adapters.tools import load_mcp_tools
+from langchain_openai import ChatOpenAI
+from langgraph.prebuilt import create_react_agent
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+
+# Initialize Rich console
+console = Console()
+
+# API key will be read from env var OPENAI_API_KEY
+model = ChatOpenAI(model="gpt-4o")
+server_params = StdioServerParameters(
+    command="python",
+    args=["src/servers/evm/main.py"],
+)
+
+
+def print_messages_pretty(messages):
+    """Print messages with nice formatting using Rich"""
+    for msg in messages:
+        msg_type = str(msg.type).upper()
+        content = msg.content
+
+        title = Text(msg_type, style="bold blue")
+        console.print(
+            Panel(content, title=title, border_style="green", expand=False, padding=(1, 2))
+        )
+
+
+async def main():
+    async with stdio_client(server_params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            tools = await load_mcp_tools(session)
+
+            console.print("[bold yellow]Sending query to agent...[/]")
+
+            agent = create_react_agent(model, tools)
+            agent_response = await agent.ainvoke(
+                {
+                    "messages": "Get Ethereum account balance 0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97"
+                }
+            )
+
+            print_messages_pretty(agent_response["messages"])
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
+
+================================================
+File: common/__init__.py
+================================================
+
+
+
+================================================
+File: common/config.py
+================================================
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+
+class Settings:
+    def __init__(self):
+        for key, value in os.environ.items():
+            setattr(self, key, value)
+
+
+settings = Settings()
+
+
+
+================================================
+File: common/interfaces.py
+================================================
+from abc import ABC, abstractmethod
+
+
+class RpcClient(ABC):
+    @abstractmethod
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        pass
+
+
+
+================================================
+File: common/rpc.py
+================================================
+"""
+Shared JSON-RPC helper to reduce duplication across blockchain adapters.
+"""
+
+import httpx
+from interfaces import RpcClient
+
+
+class HttpxRpcClient(RpcClient):
+    async def post(self, method: str, params: list, endpoint: str) -> dict:
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                endpoint, json={"jsonrpc": "2.0", "method": method, "params": params, "id": 1}
+            )
+
+            response_data = resp.json()
+
+            if "error" in response_data:
+                error_data = response_data["error"]
+                error_message = error_data.get("message", "Unknown RPC error")
+                error_code = error_data.get("code", -1)
+                raise ValueError(f"RPC Error ({error_code}): {error_message}")
+
+            return response_data.get("result")
+
+
+
+================================================
+File: common/utils.py
+================================================
+from mcp.types import CallToolResult, TextContent
+
+
+def _err(msg: str) -> CallToolResult:
+    return CallToolResult(isError=True, content=[TextContent(type="text", text=msg)])
+
+
+def _ok(data) -> CallToolResult:
+    return CallToolResult(content=[TextContent(type="text", text=str(data))])
+
+
+
+================================================
+File: servers/evm/evm.py
+================================================
+"""
+Reusable base class for all EVM-compatible blockchain adapters.
+"""
+
+from src.common.interfaces import RpcClient
+from src.common.rpc import HttpxRpcClient
+from src.servers.evm.common.interfaces import BlockchainAdapter
+
+
+class EvmAdapter(BlockchainAdapter):
+    def __init__(self, rpc_url: str, rpc_client: RpcClient = None):
+        self.rpc_url = rpc_url
+        self.rpc_client = rpc_client or HttpxRpcClient()
+
+    async def get_transaction_by_hash(self, tx_hash):
+        return await self.rpc_client.post("eth_getTransactionByHash", [tx_hash], self.rpc_url)
+
+    async def get_transaction_by_block_hash_and_index(self, block_hash, index):
+        return await self.rpc_client.post(
+            "eth_getTransactionByBlockHashAndIndex", [block_hash, hex(int(index))], self.rpc_url
+        )
+
+    async def get_transaction_by_block_number_and_index(self, block_number, index):
+        return await self.rpc_client.post(
+            "eth_getTransactionByBlockNumberAndIndex",
+            [hex(int(block_number)), hex(int(index))],
+            self.rpc_url,
+        )
+
+    # TODO: implement them
+    async def get_block_number(self) -> str:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_block_by_hash(self, block_hash: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_block_by_number(self, block_number: str, full_tx: bool = False) -> dict:
+        raise NotImplementedError("TODO: implement it")
+
+    async def get_balance(self, address: str, block: str = "latest") -> str:
+        return int(await self.rpc_client.post("eth_getBalance", [address, block], self.rpc_url), 16)
+
+    async def call(self, payload: dict, block: str = "latest") -> str:
+        raise NotImplementedError("TODO: implement it")
+
+    async def gas_price(self) -> str:
+        raise NotImplementedError("TODO: implement it")
+
+
+
+================================================
+File: servers/evm/main.py
+================================================
+import tools
+from server import mcp
+
+import chains
+
+if __name__ == "__main__":
+    mcp.run()
+
+
+
+================================================
+File: servers/evm/server.py
+================================================
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("RPCNodeMCP")
+
+
+
+
+================================================
+File: servers/evm/chains/__init__.py
+================================================
+# chains/__init__.py
+import importlib
+import pkgutil
+
+__all__ = []
+
+for mod in pkgutil.iter_modules(__path__):  # auto-discovers direct sub-modules
+    module = importlib.import_module(f"{__name__}.{mod.name}")
+    globals()[mod.name] = module  # make chains.<name> importable
+    __all__.append(mod.name)  # keeps tab-completion happy
+
+
+
+================================================
+File: servers/evm/chains/arbitrum.py
+================================================
+"""
+Arbitrum-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from src.common.config import settings
+from src.common.interfaces import RpcClient
+from src.servers.evm.common.adapter_registry import register_adapter
+from src.servers.evm.evm import EvmAdapter
+
+
+@register_adapter("arbitrum")
+class ArbitrumAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.ARBITRUM_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: servers/evm/chains/base.py
+================================================
+"""
+Base-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from src.common.config import settings
+from src.common.interfaces import RpcClient
+from src.servers.evm.common.adapter_registry import register_adapter
+from src.servers.evm.evm import EvmAdapter
+
+
+@register_adapter("base")
+class BaseChainAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.BASE_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: servers/evm/chains/binance_smart_chain.py
+================================================
+"""
+BSC-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from src.common.config import settings
+from src.common.interfaces import RpcClient
+from src.servers.evm.common.adapter_registry import register_adapter
+from src.servers.evm.evm import EvmAdapter
+
+
+@register_adapter("binance smart chain")
+class BinanceSmartChainAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.BINANCE_SMART_CHAIN_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: servers/evm/chains/ethereum.py
+================================================
+"""
+Ethereum-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from src.common.config import settings
+from src.common.interfaces import RpcClient
+from src.servers.evm.common.adapter_registry import register_adapter
+from src.servers.evm.evm import EvmAdapter
+
+
+@register_adapter("ethereum")
+class EthereumAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.ETHEREUM_RPC_URL, rpc_client=rpc_client)
+
+
+
+================================================
+File: servers/evm/chains/sonic.py
+================================================
+"""
+Sonic-specific implementation of the BlockchainAdapter using EVM base logic.
+"""
+
+from src.common.config import settings
+from src.common.interfaces import RpcClient
+from src.servers.evm.common.adapter_registry import register_adapter
+from src.servers.evm.evm import EvmAdapter
+
+
+@register_adapter("sonic")
+class SonicAdapter(EvmAdapter):
+    def __init__(self, rpc_client: RpcClient = None):
+        super().__init__(rpc_url=settings.SONIC_RPC_URL, rpc_client=rpc_client)
+
+
+
+
+================================================
+File: servers/evm/common/adapter_registry.py
+================================================
+"""
+Decorator-based registry for automatically registering blockchain adapters.
+"""
+
+from common.interfaces import BlockchainAdapter
+
+registry: dict[str, BlockchainAdapter] = {}
+
+
+def register_adapter(chain: str):
+    def wrapper(adapter_cls):
+        registry[chain] = adapter_cls()
+        return adapter_cls
+
+    return wrapper
+
+
+
+================================================
+File: servers/evm/common/client.py
+================================================
+"""
+Client dispatcher that routes blockchain transaction requests
+through registered BlockchainAdapter instances.
+"""
+
+from common.adapter_registry import registry
+
+
+def _adapter(chain: str):
+    ad = registry.get(chain)
+    if not ad:
+        raise ValueError(f"Unsupported blockchain: {chain}")
+    return ad
+
+
+async def get_transaction_by_hash(chain, tx_hash):
+    return await _adapter(chain).get_transaction_by_hash(tx_hash)
+
+
+async def get_transaction_by_block_hash_and_index(chain, block_hash, index):
+    return await _adapter(chain).get_transaction_by_block_hash_and_index(block_hash, index)
+
+
+async def get_transaction_by_block_number_and_index(chain, block_number, index):
+    return await _adapter(chain).get_transaction_by_block_number_and_index(block_number, index)
+
+
+async def get_block_number(blockchain: str) -> str:
+    return await _adapter(blockchain).get_block_number()
+
+
+async def get_block_by_hash(blockchain: str, block_hash: str, full_tx: bool = False) -> dict:
+    return await _adapter(blockchain).get_block_by_hash(block_hash, full_tx)
+
+
+async def get_block_by_number(blockchain: str, block_number: str, full_tx: bool = False) -> dict:
+    return await _adapter(blockchain).get_block_by_number(block_number, full_tx)
+
+
+async def get_balance(blockchain: str, address: str, block: str = "latest") -> str:
+    return await _adapter(blockchain).get_balance(address, block)
+
+
+async def eth_call(blockchain: str, payload: dict, block: str = "latest") -> str:
+    return await _adapter(blockchain).call(payload, block)
+
+
+async def gas_price(blockchain: str) -> str:
+    return await _adapter(blockchain).gas_price()
+
+
+
+================================================
+File: servers/evm/common/interfaces.py
+================================================
+"""
+Abstract base class defining the interface all blockchain adapters must implement.
+"""
+
+from abc import ABC, abstractmethod
+
+
+class BlockchainAdapter(ABC):
+    """Unified interface every chain‑specific adapter must provide."""
+
+    @abstractmethod
+    async def get_transaction_by_hash(self, tx_hash: str) -> dict: ...
+
+    @abstractmethod
+    async def get_transaction_by_block_hash_and_index(
+        self, block_hash: str, index: str
+    ) -> dict: ...
+
+    @abstractmethod
+    async def get_transaction_by_block_number_and_index(
+        self, block_number: str, index: str
+    ) -> dict: ...
+
+    @abstractmethod
+    async def get_block_number(self) -> str:
+        """eth_blockNumber"""
+
+    @abstractmethod
+    async def get_block_by_hash(self, block_hash: str, full_tx: bool = False) -> dict:
+        """eth_getBlockByHash"""
+
+    @abstractmethod
+    async def get_block_by_number(self, block_number: str, full_tx: bool = False) -> dict:
+        """eth_getBlockByNumber"""
+
+    @abstractmethod
+    async def get_balance(self, address: str, block: str = "latest") -> str:
+        """eth_getBalance"""
+
+    @abstractmethod
+    async def call(self, payload: dict, block: str = "latest") -> str:
+        """eth_call"""
+
+    @abstractmethod
+    async def gas_price(self) -> str:
+        """eth_gasPrice"""
+
+
+
+
+================================================
+File: servers/evm/tools/__init__.py
+================================================
+# tools/__init__.py
+import importlib
+import pkgutil
+
+__all__ = []
+
+for mod in pkgutil.iter_modules(__path__):  # auto-discovers direct sub-modules
+    module = importlib.import_module(f"{__name__}.{mod.name}")
+    globals()[mod.name] = module  # make tools.<name> importable
+    __all__.append(mod.name)  # keeps tab-completion happy
+
+
+
+================================================
+File: servers/evm/tools/transaction.py
+================================================
+"""MCP tools for transaction-related JSON-RPC calls (EVM and other chains)."""
+
+from mcp.types import CallToolResult
+from server import mcp
+
+import common.client as client
+from common.utils import _err, _ok
+
+
+@mcp.tool(
+    name="get_transaction_by_id",
+    description="Returns the full transaction object for the provided transaction hash / signature.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
+)
+async def eth_get_tx_by_hash(chain: str, tx_hash: str) -> CallToolResult:
+    try:
+        return _ok(await client.get_transaction_by_hash(chain.lower(), tx_hash))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_transaction_by_block_hash_index",
+    description="Returns the full transaction object identified by block hash and transaction index.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
+)
+async def eth_get_tx_by_blk_hash_idx(chain: str, block_hash: str, index: str) -> CallToolResult:
+    try:
+        return _ok(
+            await client.get_transaction_by_block_hash_and_index(chain.lower(), block_hash, index)
+        )
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_transaction_by_block_number_index",
+    description="Returns the full transaction object identified by block number and transaction index.",
+    annotations={"title": "Get transaction details", "readOnlyHint": True},
+)
+async def eth_get_tx_by_blk_num_idx(chain: str, block_number: str, index: str) -> CallToolResult:
+    try:
+        return _ok(
+            await client.get_transaction_by_block_number_and_index(
+                chain.lower(), block_number, index
+            )
+        )
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_latest_block_number",
+    description="Returns the most recent block number.",
+    annotations={"title": "Get block number", "readOnlyHint": True},
+)
+async def get_block_number(chain: str) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_number(chain.lower()))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_block_by_hash",
+    description="Returns a block object by block hash.",
+    annotations={"title": "Get block by hash", "readOnlyHint": True},
+)
+async def get_block_by_hash(chain: str, block_hash: str, full_tx: bool = False) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_by_hash(chain.lower(), block_hash, full_tx))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_block_by_number",
+    description="Returns a block object by block number.",
+    annotations={"title": "Get block by number", "readOnlyHint": True},
+)
+async def get_block_by_number(
+    chain: str, block_number: str, full_tx: bool = False
+) -> CallToolResult:
+    try:
+        return _ok(await client.get_block_by_number(chain.lower(), block_number, full_tx))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_balance",
+    description="Returns the account balance at a given block tag.",
+    annotations={"title": "Get balance", "readOnlyHint": True},
+)
+async def get_balance(chain: str, address: str, block: str = "latest") -> CallToolResult:
+    try:
+        return _ok(await client.get_balance(chain.lower(), address, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="call_contract",
+    description="Performs a stateless contract call.",
+    annotations={"title": "Call contract (eth_call, simulateTransaction)", "readOnlyHint": True},
+)
+async def eth_call(chain: str, payload: dict, block: str = "latest") -> CallToolResult:
+    try:
+        return _ok(await client.eth_call(chain.lower(), payload, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="get_gas_fees",
+    description="Returns the current gas price.",
+    annotations={"title": "Get gas price", "readOnlyHint": True},
+)
+async def get_gas_price(chain: str) -> CallToolResult:
+    try:
+        return _ok(await client.gas_price(chain.lower()))
+    except Exception as e:
+        return _err(str(e))
+
+
+

@@ -1,10 +1,10 @@
 """MCP tools for transaction-related JSON-RPC calls (EVM and other chains)."""
 
 from mcp.types import CallToolResult
-from server import mcp
 
-import common.client as client
+import servers.evm.common.client as client
 from common.utils import _err, _ok
+from servers.evm.server import mcp
 
 
 @mcp.tool(

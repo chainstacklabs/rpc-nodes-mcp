@@ -3,7 +3,8 @@ Shared JSON-RPC helper to reduce duplication across blockchain adapters.
 """
 
 import httpx
-from interfaces import RpcClient
+
+from common.interfaces import RpcClient
 
 
 class HttpxRpcClient(RpcClient):
