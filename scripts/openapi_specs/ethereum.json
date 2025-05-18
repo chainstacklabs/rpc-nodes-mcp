@@ -1,0 +1,3843 @@
+================================================
+FILE: openapi/ethereum_node_api/accounts_info/eth_getBalance.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getBalance",
+        "operationId": "getBalance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getBalance"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Address",
+                          "description": "The address identifier."
+                        },
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block identifier."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x690B9A9E9aa1C9dB991C7721a92d351Db4FaC990",
+                      "pending"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The account balance.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/accounts_info/eth_getCode.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getCode",
+        "operationId": "getCode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getCode"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Smart contract address",
+                          "description": "The address identifier."
+                        },
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block identifier."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The smart contract code.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/accounts_info/eth_getProof.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "eth_getProof",
+    "version": "1.0.0",
+    "description": "Get Merkle proof for account, contract storage,."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "summary": "eth_getProof",
+        "operationId": "getProof",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getProof"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x548Da0F6b0AFD0094F735503D44e79a3769980Fd",
+                      [
+                        "0xf6e506a9cbe7546a796b187c40609a170ea8073e047129a3cae1c38e6d7559b7"
+                      ],
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The proof information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/accounts_info/eth_getStorageAt.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getStorageAt",
+        "operationId": "getStorageAt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getStorageAt"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Smart contract address",
+                          "description": "The address of the contract to query."
+                        },
+                        {
+                          "type": "string",
+                          "title": "Slot index",
+                          "description": "The index of the storage position to query."
+                        },
+                        {
+                          "type": "string",
+                          "title": "Block ID",
+                          "description": "The block number or tag to use as a reference."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x271682DEB8C4E0901D1a1550aD2e64D568E69909",
+                      "0x0",
+                      "latest"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The value stored at the specified position.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/accounts_info/eth_getTransactionCount.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Blocks info"
+        ],
+        "summary": "eth_getTransactionCount",
+        "operationId": "getTransactionCount",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getTransactionCount"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Address",
+                          "description": "The address to check"
+                        },
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block identifier"
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x690B9A9E9aa1C9dB991C7721a92d351Db4FaC990",
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The address nonce",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_blockNumber.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ξ Ethereum Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with an Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Blocks info"
+        ],
+        "summary": "eth_blockNumber",
+        "operationId": "eth_blockNumber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_blockNumber"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The latest block number.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_getBlockByHash.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Example2",
+    "version": "1.2.0"
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getBlockByHash",
+        "operationId": "getBlockByHash",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "example": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "example": "eth_getBlockByHash"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block Hash",
+                          "description": "The hash identifying the block."
+                        },
+                        {
+                          "type": "boolean",
+                          "title": "Transaction selector",
+                          "description": "True for the full transactions, false for only the transaction hashes."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x633a90413361fe1889d1e5ab4cb222608d224c458b30289b8390496a3fab29d8",
+                      false
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_getBlockByNumber.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ethereum Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getBlockByNumber",
+        "operationId": "getBlockByNumber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getBlockByNumber"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block number or tag."
+                        },
+                        {
+                          "type": "boolean",
+                          "title": "Transaction selector",
+                          "description": "True for the full transactions, false for only the transaction hashes."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "latest",
+                      false
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_getBlockTransactionCountByHash.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ethereum Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with an Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Blocks info"
+        ],
+        "summary": "eth_getBlockTransactionCountByHash",
+        "operationId": "getBlockTransactionCountByHash",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getBlockTransactionCountByHash"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Block hash",
+                      "description": "The block hash identifier."
+                    },
+                    "default": [
+                      "0x633a90413361fe1889d1e5ab4cb222608d224c458b30289b8390496a3fab29d8"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_getBlockTransactionCountByNumber.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ethereum Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with an Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Blocks info"
+        ],
+        "summary": "eth_getBlockTransactionCountByNumber",
+        "operationId": "getBlockTransactionCountByNumber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getBlockTransactionCountByNumber"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Block identifier",
+                      "description": "The block number or tag."
+                    },
+                    "default": [
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block transaction count information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/blocks_info/eth_newBlockFilter.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ethereum NODE API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "summary": "eth_newBlockFilter",
+        "operationId": "newBlockFilter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_newBlockFilter"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The new filter ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/chain_info/eth_chainId.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Update"
+        ],
+        "summary": "eth_chainId",
+        "operationId": "getChainId",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_chainId"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The network Chain ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/chain_info/eth_syncing.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Syncing"
+        ],
+        "summary": "eth_syncing",
+        "operationId": "syncing",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_syncing"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Syncing information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/client_info/net_listening.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Update"
+        ],
+        "summary": "net_listening",
+        "operationId": "listening",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "net_listening"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The boolean value that indicates whether or not a node is currently actively seeking peer connections.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/client_info/net_peerCount.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Update"
+        ],
+        "summary": "net_peerCount",
+        "operationId": "peerCount",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "net_peerCount"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The number of peers connected to the client.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/client_info/web3_clientVersion.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Update"
+        ],
+        "summary": "web3_clientVersion",
+        "operationId": "clientVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "web3_clientVersion"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The client running on this node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/custom_js_tracer.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "Custom JS tracer",
+        "operationId": "traceTransaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "debug_traceTransaction"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Transaction hash",
+                          "description": "The hash of the transaction to trace."
+                        },
+                        {
+                          "type": "object",
+                          "title": "The JS custom tracer object"
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x1e60e4b78c1097d01226dca6dad808f1de05efd705670a28ae8d57171c91d4aa",
+                      {
+                        "tracer": "{gasUsed: [], step: function(log) { this.gasUsed.push(log.getGas()); }, result: function() { return this.gasUsed; }, fault: function() {}}"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction's trace",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/debug_traceBlockByHash.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "debug_traceBlockByHash",
+        "operationId": "traceBlockByHash",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "debug_traceBlockByHash"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block Hash",
+                          "description": "The block hash."
+                        },
+                        {
+                          "type": "object",
+                          "title": "Tracer type",
+                          "properties": {
+                            "tracer": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "The type of tracer."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x66103840578be3bc9c865e0961c4a4de31b5df7a45dcd13ffe2679ff9c7315d8",
+                      {
+                        "tracer": "4byteTracer"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block traces.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/debug_traceBlockByNumber.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "debug_traceBlockByNumber",
+        "operationId": "traceBlockByNumber",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "debug_traceBlockByNumber"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block hash."
+                        },
+                        {
+                          "type": "object",
+                          "title": "Tracer type",
+                          "properties": {
+                            "tracer": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "The type of tracer."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "latest",
+                      {
+                        "tracer": "callTracer"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block traces.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/debug_traceCall.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Ethereum Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with an Ethereum node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Ethereum Operations"
+        ],
+        "summary": "debug_traceCall",
+        "operationId": "traceCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "debug_traceCall"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "from": {
+                              "type": "string",
+                              "default": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+                            },
+                            "to": {
+                              "type": "string",
+                              "default": "0x0000000000a39bb272e79075ade125fd351887ac"
+                            },
+                            "gas": {
+                              "type": "string",
+                              "default": "0x1E9EF"
+                            },
+                            "gasPrice": {
+                              "type": "string",
+                              "default": "0xBD32B2ABC"
+                            },
+                            "data": {
+                              "type": "string",
+                              "default": "0xd0e30db0"
+                            }
+                          }
+                        },
+                        {
+                          "type": "string",
+                          "default": "latest"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "tracer": {
+                              "type": "string",
+                              "default": "callTracer"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "default": [
+                      {
+                        "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+                        "to": "0x0000000000a39bb272e79075ade125fd351887ac",
+                        "gas": "0x1E9EF",
+                        "gasPrice": "0xBD32B2ABC",
+                        "data": "0xd0e30db0"
+                      },
+                      "latest",
+                      {
+                        "tracer": "callTracer"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The result of the debug trace call",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/debug_traceTransaction.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "debug_traceTransaction",
+        "operationId": "traceTransaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "debug_traceTransaction"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Transaction hash",
+                          "description": "The hash of the transaction to trace."
+                        },
+                        {
+                          "type": "object",
+                          "title": "Tracing options"
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x4fc2005859dccab5d9c73c543f533899fe50e25e8d6365c9c335f267d6d12541",
+                      {
+                        "tracer": "unigramTracer"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction's trace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/trace_block.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "trace_block",
+        "operationId": "trace_block",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "trace_block"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block identifier",
+                          "description": "The block number or tag."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block's trace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/debug_and_trace/trace_transaction.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "trace_transaction",
+        "operationId": "trace_transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "trace_transaction"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Transaction hash",
+                          "description": "The hash of the transaction to trace."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x4fc2005859dccab5d9c73c543f533899fe50e25e8d6365c9c335f267d6d12541"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction's trace.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/execute_transactions/eth_call.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "upload section",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with Ethereum nodes using JSON-RPC."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "transactions info"
+        ],
+        "summary": "eth_call",
+        "operationId": "ethCall",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_call"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "title": "Call object",
+                      "properties": {
+                        "to": {
+                          "type": "string",
+                          "description": "The address of the contract to call."
+                        },
+                        "data": {
+                          "type": "string",
+                          "description": "The data to send with the call."
+                        }
+                      }
+                    },
+                    "default": [
+                      {
+                        "to": "0xc2edad668740f1aa35e4d8f227fb8e17dca888cd",
+                        "data": "0x1526fe270000000000000000000000000000000000000000000000000000000000000001"
+                      },
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The result of the call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/execute_transactions/eth_sendRawTransaction.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_sendRawTransaction",
+        "operationId": "sendRawTransaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_sendRawTransaction"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "description": "The signed transaction."
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction hash.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/execute_transactions/eth_simulateV1.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "eth_simulateV1 API",
+    "version": "1.0.0",
+    "description": "API for simulating Ethereum transactions"
+  },
+  "servers": [
+    {
+      "url": "https://ethereum-mainnet.core.chainstack.com"
+    }
+  ],
+  "paths": {
+    "/2f6d649e68c2f861fecd5b8a9e35139e": {
+      "post": {
+        "summary": "eth_simulateV1",
+        "operationId": "simulateV1",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_simulateV1"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": [
+                      {
+                        "blockStateCalls": [
+                          {
+                            "blockOverrides": {
+                              "baseFeePerGas": "0x9"
+                            },
+                            "stateOverrides": {
+                              "0xc000000000000000000000000000000000000000": {
+                                "balance": "0x4a817c800"
+                              }
+                            },
+                            "calls": [
+                              {
+                                "from": "0xc000000000000000000000000000000000000000",
+                                "to": "0xc000000000000000000000000000000000000001",
+                                "maxFeePerGas": "0xf",
+                                "value": "0x1"
+                              },
+                              {
+                                "from": "0xc000000000000000000000000000000000000000",
+                                "to": "0xc000000000000000000000000000000000000002",
+                                "maxFeePerGas": "0xf",
+                                "value": "0x1"
+                              }
+                            ]
+                          }
+                        ],
+                        "validation": true,
+                        "traceTransfers": true
+                      },
+                      "latest"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "blockStateCalls": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "blockOverrides": {
+                                    "type": "object",
+                                    "properties": {
+                                      "baseFeePerGas": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "stateOverrides": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                      "type": "object",
+                                      "properties": {
+                                        "balance": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "calls": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "from": {
+                                          "type": "string"
+                                        },
+                                        "to": {
+                                          "type": "string"
+                                        },
+                                        "maxFeePerGas": {
+                                          "type": "string"
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "validation": {
+                              "type": "boolean"
+                            },
+                            "traceTransfers": {
+                              "type": "boolean"
+                            }
+                          }
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "jsonrpc",
+                  "id",
+                  "method",
+                  "params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/filter_handling/eth_getFilterChanges.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "summary": "eth_getFilterChanges",
+        "operationId": "getFilterChanges",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getFilterChanges"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "The filter ID"
+                    },
+                    "default": [
+                      "0xbdc5b4b99ca699e1d734fc4202afee79"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The filter changes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/filter_handling/eth_uninstallFilter.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "summary": "eth_uninstallFilter",
+        "operationId": "uninstallFilter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_uninstallFilter"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Filter ID"
+                    },
+                    "default": [
+                      "0xbdc5b4b99ca699e1d734fc4202afee79"
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Boolean value indicating if the filter was removed or not.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/gas_data/eth_estimateGas.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_estimateGas",
+        "operationId": "estimateGas",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_estimateGas"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "format": "byte"
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "byte"
+                        }
+                      }
+                    },
+                    "default": [
+                      {
+                        "from": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+                        "to": "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8"
+                      },
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The estimated gas amount",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string",
+                      "format": "byte"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/gas_data/eth_gasPrice.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_gasPrice",
+        "operationId": "getGasPrice",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_gasPrice"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The value of the current gas base fee in Wei.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/gas_data/eth_maxPriorityFeePerGas.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_maxPriorityFeePerGas",
+        "operationId": "maxPriorityFeePerGas",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_maxPriorityFeePerGas"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The estimated max priority fee per gas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string",
+                      "format": "byte"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/logs_and_events/eth_getLogs.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "logs"
+        ],
+        "summary": "eth_getLogs",
+        "operationId": "getLogs",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getLogs"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fromBlock": {
+                          "type": "string",
+                          "title": "from block",
+                          "description": "The block number or tag to start searching for logs from.",
+                          "default": "latest"
+                        },
+                        "address": {
+                          "type": "string",
+                          "title": "smart contract address",
+                          "description": "The contract address to retrieve the logs for."
+                        },
+                        "topics": {
+                          "type": "array",
+                          "title": "topics",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "An array of 32-byte topics to filter for. Each topic is treated as an OR condition."
+                        }
+                      }
+                    },
+                    "default": [
+                      {
+                        "fromBlock": "latest",
+                        "address": "0x4d224452801ACEd8B2F0aebE155379bb5D594381",
+                        "topics": [
+                          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+                        ]
+                      }
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An array of log objects matching the specified filter.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/logs_and_events/eth_newFilter.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chainstack Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "logs"
+        ],
+        "summary": "eth_newFilter",
+        "operationId": "newFilter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "default": "eth_newFilter"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "fromBlock": {
+                          "type": "string",
+                          "title": "from block",
+                          "description": "The block number or tag to start searching for logs from.",
+                          "default": "latest"
+                        },
+                        "address": {
+                          "type": "string",
+                          "title": "smart contract address",
+                          "description": "The contract address to retrieve the logs for."
+                        },
+                        "topics": {
+                          "type": "array",
+                          "title": "topics",
+                          "items": {
+                            "type": "string"
+                          },
+                          "description": "An array of 32-byte topics to filter for. Each topic is treated as an OR condition."
+                        }
+                      }
+                    },
+                    "default": [
+                      {
+                        "fromBlock": "latest",
+                        "address": "0x4d224452801ACEd8B2F0aebE155379bb5D594381",
+                        "topics": [
+                          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+                        ]
+                      }
+                    ]
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The filter ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_getBlockReceipts.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "upload"
+        ],
+        "summary": "eth_getBlockReceipts",
+        "operationId": "getBlockReceipts",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getBlockReceipts"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Block identifier"
+                    },
+                    "default": [
+                      "latest"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The block receipts information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_getTransactionByBlockHashAndIndex.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "Transactions info"
+        ],
+        "summary": "eth_getTransactionByBlockHashAndIndex",
+        "operationId": "getTransactionByBlockHashAndIndex",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getTransactionByBlockHashAndIndex"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block hash"
+                        },
+                        {
+                          "type": "string",
+                          "title": "Transaction index"
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0xe5154e40a873257082e257c405d28bf2cc58d80629cc5468d2f7e6dba3c4e7db",
+                      "0x3D"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_getTransactionByBlockNumberAndIndex.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Transactions info"
+        ],
+        "summary": "eth_getTransactionByBlockNumberAndIndex",
+        "operationId": "getTransactionByBlockNumberAndIndex",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getTransactionByBlockNumberAndIndex"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "title": "Block number"
+                        },
+                        {
+                          "type": "string",
+                          "title": "Transaction index"
+                        }
+                      ]
+                    },
+                    "default": [
+                      "0x10021FD",
+                      "0x3D"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_getTransactionByHash.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Transactions info"
+        ],
+        "summary": "eth_getTransactionByHash",
+        "operationId": "getTransactionByHash",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getTransactionByHash"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Transaction hash"
+                    },
+                    "default": [
+                      "0xd5ac65792636f33afecfb829a42497c7062ee846b4e9bb16da7ddd67a8035b41"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_getTransactionReceipt.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Polygon Node API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "tags": [
+          "Transactions info"
+        ],
+        "summary": "eth_getTransactionReceipt",
+        "operationId": "getTransactionReceipt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  },
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_getTransactionReceipt"
+                  },
+                  "params": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "title": "Transaction hash"
+                    },
+                    "default": [
+                      "0xf033310487c37a86db8099a738ffa2bb62bb06efeb486a65ff595d411b5321f4"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The transaction receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
+
+
+================================================
+FILE: openapi/ethereum_node_api/transaction_info/eth_newPendingTransactionFilter.json
+================================================
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "NODE API",
+    "version": "1.0.0",
+    "description": "This is an API for interacting with a Chainstack node."
+  },
+  "servers": [
+    {
+      "url": "https://nd-422-757-666.p2pify.com"
+    }
+  ],
+  "paths": {
+    "/0a9d79d93fb2f4a4b1e04695da2b77a7": {
+      "post": {
+        "summary": "eth_newPendingTransactionFilter",
+        "operationId": "newPendingTransactionFilter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "jsonrpc": {
+                    "type": "string",
+                    "default": "2.0"
+                  },
+                  "method": {
+                    "type": "string",
+                    "default": "eth_newPendingTransactionFilter"
+                  },
+                  "params": {
+                    "type": "array",
+                    "default": []
+                  },
+                  "id": {
+                    "type": "integer",
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The new filter ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "jsonrpc": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

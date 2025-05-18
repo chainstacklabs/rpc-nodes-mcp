@@ -9,7 +9,6 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 
-# Initialize Rich console
 console = Console()
 
 # API key will be read from env var OPENAI_API_KEY
@@ -41,6 +40,8 @@ async def main():
             console.print("[bold yellow]Sending query to agent...[/]")
 
             agent = create_react_agent(model, tools)
+
+            # In this example, you will see how LLM calls two tools (get balance and convert Wei to Eth)
             agent_response = await agent.ainvoke(
                 {
                     "messages": "Get mainnet Ethereum account balance 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326 in Eth"
