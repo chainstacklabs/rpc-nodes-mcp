@@ -9,14 +9,13 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
 
-# Initialize Rich console
 console = Console()
 
 # API key will be read from env var OPENAI_API_KEY
 model = ChatOpenAI(model="gpt-4o")
 server_params = StdioServerParameters(
     command="python",
-    args=["src/main.py"],
+    args=["src/main_evm.py"],
 )
 
 
@@ -41,13 +40,17 @@ async def main():
             console.print("[bold yellow]Sending query to agent...[/]")
 
             agent = create_react_agent(model, tools)
-            agent_response = await agent.ainvoke(
-                {
-                    "messages": "Get Ethereum account balance 0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97"
-                }
-            )
 
-            print_messages_pretty(agent_response["messages"])
+            while True:
+                # Message examples:
+                # Get account balance 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326 in Eth on Ethereum Mainnet.
+                # Has this transaction been confirmed on Ethereum Mainnet? 0x85d995eba9763907fdf35cd2034144dd9d53ce32cbec21349d4b12823c6860c5?
+                user_input = input("\n[User] > ")
+                if user_input.lower() in {"exit", "quit"}:
+                    break
+
+                agent_response = await agent.ainvoke({"messages": user_input})
+                print_messages_pretty(agent_response["messages"])
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 Decorator-based registry for automatically registering blockchain adapters.
 """
 
-from core.interfaces import BlockchainAdapter
+from servers.evm.common.interfaces import BlockchainAdapter
 
 registry: dict[str, BlockchainAdapter] = {}
 
