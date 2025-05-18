@@ -7,54 +7,86 @@ def method_to_func_name(method: str) -> str:
     return method.lower()
 
 
-def generate_interface(method: str, params: list) -> str:
+def generate_interface(method_info):
     """Generate an abstract method declaration for the interface."""
+    method_name = method_info["name"]
+    params = method_info["params"]
+
     # Count the number of parameters
-    param_count = len(params) if params else 0
+    param_count = len(params)
 
     # Generate the parameter list
     if param_count > 0:
-        param_list = ", ".join([f"param{i}: str" for i in range(param_count)])
-        return f"    @abstractmethod\n    async def {method_to_func_name(method)}(self, {param_list}) -> str: ...\n"
+        param_list = ", ".join([f"{param['name']}: str" for param in params])
+        return f"    @abstractmethod\n    async def {method_to_func_name(method_name)}(self, {param_list}) -> str: ...\n"
     else:
-        return (
-            f"    @abstractmethod\n    async def {method_to_func_name(method)}(self) -> str: ...\n"
-        )
+        return f"    @abstractmethod\n    async def {method_to_func_name(method_name)}(self) -> str: ...\n"
 
 
-def generate_client_router(method: str, params: list) -> str:
+def generate_client_router(method_info):
     """Generate a client router function for the method."""
+    method_name = method_info["name"]
+    params = method_info["params"]
+
     # Count the number of parameters
-    param_count = len(params) if params else 0
+    param_count = len(params)
 
     # Generate the parameter list
     if param_count > 0:
-        param_list = ", ".join(["chain"] + [f"param{i}" for i in range(param_count)])
-        pass_params = ", ".join([f"param{i}" for i in range(param_count)])
-        return f"async def {method_to_func_name(method)}({param_list}):\n    return await _adapter(chain).{method_to_func_name(method)}({pass_params})\n\n"
+        param_list = ", ".join(["chain"] + [param["name"] for param in params])
+        pass_params = ", ".join([param["name"] for param in params])
+        return f"async def {method_to_func_name(method_name)}({param_list}):\n    return await _adapter(chain).{method_to_func_name(method_name)}({pass_params})\n\n"
     else:
-        return f"async def {method_to_func_name(method)}(chain):\n    return await _adapter(chain).{method_to_func_name(method)}()\n\n"
+        return f"async def {method_to_func_name(method_name)}(chain):\n    return await _adapter(chain).{method_to_func_name(method_name)}()\n\n"
 
 
-def generate_tool(method: str, params: list) -> str:
+def generate_tool(method_info):
     """Generate a tool function for the method."""
-    func_name = method_to_func_name(method)
+    method_name = method_info["name"]
+    params = method_info["params"]
+    summary = method_info["summary"]
+    description = method_info["description"]
+    returns = method_info["returns"]
+
+    # Create a detailed description for the tool
+    tool_description = f"Call the {method_name} JSON-RPC method"
+    if summary:
+        tool_description += f": {summary}"
+    if description:
+        tool_description += f"\n{description}"
+    if returns:
+        tool_description += f"\nReturns: {returns}"
+
+    # Add parameter descriptions
+    if params:
+        tool_description += "\n\nParameters:"
+        for param in params:
+            param_desc = f"\n- {param['name']}"
+            if param["title"]:
+                param_desc += f" ({param['title']})"
+            if param["description"]:
+                param_desc += f": {param['description']}"
+            if "value" in param and param["value"]:
+                param_desc += f" [Example: {param['value']}]"
+            tool_description += param_desc
+
+    func_name = method_to_func_name(method_name)
 
     # Count the number of parameters
-    param_count = len(params) if params else 0
+    param_count = len(params)
 
     # Generate the parameter list
     if param_count > 0:
-        param_list = ", ".join(["chain: str"] + [f"param{i}: str" for i in range(param_count)])
-        arg_list = ", ".join(["chain.lower()"] + [f"param{i}" for i in range(param_count)])
+        param_list = ", ".join(["chain: str"] + [f"{param['name']}: str" for param in params])
+        arg_list = ", ".join(["chain.lower()"] + [param["name"] for param in params])
     else:
         param_list = "chain: str"
         arg_list = "chain.lower()"
 
     return f"""@mcp.tool(
     name="{func_name}",
-    description="Auto-generated tool for {method}",
-    annotations={{"title": "{method}", "readOnlyHint": True}},
+    description={json.dumps(tool_description)},
+    annotations={{"title": "{method_name}", "readOnlyHint": True}},
 )
 async def {func_name}({param_list}) -> CallToolResult:
     try:
@@ -65,20 +97,21 @@ async def {func_name}({param_list}) -> CallToolResult:
 """
 
 
-def generate_adapter_method(method: str, params: list) -> str:
+def generate_adapter_method(method_info):
     """Generate an adapter method implementation."""
-    func_name = method_to_func_name(method)
+    method_name = method_info["name"]
+    params = method_info["params"]
 
     # Count the number of parameters
-    param_count = len(params) if params else 0
+    param_count = len(params)
 
     # Generate the parameter list and call parameters
     if param_count > 0:
-        param_list = ", ".join([f"param{i}" for i in range(param_count)])
-        call_params = ", ".join([f"param{i}" for i in range(param_count)])
-        return f'    async def {func_name}(self, {param_list}) -> str:\n        return await self.rpc_client.post("{method}", [{call_params}], self.rpc_url)\n\n'
+        param_list = ", ".join([param["name"] for param in params])
+        call_params = ", ".join([param["name"] for param in params])
+        return f'    async def {method_to_func_name(method_name)}(self, {param_list}) -> str:\n        return await self.rpc_client.post("{method_name}", [{call_params}], self.rpc_url)\n\n'
     else:
-        return f'    async def {func_name}(self) -> str:\n        return await self.rpc_client.post("{method}", [], self.rpc_url)\n\n'
+        return f'    async def {method_to_func_name(method_name)}(self) -> str:\n        return await self.rpc_client.post("{method_name}", [], self.rpc_url)\n\n'
 
 
 def generate_adapter_file(methods_info, blockchain: str) -> str:
@@ -99,8 +132,8 @@ class {blockchain.capitalize()}Adapter(BlockchainAdapter):
 
 '''
     body = ""
-    for method, params in methods_info:
-        body += generate_adapter_method(method, params)
+    for method in methods_info:
+        body += generate_adapter_method(method)
     return header + body
 
 
@@ -112,7 +145,15 @@ def extract_methods_from_text(openapi_text: str):
         try:
             cleaned = params_str.replace("\n", "").replace('\\"', '"')
             params = eval(cleaned, {"__builtins__": {}}, {})
-            methods_info.append((method, params))
+            methods_info.append(
+                {
+                    "name": method,
+                    "params": [{"name": f"param{i + 1}"} for i in range(len(params))],
+                    "summary": "",
+                    "description": "",
+                    "returns": "",
+                }
+            )
         except Exception:
             continue
     return methods_info
@@ -171,8 +212,10 @@ def extract_methods_from_json_files(file_paths):
 
     # Debug print
     print(f"Found {len(methods_info)} methods:")
-    for method, params in methods_info:
-        print(f"  - {method}: {len(params)} parameters")
+    for method in methods_info:
+        method_name = method["name"]
+        param_count = len(method["params"])
+        print(f"  - {method_name}: {param_count} parameters")
 
     return methods_info
 
@@ -181,7 +224,6 @@ def extract_methods_from_json(data):
     """Extract method information from a parsed JSON object."""
     methods_info = []
 
-    # Navigate through paths to find methods and parameters
     if "paths" in data:
         for path, path_info in data["paths"].items():
             for method_type, operation in path_info.items():
@@ -193,10 +235,75 @@ def extract_methods_from_json(data):
                             props = schema["properties"]
                             if "method" in props and "default" in props["method"]:
                                 method_name = props["method"]["default"]
+                                params_info = []
 
-                                if "params" in props and "default" in props["params"]:
-                                    params = props["params"]["default"]
-                                    methods_info.append((method_name, params))
+                                if "params" in props:
+                                    param_items = props["params"].get("items", {})
+                                    any_of = param_items.get("anyOf")
+                                    one_of = param_items.get("oneOf")
+
+                                    if any_of:
+                                        for idx, item in enumerate(any_of):
+                                            params_info.append(
+                                                {
+                                                    "name": f"param{idx + 1}",
+                                                    "title": item.get("title", ""),
+                                                    "description": item.get("description", ""),
+                                                    "value": "",
+                                                }
+                                            )
+                                    elif one_of:
+                                        for idx, item in enumerate(one_of):
+                                            params_info.append(
+                                                {
+                                                    "name": f"param{idx + 1}",
+                                                    "title": item.get("title", ""),
+                                                    "description": item.get("description", ""),
+                                                    "value": "",
+                                                }
+                                            )
+                                    elif "properties" in param_items:
+                                        for name, info in param_items["properties"].items():
+                                            safe_name = (
+                                                name + "_"
+                                                if name in {"from", "to", "class", "global"}
+                                                else name
+                                            )
+                                            params_info.append(
+                                                {
+                                                    "name": safe_name,
+                                                    "title": info.get("title", ""),
+                                                    "description": info.get("description", ""),
+                                                    "value": info.get("default", ""),
+                                                }
+                                            )
+
+                                    elif param_items.get("type") in (
+                                        "string",
+                                        "boolean",
+                                        "integer",
+                                        "object",
+                                    ):
+                                        params_info.append(
+                                            {
+                                                "name": "param1",
+                                                "title": param_items.get("title", ""),
+                                                "description": param_items.get("description", ""),
+                                                "value": "",
+                                            }
+                                        )
+
+                                methods_info.append(
+                                    {
+                                        "name": method_name,
+                                        "params": params_info,
+                                        "summary": operation.get("summary", ""),
+                                        "description": operation.get("description", ""),
+                                        "returns": operation.get("responses", {})
+                                        .get("200", {})
+                                        .get("description", ""),
+                                    }
+                                )
 
     return methods_info
 
@@ -257,13 +364,13 @@ from servers.{blockchain}.server import mcp
 
 ''')
 
-    for method, params in methods_info:
+    for method_info in methods_info:
         with open(f"{out_dir}/interfaces.py", "a") as f:
-            f.write(generate_interface(method, params))
+            f.write(generate_interface(method_info))
         with open(f"{out_dir}/client.py", "a") as f:
-            f.write(generate_client_router(method, params))
+            f.write(generate_client_router(method_info))
         with open(f"{out_dir}/json_rpc_methods.py", "a") as f:
-            f.write(generate_tool(method, params))
+            f.write(generate_tool(method_info))
 
     adapter_code = generate_adapter_file(methods_info, blockchain)
     Path(f"{out_dir}/{blockchain}.py").write_text(adapter_code)
