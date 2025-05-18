@@ -1,7 +1,12 @@
 # MCP to access blockchain RPC nodes
 
 Minimal, fast, and extensible [MCP server](https://modelcontextprotocol.io/introduction) for blockchain transaction analysis.
-Supports Ethereum, Solana, and EVM-compatible chains via a clean adapter interface.
+Supports EVM blockchains via a clean adapter interface.
+
+🤖 Run the auto-generation script to generate MCP tools for other blockchains using [OpenAPI specifications](https://github.com/chainstack/dev-portal/tree/main/openapi).
+```bash
+uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
+```
 
 ## 🚀 Quick Start
 
@@ -26,12 +31,12 @@ For more details, visit [Model Context Inspector](https://modelcontextprotocol.i
 
 ## Scripts
 
-A client example which interacts with the MCP server (it requires `OPENAI_API_KEY` env var):
+A client example that interacts with the MCP server (requires `OPENAI_API_KEY` environment variable):
 ```bash
 uv run scripts/run_mcp_client_example.py
 ```
 
-Auto generation tools and required interfaces based on OpenAPI spec:
+Tool for auto-generating MCP interfaces and implementations (_only tools currently_) based on OpenAPI spec (see [Chainstack open-source docs](https://github.com/chainstack/dev-portal/tree/main/openapi)):
 ```bash
 uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
 ```
