@@ -41,14 +41,15 @@ async def main():
 
             agent = create_react_agent(model, tools)
 
-            # In this example, you will see how LLM calls two tools (get balance and convert Wei to Eth)
-            agent_response = await agent.ainvoke(
-                {
-                    "messages": "Get mainnet Ethereum account balance 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326 in Eth"
-                }
-            )
+            while True:
+                # Message example:
+                # Get mainnet Ethereum account balance 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326 in Eth
+                user_input = input("\n[User] > ")
+                if user_input.lower() in {"exit", "quit"}:
+                    break
 
-            print_messages_pretty(agent_response["messages"])
+                agent_response = await agent.ainvoke({"messages": user_input})
+                print_messages_pretty(agent_response["messages"])
 
 
 if __name__ == "__main__":
