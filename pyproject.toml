@@ -1,7 +1,7 @@
 [project]
 name = "mcp-v1"
 version = "0.1.0"
-description = "MCP server to interact with Ethereum and Solana"
+description = "MCP server to interact with EVM blockchains"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
