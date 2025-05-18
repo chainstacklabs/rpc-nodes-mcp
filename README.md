@@ -20,50 +20,18 @@ cd repo
 
 ## ▶️ Run the Server
 ```bash
-npx @modelcontextprotocol/inspector uv run src/main.py
+npx @modelcontextprotocol/inspector uv run src/main_evm.py
 ```
-For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector). There is also a client example which interacts with the MCP server (it requires `OPENAI_API_KEY` env var).
+For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector).
+
+## Scripts
+
+A client example which interacts with the MCP server (it requires `OPENAI_API_KEY` env var):
 ```bash
-uv run src/client_example.py
+uv run scripts/run_mcp_client_example.py
 ```
 
-## 🧪 Run Tests
+Auto generation tools and required interfaces based on OpenAPI spec:
 ```bash
-uv run pytest
-```
-
-## 🧩 Add a Blockchain Adapter
-1. Create a file in `src/chains/`, e.g. `fantom.py`
-2. Subclass `EvmAdapter` or implement `BlockchainAdapter`
-3. Register the adapter:
-   ```python
-   @register_adapter("fantom")
-   class FantomAdapter(EvmAdapter):
-       def __init__(self, rpc_client: RpcClient = None):
-           super().__init__(rpc_url=settings.FANTOM_RPC_URL, rpc_client=rpc_client)
-   ```
-
-## 🔧 Add a Tool
-1. Add a new function in `src/tools/`, use `@mcp.tool(...)`
-2. Optionally use `fetch_transaction(...)` from `core.client`
-3. Return a `CallToolResult`
-
-Example:
-```python
-@mcp.tool(name="example_tool")
-async def example_tool(...) -> CallToolResult:
-    ...
-```
-
-## 🧠 Project Structure
-```
-src/
-├── chains/        # Blockchain adapters (EVM & Solana)
-├── core/          # Interfaces, RPC client, registry
-├── tools/         # MCP-exposed tools
-├── prompts/       # Prompt templates
-├── tests/         # Unit tests (pytest)
-├── config.py      # Environment variable loader
-├── main.py        # Entrypoint
-├── server.py      # MCP server instance
+uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
 ```
