@@ -1,4 +1,4 @@
-"""MCP tools for transaction-related JSON-RPC calls (EVM and other chains)."""
+"""MCP tools for transaction-related JSON-RPC calls."""
 
 from mcp.types import CallToolResult
 

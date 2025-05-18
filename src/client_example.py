@@ -16,7 +16,7 @@ console = Console()
 model = ChatOpenAI(model="gpt-4o")
 server_params = StdioServerParameters(
     command="python",
-    args=["src/servers/evm/main.py"],
+    args=["src/main_evm.py"],
 )
 
 
@@ -43,7 +43,7 @@ async def main():
             agent = create_react_agent(model, tools)
             agent_response = await agent.ainvoke(
                 {
-                    "messages": "Get Ethereum account balance 0x4838B106FCe9647Bdf1E7877BF73cE8B0BAD5f97"
+                    "messages": "Get mainnet Ethereum account balance 0x1f9090aaE28b8a3dCeaDf281B0F12828e676c326 in Eth"
                 }
             )
 
