@@ -45,5 +45,5 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 
 ## Add MCP server to your favourite tools
 
-[Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
-[Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
+- [Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
+- [Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
