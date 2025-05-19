@@ -11,22 +11,22 @@ uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_nam
 uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
 ```
 
-## 🚀 Quick Start
+## 🚀 Quick start
 
-### 1. Clone the Repository
+### 1. Clone the repository
 ```bash
 git clone https://github.com/chainstacklabs/rpc-nodes-mcp.git
 cd rpc-nodes-mcp
 ```
 
-### 2. Install Dependencies with `uv`
+### 2. Install dependencies with `uv`
 | Mode       | Command                                           |
 |------------|---------------------------------------------------|
 | Base       | `uv pip install -r pyproject.toml`                |
 | Dev        | `uv pip install -r pyproject.toml -e '.[dev]'`    |
 | Test       | `uv pip install -r pyproject.toml -e '.[test]'`   |
 
-## ▶️ Run the Server
+### ▶️ Run MCP server
 ```bash
 npx @modelcontextprotocol/inspector uv run src/main_evm.py
 ```
@@ -43,3 +43,8 @@ Tool for auto-generating MCP interfaces and implementations (_only tools current
 ```bash
 uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
 ```
+
+## Add MCP server to your favourite tools
+
+[Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
+[Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
