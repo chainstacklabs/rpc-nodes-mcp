@@ -9,7 +9,7 @@ from common.interfaces import RpcClient
 
 class HttpxRpcClient(RpcClient):
     async def post(self, method: str, params: list, endpoint: str) -> dict:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=30) as client:
             resp = await client.post(
                 endpoint, json={"jsonrpc": "2.0", "method": method, "params": params, "id": 1}
             )
