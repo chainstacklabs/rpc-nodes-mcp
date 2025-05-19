@@ -1,7 +1,6 @@
 # MCP to access blockchain RPC nodes
 
-Minimal, fast, and extensible [MCP server](https://modelcontextprotocol.io/introduction) for blockchain transaction analysis.
-Supports EVM blockchains via a clean adapter interface.
+Minimal, fast, and extensible [MCP server](https://modelcontextprotocol.io/introduction) for interactions with JSON-RPC blockchain nodes. Supports EVM blockchains.
 
 🤖 Run the auto-generation script to generate MCP tools for other blockchains using [OpenAPI specifications](https://github.com/chainstack/dev-portal/tree/main/openapi).
 ```bash
