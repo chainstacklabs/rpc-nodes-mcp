@@ -38,5 +38,5 @@ uv run scripts/run_mcp_client_example.py
 
 Tool for auto-generating MCP interfaces and implementations (_only tools currently_) based on OpenAPI spec (see [Chainstack open-source docs](https://github.com/chainstack/dev-portal/tree/main/openapi)):
 ```bash
-uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
+uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
 ```
