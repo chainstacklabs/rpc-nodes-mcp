@@ -6,6 +6,9 @@ Supports EVM blockchains via a clean adapter interface.
 🤖 Run the auto-generation script to generate MCP tools for other blockchains using [OpenAPI specifications](https://github.com/chainstack/dev-portal/tree/main/openapi).
 ```bash
 uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
+
+# Example
+uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
 ```
 
 ## 🚀 Quick Start
