@@ -16,7 +16,7 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/chainstacklabs/rpc-nodes-mcp.git
-cd repo
+cd rpc-nodes-mcp
 ```
 
 ### 2. Install Dependencies with `uv`
