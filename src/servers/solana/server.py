@@ -1,3 +1,3 @@
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("EvmJsonRpcNodeMCP")
+mcp = FastMCP("SolanaJsonRpcNodeMCP")
