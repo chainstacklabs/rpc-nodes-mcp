@@ -61,14 +61,14 @@ class EthereumAdapter(BlockchainAdapter):
     async def debug_tracetransaction(self, param1, param2) -> str:
         return await self.rpc_client.post("debug_traceTransaction", [param1, param2], self.rpc_url)
 
-    async def debug_traceblockbyhash(self, param1, param2) -> str:
-        return await self.rpc_client.post("debug_traceBlockByHash", [param1, param2], self.rpc_url)
+    async def debug_traceblockbyhash(self, param1, tracer) -> str:
+        return await self.rpc_client.post("debug_traceBlockByHash", [param1, tracer], self.rpc_url)
 
-    async def debug_traceblockbynumber(self, param1, param2) -> str:
-        return await self.rpc_client.post("debug_traceBlockByNumber", [param1, param2], self.rpc_url)
+    async def debug_traceblockbynumber(self, param1, tracer) -> str:
+        return await self.rpc_client.post("debug_traceBlockByNumber", [param1, tracer], self.rpc_url)
 
-    async def debug_tracecall(self, param1, param2, param3) -> str:
-        return await self.rpc_client.post("debug_traceCall", [param1, param2, param3], self.rpc_url)
+    async def debug_tracecall(self, from_, param2, tracer) -> str:
+        return await self.rpc_client.post("debug_traceCall", [from_, param2, tracer], self.rpc_url)
 
     async def debug_tracetransaction(self, param1, param2) -> str:
         return await self.rpc_client.post("debug_traceTransaction", [param1, param2], self.rpc_url)
@@ -85,8 +85,8 @@ class EthereumAdapter(BlockchainAdapter):
     async def eth_sendrawtransaction(self, param1) -> str:
         return await self.rpc_client.post("eth_sendRawTransaction", [param1], self.rpc_url)
 
-    async def eth_simulatev1(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_simulateV1", [param1, param2], self.rpc_url)
+    async def eth_simulatev1(self, blockStateCalls, param2) -> str:
+        return await self.rpc_client.post("eth_simulateV1", [blockStateCalls, param2], self.rpc_url)
 
     async def eth_getfilterchanges(self, param1) -> str:
         return await self.rpc_client.post("eth_getFilterChanges", [param1], self.rpc_url)

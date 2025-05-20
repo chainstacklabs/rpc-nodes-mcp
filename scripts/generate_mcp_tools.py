@@ -12,10 +12,7 @@ def generate_interface(method_info):
     method_name = method_info["name"]
     params = method_info["params"]
 
-    # Count the number of parameters
     param_count = len(params)
-
-    # Generate the parameter list
     if param_count > 0:
         param_list = ", ".join([f"{param['name']}: str" for param in params])
         return f"    @abstractmethod\n    async def {method_to_func_name(method_name)}(self, {param_list}) -> str: ...\n"
@@ -28,10 +25,7 @@ def generate_client_router(method_info):
     method_name = method_info["name"]
     params = method_info["params"]
 
-    # Count the number of parameters
     param_count = len(params)
-
-    # Generate the parameter list
     if param_count > 0:
         param_list = ", ".join(["chain"] + [param["name"] for param in params])
         pass_params = ", ".join([param["name"] for param in params])
@@ -62,20 +56,20 @@ def generate_tool(method_info):
         tool_description += "\n\nParameters:"
         for param in params:
             param_desc = f"\n- {param['name']}"
-            if param["title"]:
+            if param.get("title"):
                 param_desc += f" ({param['title']})"
-            if param["description"]:
+            if param.get("description"):
                 param_desc += f": {param['description']}"
-            if "value" in param and param["value"]:
+            if isinstance(param.get("value"), dict):
+                inner_fields = ", ".join([f"{k}={v}" for k, v in param["value"].items()])
+                param_desc += f" [Object Example: {{{inner_fields}}}]"
+            elif "value" in param and param.get("value"):
                 param_desc += f" [Example: {param['value']}]"
             tool_description += param_desc
 
     func_name = method_to_func_name(method_name)
 
-    # Count the number of parameters
     param_count = len(params)
-
-    # Generate the parameter list
     if param_count > 0:
         param_list = ", ".join(["chain: str"] + [f"{param['name']}: str" for param in params])
         arg_list = ", ".join(["chain.lower()"] + [param["name"] for param in params])
@@ -102,10 +96,7 @@ def generate_adapter_method(method_info):
     method_name = method_info["name"]
     params = method_info["params"]
 
-    # Count the number of parameters
     param_count = len(params)
-
-    # Generate the parameter list and call parameters
     if param_count > 0:
         param_list = ", ".join([param["name"] for param in params])
         call_params = ", ".join([param["name"] for param in params])
@@ -138,6 +129,7 @@ class {blockchain.capitalize()}Adapter(BlockchainAdapter):
 
 
 def extract_methods_from_text(openapi_text: str):
+    """Extract method information using regex when JSON parsing fails."""
     pattern = r'"method":\s*\{[^}]*"default":\s*"([^"]+)"[^}]*\}.*?"params":\s*\{[^}]*"default":\s*(\[[^\]]*\])'
     matches = re.findall(pattern, openapi_text, re.DOTALL)
     methods_info = []
@@ -178,7 +170,8 @@ def extract_methods_from_json_files(file_paths):
         # Check if this is a combined file with multiple JSON objects
         if "================================================" in content:
             # Split the file by the delimiter
-            json_parts = re.split(r"={10,}\nFILE:.*\n={10,}\n", content)
+            # This regex matches the delimiter pattern used in the example files
+            json_parts = re.split(r"={10,}\nFILE:.*\n={10,}", content)
 
             for part in json_parts:
                 if not part.strip():
@@ -238,60 +231,225 @@ def extract_methods_from_json(data):
                                 params_info = []
 
                                 if "params" in props:
-                                    param_items = props["params"].get("items", {})
-                                    any_of = param_items.get("anyOf")
-                                    one_of = param_items.get("oneOf")
+                                    params_prop = props["params"]
+                                    param_default = params_prop.get("default", [])
 
-                                    if any_of:
-                                        for idx, item in enumerate(any_of):
+                                    # Debug info
+                                    print(f"Processing method: {method_name}")
+                                    print(f"Params property type: {type(params_prop)}")
+
+                                    # Handle different ways parameters can be structured
+                                    if "items" in params_prop:
+                                        param_items = params_prop["items"]
+
+                                        # Handle anyOf case
+                                        if "anyOf" in param_items:
+                                            default_vals = (
+                                                param_default
+                                                if isinstance(param_default, list)
+                                                else []
+                                            )
+                                            for idx, item in enumerate(param_items["anyOf"]):
+                                                if item.get("type") == "string":
+                                                    params_info.append(
+                                                        {
+                                                            "name": "account",
+                                                            "title": "",
+                                                            "description": item.get(
+                                                                "description", ""
+                                                            ),
+                                                            "value": item.get("default", ""),
+                                                        }
+                                                    )
+                                                elif (
+                                                    item.get("type") == "object"
+                                                    and "properties" in item
+                                                ):
+                                                    object_example = {
+                                                        k: v.get("default", "")
+                                                        for k, v in item["properties"].items()
+                                                    }
+                                                    field_descriptions = []
+                                                    for k, v in item["properties"].items():
+                                                        desc = v.get("description", "")
+                                                        if desc:
+                                                            field_descriptions.append(
+                                                                f"{k}: {desc}"
+                                                            )
+                                                        else:
+                                                            field_descriptions.append(k)
+                                                    params_info.append(
+                                                        {
+                                                            "name": "options",
+                                                            "title": "Options object",
+                                                            "description": "Options including: "
+                                                            + ", ".join(field_descriptions),
+                                                            "value": object_example,
+                                                        }
+                                                    )
+
+                                        # Handle oneOf case
+                                        elif "oneOf" in param_items:
+                                            one_of = param_items["oneOf"]
+                                            for idx, item in enumerate(one_of):
+                                                param_name = f"param{idx + 1}"
+                                                # If it's a primitive type with description, use param1
+                                                if "type" in item and item["type"] in [
+                                                    "string",
+                                                    "integer",
+                                                    "boolean",
+                                                ]:
+                                                    params_info.append(
+                                                        {
+                                                            "name": param_name,
+                                                            "title": item.get("title", ""),
+                                                            "description": item.get(
+                                                                "description", ""
+                                                            ),
+                                                            "value": item.get("default", ""),
+                                                        }
+                                                    )
+                                                # If it's an object with properties, extract parameter names
+                                                elif (
+                                                    item.get("type") == "object"
+                                                    and "properties" in item
+                                                ):
+                                                    # Use the first property name as param name
+                                                    keys = list(item["properties"].keys())
+                                                    if keys:
+                                                        obj_param_name = keys[0]
+                                                        if obj_param_name in {
+                                                            "from",
+                                                            "to",
+                                                            "class",
+                                                            "global",
+                                                        }:
+                                                            obj_param_name += "_"
+                                                        params_info.append(
+                                                            {
+                                                                "name": obj_param_name,
+                                                                "title": item.get("title", ""),
+                                                                "description": item.get(
+                                                                    "description", ""
+                                                                ),
+                                                                "value": item.get("default", ""),
+                                                            }
+                                                        )
+                                                    else:
+                                                        params_info.append(
+                                                            {
+                                                                "name": param_name,
+                                                                "title": item.get("title", ""),
+                                                                "description": item.get(
+                                                                    "description", ""
+                                                                ),
+                                                                "value": item.get("default", ""),
+                                                            }
+                                                        )
+                                                else:
+                                                    params_info.append(
+                                                        {
+                                                            "name": param_name,
+                                                            "title": item.get("title", ""),
+                                                            "description": item.get(
+                                                                "description", ""
+                                                            ),
+                                                            "value": item.get("default", ""),
+                                                        }
+                                                    )
+
+                                        # Direct type specification (primitive types)
+                                        elif "type" in param_items:
+                                            item_type = param_items["type"]
+                                            if item_type in [
+                                                "string",
+                                                "boolean",
+                                                "integer",
+                                                "number",
+                                            ]:
+                                                params_info.append(
+                                                    {
+                                                        "name": "param1",
+                                                        "title": param_items.get("title", ""),
+                                                        "description": param_items.get(
+                                                            "description", ""
+                                                        ),
+                                                        "value": param_items.get("default", ""),
+                                                    }
+                                                )
+                                            # Handle direct array items with object properties
+                                            elif (
+                                                item_type == "object"
+                                                and "properties" in param_items
+                                            ):
+                                                for name, info in param_items["properties"].items():
+                                                    safe_name = (
+                                                        name + "_"
+                                                        if name in {"from", "to", "class", "global"}
+                                                        else name
+                                                    )
+                                                    params_info.append(
+                                                        {
+                                                            "name": safe_name,
+                                                            "title": info.get("title", ""),
+                                                            "description": info.get(
+                                                                "description", ""
+                                                            ),
+                                                            "value": info.get("default", ""),
+                                                        }
+                                                    )
+
+                                    # If we found no parameters but have defaults, infer from defaults
+                                    if not params_info and param_default:
+                                        for idx, _ in enumerate(param_default):
                                             params_info.append(
                                                 {
                                                     "name": f"param{idx + 1}",
-                                                    "title": item.get("title", ""),
-                                                    "description": item.get("description", ""),
+                                                    "title": "",
+                                                    "description": f"Parameter {idx + 1}",
                                                     "value": "",
-                                                }
-                                            )
-                                    elif one_of:
-                                        for idx, item in enumerate(one_of):
-                                            params_info.append(
-                                                {
-                                                    "name": f"param{idx + 1}",
-                                                    "title": item.get("title", ""),
-                                                    "description": item.get("description", ""),
-                                                    "value": "",
-                                                }
-                                            )
-                                    elif "properties" in param_items:
-                                        for name, info in param_items["properties"].items():
-                                            safe_name = (
-                                                name + "_"
-                                                if name in {"from", "to", "class", "global"}
-                                                else name
-                                            )
-                                            params_info.append(
-                                                {
-                                                    "name": safe_name,
-                                                    "title": info.get("title", ""),
-                                                    "description": info.get("description", ""),
-                                                    "value": info.get("default", ""),
                                                 }
                                             )
 
-                                    elif param_items.get("type") in (
-                                        "string",
-                                        "boolean",
-                                        "integer",
-                                        "object",
+                                    # If still no parameters found, check if we can extract from the actual default values
+                                    if (
+                                        not params_info
+                                        and isinstance(param_default, list)
+                                        and len(param_default) > 0
                                     ):
-                                        params_info.append(
-                                            {
-                                                "name": "param1",
-                                                "title": param_items.get("title", ""),
-                                                "description": param_items.get("description", ""),
-                                                "value": "",
-                                            }
-                                        )
+                                        for idx, default_val in enumerate(param_default):
+                                            if isinstance(default_val, dict):
+                                                # Extract param names from dictionary keys
+                                                for key in default_val.keys():
+                                                    safe_key = (
+                                                        key + "_"
+                                                        if key in {"from", "to", "class", "global"}
+                                                        else key
+                                                    )
+                                                    params_info.append(
+                                                        {
+                                                            "name": safe_key,
+                                                            "title": "",
+                                                            "description": f"Parameter {safe_key}",
+                                                            "value": "",
+                                                        }
+                                                    )
+                                            else:
+                                                params_info.append(
+                                                    {
+                                                        "name": f"param{idx + 1}",
+                                                        "title": "",
+                                                        "description": f"Parameter {idx + 1}",
+                                                        "value": "",
+                                                    }
+                                                )
+
+                                # Log a warning if no parameters were found
+                                if "params" in props and not params_info:
+                                    print(
+                                        f"Warning: No parameters extracted for method {method_name}"
+                                    )
+                                    print(f"Params property: {props['params']}")
 
                                 methods_info.append(
                                     {

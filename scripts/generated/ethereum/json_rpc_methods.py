@@ -185,34 +185,34 @@ async def debug_tracetransaction(chain: str, param1: str, param2: str) -> CallTo
 
 @mcp.tool(
     name="debug_traceblockbyhash",
-    description="Call the debug_traceBlockByHash JSON-RPC method: debug_traceBlockByHash\nReturns: The block traces.\n\nParameters:\n- param1 (Block Hash): The block hash.\n- param2 (Tracer type): The type of tracer.",
+    description="Call the debug_traceBlockByHash JSON-RPC method: debug_traceBlockByHash\nReturns: The block traces.\n\nParameters:\n- param1 (Block Hash): The block hash.\n- tracer (Tracer type): The type of tracer.",
     annotations={"title": "debug_traceBlockByHash", "readOnlyHint": True},
 )
-async def debug_traceblockbyhash(chain: str, param1: str, param2: str) -> CallToolResult:
+async def debug_traceblockbyhash(chain: str, param1: str, tracer: str) -> CallToolResult:
     try:
-        return _ok(await client.debug_traceblockbyhash(chain.lower(), param1, param2))
+        return _ok(await client.debug_traceblockbyhash(chain.lower(), param1, tracer))
     except Exception as e:
         return _err(str(e))
 
 @mcp.tool(
     name="debug_traceblockbynumber",
-    description="Call the debug_traceBlockByNumber JSON-RPC method: debug_traceBlockByNumber\nReturns: The block traces.\n\nParameters:\n- param1 (Block identifier): The block hash.\n- param2 (Tracer type): The type of tracer.",
+    description="Call the debug_traceBlockByNumber JSON-RPC method: debug_traceBlockByNumber\nReturns: The block traces.\n\nParameters:\n- param1 (Block identifier): The block hash.\n- tracer (Tracer type): The type of tracer.",
     annotations={"title": "debug_traceBlockByNumber", "readOnlyHint": True},
 )
-async def debug_traceblockbynumber(chain: str, param1: str, param2: str) -> CallToolResult:
+async def debug_traceblockbynumber(chain: str, param1: str, tracer: str) -> CallToolResult:
     try:
-        return _ok(await client.debug_traceblockbynumber(chain.lower(), param1, param2))
+        return _ok(await client.debug_traceblockbynumber(chain.lower(), param1, tracer))
     except Exception as e:
         return _err(str(e))
 
 @mcp.tool(
     name="debug_tracecall",
-    description="Call the debug_traceCall JSON-RPC method: debug_traceCall\nReturns: The result of the debug trace call\n\nParameters:\n- param1\n- param2\n- param3",
+    description="Call the debug_traceCall JSON-RPC method: debug_traceCall\nReturns: The result of the debug trace call\n\nParameters:\n- from_\n- param2 [Example: latest]\n- tracer",
     annotations={"title": "debug_traceCall", "readOnlyHint": True},
 )
-async def debug_tracecall(chain: str, param1: str, param2: str, param3: str) -> CallToolResult:
+async def debug_tracecall(chain: str, from_: str, param2: str, tracer: str) -> CallToolResult:
     try:
-        return _ok(await client.debug_tracecall(chain.lower(), param1, param2, param3))
+        return _ok(await client.debug_tracecall(chain.lower(), from_, param2, tracer))
     except Exception as e:
         return _err(str(e))
 
@@ -273,12 +273,12 @@ async def eth_sendrawtransaction(chain: str, param1: str) -> CallToolResult:
 
 @mcp.tool(
     name="eth_simulatev1",
-    description="Call the eth_simulateV1 JSON-RPC method: eth_simulateV1\nReturns: Successful response\n\nParameters:\n- param1\n- param2",
+    description="Call the eth_simulateV1 JSON-RPC method: eth_simulateV1\nReturns: Successful response\n\nParameters:\n- blockStateCalls\n- param2",
     annotations={"title": "eth_simulateV1", "readOnlyHint": True},
 )
-async def eth_simulatev1(chain: str, param1: str, param2: str) -> CallToolResult:
+async def eth_simulatev1(chain: str, blockStateCalls: str, param2: str) -> CallToolResult:
     try:
-        return _ok(await client.eth_simulatev1(chain.lower(), param1, param2))
+        return _ok(await client.eth_simulatev1(chain.lower(), blockStateCalls, param2))
     except Exception as e:
         return _err(str(e))
 

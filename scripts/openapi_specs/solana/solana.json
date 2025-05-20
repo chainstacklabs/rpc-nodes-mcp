@@ -1,0 +1,4107 @@
+================================================
+FILE: openapi/solana_node_api/getAccountInfo.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getAccountInfo example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getAccountInfo."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getAccountInfo",
+                "operationId": "getAccountInfo",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getAccountInfo"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "The public key of the account",
+                                                    "default": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "encoding": {
+                                                            "type": "string",
+                                                            "default": "jsonParsed"
+                                                        },
+                                                        "commitment": {
+                                                            "type": "string",
+                                                            "default": "finalized"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+                                            {
+                                                "encoding": "jsonParsed",
+                                                "commitment": "finalized"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Account information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBalance.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBalance example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBalance."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBalance",
+                "operationId": "getBalance",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBalance"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "The public key of the account",
+                                            "default": "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"
+                                        },
+                                        "default": [
+                                            "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Account balance",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlock.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlock example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlock."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlock",
+                "operationId": "getBlock",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlock"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "oneOf": [
+                                                {
+                                                    "type": "integer",
+                                                    "description": "The slot of the block",
+                                                    "default": 239462061
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "encoding": {
+                                                            "type": "string",
+                                                            "default": "jsonParsed"
+                                                        },
+                                                        "maxSupportedTransactionVersion": {
+                                                            "type": "integer",
+                                                            "default": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            239462061,
+                                            {
+                                                "encoding": "jsonParsed",
+                                                "maxSupportedTransactionVersion": 0
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Block details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlockCommitment.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlockCommitment example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlockCommitment."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlockCommitment",
+                "operationId": "getBlockCommitment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlockCommitment"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "The slot of the block",
+                                            "default": 166974442
+                                        },
+                                        "default": [
+                                            166974442
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Block commitment details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlockHeight.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlockHeight example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlockHeight."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlockHeight",
+                "operationId": "getBlockHeight",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlockHeight"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Block height",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlockProduction.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlockProduction example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlockProduction."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlockProduction",
+                "operationId": "getBlockProduction",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlockProduction"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Block production details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlocks.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlocks example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlocks."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlocks",
+                "operationId": "getBlocks",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlocks"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "The start slot of the blocks",
+                                            "default": 166974442
+                                        },
+                                        "default": [
+                                            166974442
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Blocks details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlocksWithLimit.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlocksWithLimit example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlocksWithLimit."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlocksWithLimit",
+                "operationId": "getBlocksWithLimit",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlocksWithLimit"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "The start slot of the blocks and the maximum number of blocks",
+                                            "default": 166974442
+                                        },
+                                        "default": [
+                                            166974442,
+                                            100
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Blocks details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getBlockTime.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getBlockTime example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getBlockTime."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getBlockTime",
+                "operationId": "getBlockTime",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getBlockTime"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "The slot of the block",
+                                            "default": 166974442
+                                        },
+                                        "default": [
+                                            166974442
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Block time details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getClusterNodes.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getClusterNodes example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getClusterNodes."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getClusterNodes",
+                "operationId": "getClusterNodes",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getClusterNodes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cluster nodes details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "pubkey": {
+                                                        "type": "string"
+                                                    },
+                                                    "gossip": {
+                                                        "type": "string"
+                                                    },
+                                                    "tpu": {
+                                                        "type": "string"
+                                                    },
+                                                    "rpc": {
+                                                        "type": "string"
+                                                    },
+                                                    "version": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getEpochInfo.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getEpochInfo example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getEpochInfo."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getEpochInfo",
+                "operationId": "getEpochInfo",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getEpochInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Epoch info details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "absoluteSlot": {
+                                                    "type": "integer"
+                                                },
+                                                "blockHeight": {
+                                                    "type": "integer"
+                                                },
+                                                "epoch": {
+                                                    "type": "integer"
+                                                },
+                                                "slotIndex": {
+                                                    "type": "integer"
+                                                },
+                                                "slotsInEpoch": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getEpochSchedule.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getEpochSchedule example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getEpochSchedule."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getEpochSchedule",
+                "operationId": "getEpochSchedule",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getEpochSchedule"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Epoch schedule details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "slotsPerEpoch": {
+                                                    "type": "integer"
+                                                },
+                                                "leaderScheduleSlotOffset": {
+                                                    "type": "integer"
+                                                },
+                                                "warmup": {
+                                                    "type": "boolean"
+                                                },
+                                                "firstNormalEpoch": {
+                                                    "type": "integer"
+                                                },
+                                                "firstNormalSlot": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getFeeForMessage.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getFeeForMessage example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getFeeForMessage."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getFeeForMessage",
+                "operationId": "getFeeForMessage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getFeeForMessage"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "The serialized message",
+                                                    "default": "AQABA36MCIdgv94d3c8ywX8gm4JC7lKq8TH6zYjQ6ixtCwbyhwEgP0xzGjSa7QhxjYGUHwUPDgYsz9S8Mb/9c7ejFiwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOnEi/spkCilDriqSI6o2AneB2xk65o4Xm9EM+yGyiPAQICAAEMAgAAAADKmjsAAAAA"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "commitment": {
+                                                            "type": "string",
+                                                            "default": "finalized"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            "AQABA36MCIdgv94d3c8ywX8gm4JC7lKq8TH6zYjQ6ixtCwbyhwEgP0xzGjSa7QhxjYGUHwUPDgYsz9S8Mb/9c7ejFiwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIOnEi/spkCilDriqSI6o2AneB2xk65o4Xm9EM+yGyiPAQICAAEMAgAAAADKmjsAAAAA",
+                                            {
+                                                "commitment": "finalized"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Fee details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getFirstAvailableBlock.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getFirstAvailableBlock example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getFirstAvailableBlock."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getFirstAvailableBlock",
+                "operationId": "getFirstAvailableBlock",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getFirstAvailableBlock"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "First available block details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getGenesisHash.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getGenesisHash example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getGenesisHash."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getGenesisHash",
+                "operationId": "getGenesisHash",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getGenesisHash"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Genesis hash details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getHighestSnapshotSlot.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getHighestSnapshotSlot example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getHighestSnapshotSlot."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getHighestSnapshotSlot",
+                "operationId": "getHighestSnapshotSlot",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getHighestSnapshotSlot"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Highest snapshot slot details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getIdentity.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getIdentity example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getIdentity."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getIdentity",
+                "operationId": "getIdentity",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getIdentity"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Identity details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "identity": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getInflationGovernor.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getInflationGovernor example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getInflationGovernor."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getInflationGovernor",
+                "operationId": "getInflationGovernor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getInflationGovernor"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inflation governor details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "foundation": {
+                                                    "type": "number"
+                                                },
+                                                "foundationTerm": {
+                                                    "type": "number"
+                                                },
+                                                "initial": {
+                                                    "type": "number"
+                                                },
+                                                "taper": {
+                                                    "type": "number"
+                                                },
+                                                "terminal": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getInflationRate.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getInflationRate example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getInflationRate."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getInflationRate",
+                "operationId": "getInflationRate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getInflationRate"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inflation rate details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "epoch": {
+                                                    "type": "integer"
+                                                },
+                                                "foundation": {
+                                                    "type": "number"
+                                                },
+                                                "total": {
+                                                    "type": "number"
+                                                },
+                                                "validator": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getInflationReward.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getInflationReward example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getInflationReward."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getInflationReward",
+                "operationId": "getInflationReward",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getInflationReward"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            [
+                                                "6D2jqw9hyVCpppZexquxa74Fn33rJzzBx38T58VucHx9"
+                                            ],
+                                            {
+                                                "epoch": 554
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Inflation reward details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "epoch": {
+                                                        "type": "integer"
+                                                    },
+                                                    "effectiveSlot": {
+                                                        "type": "integer"
+                                                    },
+                                                    "amount": {
+                                                        "type": "integer"
+                                                    },
+                                                    "postBalance": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getLargestAccounts.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getLargestAccounts example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getLargestAccounts."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getLargestAccounts",
+                "operationId": "getLargestAccounts",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getLargestAccounts"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "filter": {
+                                                    "type": "string",
+                                                    "default": "circulating"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Largest accounts details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "lamports": {
+                                                        "type": "integer"
+                                                    },
+                                                    "address": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getLatestBlockhash.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getLatestBlockhash example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getLatestBlockhash."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getLatestBlockhash",
+                "operationId": "getLatestBlockhash",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getLatestBlockhash"
+                                    },
+                                    "params": {
+                                        "type": "array"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Latest blockhash details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "blockhash": {
+                                                    "type": "string"
+                                                },
+                                                "feeCalculator": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "lamportsPerSignature": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getLeaderSchedule.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getLeaderSchedule example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getLeaderSchedule."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getLeaderSchedule",
+                "operationId": "getLeaderSchedule",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getLeaderSchedule"
+                                    },
+                                    "params": {
+                                        "type": "array"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Leader schedule details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getMaxRetransmitSlot.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getMaxRetransmitSlot example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getMaxRetransmitSlot."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getMaxRetransmitSlot",
+                "operationId": "getMaxRetransmitSlot",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getMaxRetransmitSlot"
+                                    },
+                                    "params": {
+                                        "type": "array"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Max retransmit slot details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getMaxShredInsertSlot.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getMaxShredInsertSlot example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getMaxShredInsertSlot."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getMaxShredInsertSlot",
+                "operationId": "getMaxShredInsertSlot",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getMaxShredInsertSlot"
+                                    },
+                                    "params": {
+                                        "type": "array"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Max shred insert slot details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getMinimumBalanceForRentExemption.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getMinimumBalanceForRentExemption example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getMinimumBalanceForRentExemption."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getMinimumBalanceForRentExemption",
+                "operationId": "getMinimumBalanceForRentExemption",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getMinimumBalanceForRentExemption"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "default": [
+                                            50
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Minimum balance for rent exemption details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getMultipleAccounts.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getMultipleAccounts example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getMultipleAccounts."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getMultipleAccounts",
+                "operationId": "getMultipleAccounts",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getMultipleAccounts"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            [
+                                                "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM",
+                                                "7mhcgF1DVsj5iv4CxZDgp51H6MBBwqamsH1KnqXhSRc5"
+                                            ],
+                                            {
+                                                "encoding": "base58"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Multiple accounts details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getProgramAccounts.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getProgramAccounts example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getProgramAccounts."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getProgramAccounts",
+                "operationId": "getProgramAccounts",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getProgramAccounts"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "FsJ3A3u2vn5cTVofAjvy6y5kwABJAqYWpe4975bi2epH",
+                                            {
+                                                "encoding": "jsonParsed",
+                                                "filters": []
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Program accounts details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getRecentBlockhash.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getRecentBlockhash example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getRecentBlockhash."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getRecentBlockhash",
+                "operationId": "getRecentBlockhash",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getRecentBlockhash"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recent blockhash details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "context": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "slot": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                },
+                                                "value": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "blockhash": {
+                                                            "type": "string"
+                                                        },
+                                                        "feeCalculator": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "lamportsPerSignature": {
+                                                                    "type": "integer"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getRecentPerformanceSamples.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getRecentPerformanceSamples example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getRecentPerformanceSamples."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getRecentPerformanceSamples",
+                "operationId": "getRecentPerformanceSamples",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getRecentPerformanceSamples"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            5
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recent performance samples details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getRecentPrioritizationFees.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getRecentPrioritizationFees example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getRecentPrioritizationFees."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getRecentPrioritizationFees",
+                "operationId": "getRecentPrioritizationFees",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getRecentPrioritizationFees"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            [
+                                                "CxELquR1gPP8wHe33gZ4QxqGB3sZ9RSwsJ2KshVewkFY"
+                                            ]
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recent prioritization fees details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getSignaturesForAddress.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getSignaturesForAddress example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getSignaturesForAddress."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getSignaturesForAddress",
+                "operationId": "getSignaturesForAddress",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getSignaturesForAddress"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Signatures for address details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getSignatureStatuses.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getSignatureStatuses example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getSignatureStatuses."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getSignatureStatuses",
+                "operationId": "getSignatureStatuses",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getSignatureStatuses"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            [
+                                                "5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW"
+                                            ],
+                                            {
+                                                "searchTransactionHistory": true
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Signature statuses details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getSlot.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getSlot example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getSlot."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getSlot",
+                "operationId": "getSlot",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getSlot"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Slot details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getSlotLeader.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getSlotLeader example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getSlotLeader."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getSlotLeader",
+                "operationId": "getSlotLeader",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getSlotLeader"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Slot leader details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getStakeActivation.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getStakeActivation example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getStakeActivation."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getStakeActivation",
+                "operationId": "getStakeActivation",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getStakeActivation"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "6D2jqw9hyVCpppZexquxa74Fn33rJzzBx38T58VucHx9",
+                                            {
+                                                "epoch": 554
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Stake activation details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getStakeMinimumDelegation.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getStakeMinimumDelegation example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getStakeMinimumDelegation."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getStakeMinimumDelegation",
+                "operationId": "getStakeMinimumDelegation",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getStakeMinimumDelegation"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Minimum delegation details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getSupply.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getSupply example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getSupply."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getSupply",
+                "operationId": "getSupply",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getSupply"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": []
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Supply details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getTokenAccountBalance.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getTokenAccountBalance example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getTokenAccountBalance."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getTokenAccountBalance",
+                "operationId": "getTokenAccountBalance",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getTokenAccountBalance"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "3emsAVdmGKERbHjmGfQ6oZ1e35dkf5iYcS6U4CPKFVaa"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token account balance details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getTokenAccountsByOwner.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getTokenAccountsByOwner example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getTokenAccountsByOwner."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getTokenAccountsByOwner",
+                "operationId": "getTokenAccountsByOwner",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getTokenAccountsByOwner"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "CEXq1uy9y15PL2Wb4vDQwQfcJakBGjaAjeuR2nKLj8dk",
+                                            {
+                                                "mint": "8wXtPeU6557ETkp9WHFY1n1EcU6NxDvbAggHGsMYiHsB"
+                                            },
+                                            {
+                                                "encoding": "jsonParsed"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token accounts by owner details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getTokenLargestAccounts.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getTokenLargestAccounts example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getTokenLargestAccounts."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getTokenLargestAccounts",
+                "operationId": "getTokenLargestAccounts",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getTokenLargestAccounts"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "default": [
+                                            "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Largest token accounts details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/getTransaction.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "getTransaction example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's getTransaction."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "getTransaction",
+                "operationId": "getTransaction",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "getTransaction"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "Transaction signature",
+                                                    "default": "4VAGET7z5g7ogVGmbmZ6KBtF6DS8ftLWzD65BXZWQJjwASUqLod7LhGB6mqThcqo97QcC7r7uNmBY8GwsnLAA52n"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "encoding": {
+                                                            "type": "string",
+                                                            "default": "jsonParsed"
+                                                        },
+                                                        "maxSupportedTransactionVersion": {
+                                                            "type": "integer",
+                                                            "default": 0
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            "4VAGET7z5g7ogVGmbmZ6KBtF6DS8ftLWzD65BXZWQJjwASUqLod7LhGB6mqThcqo97QcC7r7uNmBY8GwsnLAA52n",
+                                            {
+                                                "encoding": "jsonParsed",
+                                                "maxSupportedTransactionVersion": 0
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Transaction details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/isBlockhashValid.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "isBlockhashValid example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's isBlockhashValid."
+    },
+    "servers": [
+        {
+            "url": "https://solana-mainnet.core.chainstack.com"
+        }
+    ],
+    "paths": {
+        "/83e0d6661ee0488e22e167c18818cb38": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "isBlockhashValid",
+                "operationId": "isBlockhashValid",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 45
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "isBlockhashValid"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "The blockhash to validate, as a base-58 encoded string",
+                                                    "default": "AspJzsEukGPuLYsebpUSSeS79GtYVVh6Bn4478qWXqBK"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "commitment": {
+                                                            "type": "string",
+                                                            "default": "processed"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            "AspJzsEukGPuLYsebpUSSeS79GtYVVh6Bn4478qWXqBK",
+                                            {
+                                                "commitment": "processed"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Blockhash validity status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}
+
+
+================================================
+FILE: openapi/solana_node_api/simulateTransaction.json
+================================================
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "simulateTransaction example",
+        "version": "1.0.0",
+        "description": "This is an API example for Solana's simulateTransaction."
+    },
+    "servers": [
+        {
+            "url": "https://nd-326-444-187.p2pify.com"
+        }
+    ],
+    "paths": {
+        "/9de47db917d4f69168e3fed02217d15b": {
+            "post": {
+                "tags": [
+                    "query"
+                ],
+                "summary": "simulateTransaction",
+                "operationId": "simulateTransaction",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "default": 1
+                                    },
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0"
+                                    },
+                                    "method": {
+                                        "type": "string",
+                                        "default": "simulateTransaction"
+                                    },
+                                    "params": {
+                                        "type": "array",
+                                        "items": {
+                                            "anyOf": [
+                                                {
+                                                    "type": "string",
+                                                    "description": "Transaction, as an encoded string"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "encoding": {
+                                                            "type": "string",
+                                                            "default": "base64"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "default": [
+                                            "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEDArczbMia1tLmq7zz4DinMNN0pJ1JtLdqIJPUw3YrGCzYAMHBsgN27lcgB6H2WQvFgyZuJYHa46puOQo9yQ8CVQbd9uHXZaGT2cvhRs7reawctIXtX1s3kTqM9YV+/wCp20C7Wj2aiuk5TReAXo+VTVg8QTHjs0UjNMMKCvpzZ+ABAgEBARU=",
+                                            {
+                                                "encoding": "base64"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Simulated transaction details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "jsonrpc": {
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "result": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "x-readme": {
+        "explorer-enabled": true,
+        "proxy-enabled": true
+    }
+}

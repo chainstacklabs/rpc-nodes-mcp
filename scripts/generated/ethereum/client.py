@@ -59,14 +59,14 @@ async def web3_clientversion(chain):
 async def debug_tracetransaction(chain, param1, param2):
     return await _adapter(chain).debug_tracetransaction(param1, param2)
 
-async def debug_traceblockbyhash(chain, param1, param2):
-    return await _adapter(chain).debug_traceblockbyhash(param1, param2)
+async def debug_traceblockbyhash(chain, param1, tracer):
+    return await _adapter(chain).debug_traceblockbyhash(param1, tracer)
 
-async def debug_traceblockbynumber(chain, param1, param2):
-    return await _adapter(chain).debug_traceblockbynumber(param1, param2)
+async def debug_traceblockbynumber(chain, param1, tracer):
+    return await _adapter(chain).debug_traceblockbynumber(param1, tracer)
 
-async def debug_tracecall(chain, param1, param2, param3):
-    return await _adapter(chain).debug_tracecall(param1, param2, param3)
+async def debug_tracecall(chain, from_, param2, tracer):
+    return await _adapter(chain).debug_tracecall(from_, param2, tracer)
 
 async def debug_tracetransaction(chain, param1, param2):
     return await _adapter(chain).debug_tracetransaction(param1, param2)
@@ -83,8 +83,8 @@ async def eth_call(chain, to_, data):
 async def eth_sendrawtransaction(chain, param1):
     return await _adapter(chain).eth_sendrawtransaction(param1)
 
-async def eth_simulatev1(chain, param1, param2):
-    return await _adapter(chain).eth_simulatev1(param1, param2)
+async def eth_simulatev1(chain, blockStateCalls, param2):
+    return await _adapter(chain).eth_simulatev1(blockStateCalls, param2)
 
 async def eth_getfilterchanges(chain, param1):
     return await _adapter(chain).eth_getfilterchanges(param1)
