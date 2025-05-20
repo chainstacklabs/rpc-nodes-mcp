@@ -17,8 +17,8 @@ async def getaccountinfo(chain, account, options):
     return await _adapter(chain).getaccountinfo(account, options)
 
 
-async def getbalance(chain, param1):
-    return await _adapter(chain).getbalance(param1)
+async def getbalance(chain, account, options):
+    return await _adapter(chain).getbalance(account, options)
 
 
 async def getblock(chain, param1, encoding):
@@ -73,6 +73,10 @@ async def getgenesishash(chain):
     return await _adapter(chain).getgenesishash()
 
 
+async def gethealth(chain):
+    return await _adapter(chain).gethealth()
+
+
 async def gethighestsnapshotslot(chain):
     return await _adapter(chain).gethighestsnapshotslot()
 
@@ -125,10 +129,6 @@ async def getprogramaccounts(chain, param1, param2):
     return await _adapter(chain).getprogramaccounts(param1, param2)
 
 
-async def getrecentblockhash(chain):
-    return await _adapter(chain).getrecentblockhash()
-
-
 async def getrecentperformancesamples(chain, param1):
     return await _adapter(chain).getrecentperformancesamples(param1)
 
@@ -153,8 +153,8 @@ async def getslotleader(chain):
     return await _adapter(chain).getslotleader()
 
 
-async def getstakeactivation(chain, param1, param2):
-    return await _adapter(chain).getstakeactivation(param1, param2)
+async def getslotleaders(chain, start_slot, limit):
+    return await _adapter(chain).getslotleaders(start_slot, limit)
 
 
 async def getstakeminimumdelegation(chain):
@@ -173,16 +173,28 @@ async def gettokenaccountsbyowner(chain, param1, param2, param3):
     return await _adapter(chain).gettokenaccountsbyowner(param1, param2, param3)
 
 
+async def gettokenaccountsbydelegate(chain, param1, param2, param3):
+    return await _adapter(chain).gettokenaccountsbydelegate(param1, param2, param3)
+
+
 async def gettokenlargestaccounts(chain, param1):
     return await _adapter(chain).gettokenlargestaccounts(param1)
+
+
+async def gettokensupply(chain, mint, options):
+    return await _adapter(chain).gettokensupply(mint, options)
 
 
 async def gettransaction(chain, account, options):
     return await _adapter(chain).gettransaction(account, options)
 
 
-async def isblockhashvalid(chain, account, options):
-    return await _adapter(chain).isblockhashvalid(account, options)
+async def gettransactioncount(chain, options):
+    return await _adapter(chain).gettransactioncount(options)
+
+
+async def getversion(chain):
+    return await _adapter(chain).getversion()
 
 
 async def simulatetransaction(chain, account, options):

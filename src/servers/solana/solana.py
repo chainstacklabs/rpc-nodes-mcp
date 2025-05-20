@@ -15,8 +15,8 @@ class SolanaAdapter(BlockchainAdapter):
     async def getaccountinfo(self, account, options) -> str:
         return await self.rpc_client.post("getAccountInfo", [account, options], self.rpc_url)
 
-    async def getbalance(self, param1) -> str:
-        return await self.rpc_client.post("getBalance", [param1], self.rpc_url)
+    async def getbalance(self, account, options) -> str:
+        return await self.rpc_client.post("getBalance", [account, options], self.rpc_url)
 
     async def getblock(self, param1, encoding) -> str:
         return await self.rpc_client.post("getBlock", [param1, encoding], self.rpc_url)
@@ -56,6 +56,9 @@ class SolanaAdapter(BlockchainAdapter):
 
     async def getgenesishash(self) -> str:
         return await self.rpc_client.post("getGenesisHash", [], self.rpc_url)
+
+    async def gethealth(self) -> str:
+        return await self.rpc_client.post("getHealth", [], self.rpc_url)
 
     async def gethighestsnapshotslot(self) -> str:
         return await self.rpc_client.post("getHighestSnapshotSlot", [], self.rpc_url)
@@ -98,9 +101,6 @@ class SolanaAdapter(BlockchainAdapter):
     async def getprogramaccounts(self, param1, param2) -> str:
         return await self.rpc_client.post("getProgramAccounts", [param1, param2], self.rpc_url)
 
-    async def getrecentblockhash(self) -> str:
-        return await self.rpc_client.post("getRecentBlockhash", [], self.rpc_url)
-
     async def getrecentperformancesamples(self, param1) -> str:
         return await self.rpc_client.post("getRecentPerformanceSamples", [param1], self.rpc_url)
 
@@ -119,8 +119,8 @@ class SolanaAdapter(BlockchainAdapter):
     async def getslotleader(self) -> str:
         return await self.rpc_client.post("getSlotLeader", [], self.rpc_url)
 
-    async def getstakeactivation(self, param1, param2) -> str:
-        return await self.rpc_client.post("getStakeActivation", [param1, param2], self.rpc_url)
+    async def getslotleaders(self, start_slot, limit) -> str:
+        return await self.rpc_client.post("getSlotLeaders", [start_slot, limit], self.rpc_url)
 
     async def getstakeminimumdelegation(self) -> str:
         return await self.rpc_client.post("getStakeMinimumDelegation", [], self.rpc_url)
@@ -136,14 +136,25 @@ class SolanaAdapter(BlockchainAdapter):
             "getTokenAccountsByOwner", [param1, param2, param3], self.rpc_url
         )
 
+    async def gettokenaccountsbydelegate(self, param1, param2, param3) -> str:
+        return await self.rpc_client.post(
+            "getTokenAccountsByDelegate", [param1, param2, param3], self.rpc_url
+        )
+
     async def gettokenlargestaccounts(self, param1) -> str:
         return await self.rpc_client.post("getTokenLargestAccounts", [param1], self.rpc_url)
+
+    async def gettokensupply(self, mint, options) -> str:
+        return await self.rpc_client.post("getTokenSupply", [mint, options], self.rpc_url)
 
     async def gettransaction(self, account, options) -> str:
         return await self.rpc_client.post("getTransaction", [account, options], self.rpc_url)
 
-    async def isblockhashvalid(self, account, options) -> str:
-        return await self.rpc_client.post("isBlockhashValid", [account, options], self.rpc_url)
+    async def gettransactioncount(self, options) -> str:
+        return await self.rpc_client.post("getTransactionCount", [options], self.rpc_url)
+
+    async def getVersion(self) -> str:
+        return await self.rpc_client.post("getVersion", [], self.rpc_url)
 
     async def simulatetransaction(self, account, options) -> str:
         return await self.rpc_client.post("simulateTransaction", [account, options], self.rpc_url)
