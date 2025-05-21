@@ -47,3 +47,9 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 
 - [Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
 - [Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
+
+## Generate LLM API key
+
+- [Mistral](https://console.mistral.ai/api-keys)
+- [Claude](https://docs.anthropic.com/en/api/overview)
+- [OpenAI](https://platform.openai.com/api-keys)
