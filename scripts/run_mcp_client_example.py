@@ -12,7 +12,7 @@ from rich.text import Text
 console = Console()
 
 # API key will be read from env var OPENAI_API_KEY
-# You can use any LLM provider - Open AI, Mistral, Claude, etc.
+# You can use any LLM provider - Open AI, Mistral (free tier), Claude, etc.
 model = ChatOpenAI(model="gpt-4o")
 server_params = StdioServerParameters(
     command="python",
