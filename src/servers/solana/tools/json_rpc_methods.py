@@ -1404,7 +1404,7 @@ async def gettokensupply(
         "- signature (str): Base-58 encoded transaction signature.\n"
         "- encoding (str, optional): Encoding format: 'json', 'jsonParsed', 'base58', 'base64'.\n"
         "- commitment (str, optional): Commitment level.\n"
-        "- max_supported_transaction_version (int, optional): Max tx version to return.\n\n"
+        "- max_supported_transaction_version (int, optional): Max tx version to return. Currently, the only valid value for this parameter is 0. Setting it to 0 allows you to fetch all transactions, including both Versioned and legacy transactions.\n\n"
         "Returns: Transaction object, optionally parsed.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -1419,7 +1419,7 @@ async def gettransaction(
     signature: str,
     encoding: str = None,
     commitment: str = None,
-    max_supported_transaction_version: int = None,
+    max_supported_transaction_version: int = 0,
 ) -> CallToolResult:
     try:
         options = {}
