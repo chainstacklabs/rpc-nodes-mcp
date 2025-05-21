@@ -1236,32 +1236,33 @@ async def trace_call(
         "Call the trace_callMany JSON-RPC method to simulate multiple contract calls and return trace results for each.\n\n"
         "Description: Executes multiple calls in the context of the same block and returns detailed traces for each.\n\n"
         "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains..\n"
-        "- calls (list[tuple]): A list of tuples, each containing:\n"
-        "    * call (dict with from, to, value, data, etc)\n"
-        "    * trace_types (list[str]): Types like ['trace'], ['vmTrace'], ['stateDiff'].\n"
-        "- block (str): Block number or tag (e.g., 'latest').\n\n"
-        "Returns: A list of trace results. Each includes:\n"
-        "- output: Return data from the call.\n"
-        "- stateDiff: Changes in state caused by the call.\n"
-        "- trace: List of low-level actions:\n"
-        "  - action: Call info including from, to, value, gas, input, callType.\n"
-        "  - result: Execution result (gasUsed, output).\n"
-        "  - traceAddress: Execution path of the call.\n"
-        "  - type: Type of the call ('call', 'create').\n"
-        "- vmTrace: VM state transitions during execution.\n\n"
+        "- chain (str): Must be Ethereum.\n"
+        "- calls (list): List of objects, each with 'call' and 'trace_types' fields.\n"
+        "  * call (dict): Contains from, to, value, gas, data, etc.\n"
+        "  * trace_types (list[str]): e.g., ['trace'], ['vmTrace'].\n"
+        "- block (str): Block tag or number (e.g., 'latest').\n\n"
+        "Expected input format for `calls`:\n"
+        "[\n"
+        "  {\n"
+        '    "call": {\n'
+        '      "from": "0x...",\n'
+        '      "to": "0x...",\n'
+        '      "value": "0x...",\n'
+        '      "data": "0x..."\n'
+        "    },\n"
+        '    "trace_types": ["trace"]\n'
+        "  }\n"
+        "]\n\n"
+        "Returns: A list of trace results per call.\n"
+        "Each trace includes output, stateDiff, trace actions, and vmTrace (if requested).\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
         "{\n"
         '  "jsonrpc": "2.0",\n'
         '  "method": "trace_callMany",\n'
-        '  "params": [\n'
-        "    [\n"
-        '      [{"from": "0x...", "to": "0x...", "value": "0x186a0"}, ["trace"]],\n'
-        '      [{"from": "0x...", "to": "0x...", "value": "0x186a0"}, ["trace"]]\n'
-        "    ],\n"
-        '    "latest"\n'
-        "  ],\n"
+        '  "params": [[\n'
+        '    {"call": {"to": "0x...", "data": "0x..."}, "trace_types": ["trace"]}\n'
+        '  ], "latest"],\n'
         '  "id": 1\n'
         "}'"
     ),
@@ -1269,11 +1270,12 @@ async def trace_call(
 )
 async def trace_callMany(
     chain: str,
-    calls: list[tuple[dict, list[str]]],
+    calls: list[dict],
     block: str,
 ) -> CallToolResult:
     try:
-        return _ok(await client.trace_callMany(chain.lower(), calls, block))
+        formatted_calls = [[c["call"], c["trace_types"]] for c in calls]
+        return _ok(await client.trace_callMany(chain.lower(), formatted_calls, block))
     except Exception as e:
         return _err(str(e))
 
