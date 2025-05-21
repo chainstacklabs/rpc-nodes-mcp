@@ -21,40 +21,40 @@ async def getbalance(chain, account, options):
     return await _adapter(chain).getbalance(account, options)
 
 
-async def getblock(chain, param1, encoding):
-    return await _adapter(chain).getblock(param1, encoding)
+async def getblock(chain, slot_number, options):
+    return await _adapter(chain).getblock(slot_number, options)
 
 
-async def getblockcommitment(chain, param1):
-    return await _adapter(chain).getblockcommitment(param1)
+async def getblockcommitment(chain, slot_number):
+    return await _adapter(chain).getblockcommitment(slot_number)
 
 
-async def getblockheight(chain):
-    return await _adapter(chain).getblockheight()
+async def getblockheight(chain, options):
+    return await _adapter(chain).getblockheight(options)
 
 
-async def getblockproduction(chain):
-    return await _adapter(chain).getblockproduction()
+async def getblockproduction(chain, options):
+    return await _adapter(chain).getblockproduction(options)
 
 
-async def getblocks(chain, param1):
-    return await _adapter(chain).getblocks(param1)
+async def getblocks(chain, start_slot, end_slot, options):
+    return await _adapter(chain).getblocks(start_slot, end_slot, options)
 
 
-async def getblockswithlimit(chain, param1):
-    return await _adapter(chain).getblockswithlimit(param1)
+async def getblockswithlimit(chain, start_slot, end_slot, options):
+    return await _adapter(chain).getblockswithlimit(start_slot, end_slot, options)
 
 
-async def getblocktime(chain, param1):
-    return await _adapter(chain).getblocktime(param1)
+async def getblocktime(chain, slot_number):
+    return await _adapter(chain).getblocktime(slot_number)
 
 
 async def getclusternodes(chain):
     return await _adapter(chain).getclusternodes()
 
 
-async def getepochinfo(chain):
-    return await _adapter(chain).getepochinfo()
+async def getepochinfo(chain, options):
+    return await _adapter(chain).getepochinfo(options)
 
 
 async def getepochschedule(chain):
@@ -85,28 +85,28 @@ async def getidentity(chain):
     return await _adapter(chain).getidentity()
 
 
-async def getinflationgovernor(chain):
-    return await _adapter(chain).getinflationgovernor()
+async def getinflationgovernor(chain, options):
+    return await _adapter(chain).getinflationgovernor(options)
 
 
 async def getinflationrate(chain):
     return await _adapter(chain).getinflationrate()
 
 
-async def getinflationreward(chain, param1, param2):
-    return await _adapter(chain).getinflationreward(param1, param2)
+async def getinflationreward(chain, addresses, options):
+    return await _adapter(chain).getinflationreward(addresses, options)
 
 
 async def getlargestaccounts(chain, filter):
     return await _adapter(chain).getlargestaccounts(filter)
 
 
-async def getlatestblockhash(chain):
-    return await _adapter(chain).getlatestblockhash()
+async def getlatestblockhash(chain, options):
+    return await _adapter(chain).getlatestblockhash(options)
 
 
-async def getleaderschedule(chain):
-    return await _adapter(chain).getleaderschedule()
+async def getleaderschedule(chain, slot_number, options):
+    return await _adapter(chain).getleaderschedule(slot_number, options)
 
 
 async def getmaxretransmitslot(chain):
@@ -117,56 +117,56 @@ async def getmaxshredinsertslot(chain):
     return await _adapter(chain).getmaxshredinsertslot()
 
 
-async def getminimumbalanceforrentexemption(chain, param1):
-    return await _adapter(chain).getminimumbalanceforrentexemption(param1)
+async def getminimumbalanceforrentexemption(chain, account_data_length, options):
+    return await _adapter(chain).getminimumbalanceforrentexemption(account_data_length, options)
 
 
-async def getmultipleaccounts(chain, param1, param2):
-    return await _adapter(chain).getmultipleaccounts(param1, param2)
+async def getmultipleaccounts(chain, pubkeys, options):
+    return await _adapter(chain).getmultipleaccounts(pubkeys, options)
 
 
-async def getprogramaccounts(chain, param1, param2):
-    return await _adapter(chain).getprogramaccounts(param1, param2)
+async def getprogramaccounts(chain, pubkey, options):
+    return await _adapter(chain).getprogramaccounts(pubkey, options)
 
 
-async def getrecentperformancesamples(chain, param1):
-    return await _adapter(chain).getrecentperformancesamples(param1)
+async def getrecentperformancesamples(chain, samples_number):
+    return await _adapter(chain).getrecentperformancesamples(samples_number)
 
 
-async def getrecentprioritizationfees(chain, param1):
-    return await _adapter(chain).getrecentprioritizationfees(param1)
+async def getrecentprioritizationfees(chain, addresses):
+    return await _adapter(chain).getrecentprioritizationfees(addresses)
 
 
-async def getsignaturesforaddress(chain, param1):
-    return await _adapter(chain).getsignaturesforaddress(param1)
+async def getsignaturesforaddress(chain, account, options):
+    return await _adapter(chain).getsignaturesforaddress(account, options)
 
 
-async def getsignaturestatuses(chain, param1, param2):
-    return await _adapter(chain).getsignaturestatuses(param1, param2)
+async def getsignaturestatuses(chain, signatures, options):
+    return await _adapter(chain).getsignaturestatuses(signatures, options)
 
 
-async def getslot(chain):
-    return await _adapter(chain).getslot()
+async def getslot(chain, options):
+    return await _adapter(chain).getslot(options)
 
 
-async def getslotleader(chain):
-    return await _adapter(chain).getslotleader()
+async def getslotleader(chain, options):
+    return await _adapter(chain).getslotleader(options)
 
 
 async def getslotleaders(chain, start_slot, limit):
     return await _adapter(chain).getslotleaders(start_slot, limit)
 
 
-async def getstakeminimumdelegation(chain):
-    return await _adapter(chain).getstakeminimumdelegation()
+async def getstakeminimumdelegation(chain, options):
+    return await _adapter(chain).getstakeminimumdelegation(options)
 
 
-async def getsupply(chain):
-    return await _adapter(chain).getsupply()
+async def getsupply(chain, options):
+    return await _adapter(chain).getsupply(options)
 
 
-async def gettokenaccountbalance(chain, param1):
-    return await _adapter(chain).gettokenaccountbalance(param1)
+async def gettokenaccountbalance(chain, account, options):
+    return await _adapter(chain).gettokenaccountbalance(account, options)
 
 
 async def gettokenaccountsbyowner(chain, param1, param2, param3):
@@ -177,8 +177,8 @@ async def gettokenaccountsbydelegate(chain, param1, param2, param3):
     return await _adapter(chain).gettokenaccountsbydelegate(param1, param2, param3)
 
 
-async def gettokenlargestaccounts(chain, param1):
-    return await _adapter(chain).gettokenlargestaccounts(param1)
+async def gettokenlargestaccounts(chain, mint, options):
+    return await _adapter(chain).gettokenlargestaccounts(mint, options)
 
 
 async def gettokensupply(chain, mint, options):

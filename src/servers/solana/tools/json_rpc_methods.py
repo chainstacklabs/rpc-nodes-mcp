@@ -1142,6 +1142,7 @@ async def getslotleaders(
         "Call the getStakeMinimumDelegation JSON-RPC method to retrieve the minimum stake amount needed for delegation.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n\n"
+        "- commitment (str, optional): Commitment level.\n"
         "Returns: Minimum number of lamports required for stake delegation.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -1150,9 +1151,12 @@ async def getslotleaders(
     ),
     annotations={"title": "getStakeMinimumDelegation", "readOnlyHint": True},
 )
-async def getstakeminimumdelegation(chain: str) -> CallToolResult:
+async def getstakeminimumdelegation(chain: str, commitment: str) -> CallToolResult:
     try:
-        return _ok(await client.getstakeminimumdelegation(chain.lower()))
+        options = {}
+        if commitment:
+            options["commitment"] = commitment
+        return _ok(await client.getstakeminimumdelegation(chain.lower(), options or None))
     except Exception as e:
         return _err(str(e))
 
