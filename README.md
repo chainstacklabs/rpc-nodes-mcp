@@ -46,6 +46,7 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 ## Add MCP server to your favourite tools
 
 - [Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
+- [VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 - [Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
 
 ## Generate LLM API key
