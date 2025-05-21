@@ -12,130 +12,143 @@ class EvmAdapter(BlockchainAdapter):
         self.rpc_url = rpc_url
         self.rpc_client = rpc_client or HttpxRpcClient()
 
-    async def eth_getbalance(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_getBalance", [param1, param2], self.rpc_url)
+    async def web3_clientVersion(self) -> str:
+        return await self.rpc_client.post("web3_clientVersion", [], self.rpc_url)
 
-    async def eth_getcode(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_getCode", [param1, param2], self.rpc_url)
+    async def web3_sha3(self, data: str) -> str:
+        return await self.rpc_client.post("web3_sha3", [data], self.rpc_url)
 
-    async def eth_getproof(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_getProof", [param1, param2], self.rpc_url)
-
-    async def eth_getstorageat(self, param1, param2, param3) -> str:
-        return await self.rpc_client.post(
-            "eth_getStorageAt", [param1, param2, param3], self.rpc_url
-        )
-
-    async def eth_gettransactioncount(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_getTransactionCount", [param1, param2], self.rpc_url)
-
-    async def eth_blocknumber(self) -> str:
-        return await self.rpc_client.post("eth_blockNumber", [], self.rpc_url)
-
-    async def eth_getblockbynumber(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_getBlockByNumber", [param1, param2], self.rpc_url)
-
-    async def eth_getblocktransactioncountbyhash(self, param1) -> str:
-        return await self.rpc_client.post(
-            "eth_getBlockTransactionCountByHash", [param1], self.rpc_url
-        )
-
-    async def eth_getblocktransactioncountbynumber(self, param1) -> str:
-        return await self.rpc_client.post(
-            "eth_getBlockTransactionCountByNumber", [param1], self.rpc_url
-        )
-
-    async def eth_newblockfilter(self) -> str:
-        return await self.rpc_client.post("eth_newBlockFilter", [], self.rpc_url)
-
-    async def eth_chainid(self) -> str:
-        return await self.rpc_client.post("eth_chainId", [], self.rpc_url)
-
-    async def eth_syncing(self) -> str:
-        return await self.rpc_client.post("eth_syncing", [], self.rpc_url)
+    async def net_version(self) -> str:
+        return await self.rpc_client.post("net_version", [], self.rpc_url)
 
     async def net_listening(self) -> str:
         return await self.rpc_client.post("net_listening", [], self.rpc_url)
 
-    async def net_peercount(self) -> str:
+    async def net_peerCount(self) -> str:
         return await self.rpc_client.post("net_peerCount", [], self.rpc_url)
 
-    async def web3_clientversion(self) -> str:
-        return await self.rpc_client.post("web3_clientVersion", [], self.rpc_url)
+    async def eth_syncing(self) -> str:
+        return await self.rpc_client.post("eth_syncing", [], self.rpc_url)
 
-    async def debug_tracetransaction(self, param1, param2) -> str:
-        return await self.rpc_client.post("debug_traceTransaction", [param1, param2], self.rpc_url)
+    async def eth_chainId(self) -> str:
+        return await self.rpc_client.post("eth_chainId", [], self.rpc_url)
 
-    async def debug_traceblockbyhash(self, param1, param2) -> str:
-        return await self.rpc_client.post("debug_traceBlockByHash", [param1, param2], self.rpc_url)
+    async def eth_blockNumber(self) -> str:
+        return await self.rpc_client.post("eth_blockNumber", [], self.rpc_url)
 
-    async def debug_traceblockbynumber(self, param1, param2) -> str:
-        return await self.rpc_client.post(
-            "debug_traceBlockByNumber", [param1, param2], self.rpc_url
-        )
-
-    async def debug_tracecall(self, param1, param2, param3) -> str:
-        return await self.rpc_client.post("debug_traceCall", [param1, param2, param3], self.rpc_url)
-
-    async def debug_tracetransaction(self, param1, param2) -> str:
-        return await self.rpc_client.post("debug_traceTransaction", [param1, param2], self.rpc_url)
-
-    async def trace_block(self, param1) -> str:
-        return await self.rpc_client.post("trace_block", [param1], self.rpc_url)
-
-    async def trace_transaction(self, param1) -> str:
-        return await self.rpc_client.post("trace_transaction", [param1], self.rpc_url)
-
-    async def eth_call(self, to_, data) -> str:
-        return await self.rpc_client.post("eth_call", [to_, data], self.rpc_url)
-
-    async def eth_sendrawtransaction(self, param1) -> str:
-        return await self.rpc_client.post("eth_sendRawTransaction", [param1], self.rpc_url)
-
-    async def eth_simulatev1(self, param1, param2) -> str:
-        return await self.rpc_client.post("eth_simulateV1", [param1, param2], self.rpc_url)
-
-    async def eth_getfilterchanges(self, param1) -> str:
-        return await self.rpc_client.post("eth_getFilterChanges", [param1], self.rpc_url)
-
-    async def eth_uninstallfilter(self, param1) -> str:
-        return await self.rpc_client.post("eth_uninstallFilter", [param1], self.rpc_url)
-
-    async def eth_estimategas(self, from_, to_) -> str:
-        return await self.rpc_client.post("eth_estimateGas", [from_, to_], self.rpc_url)
-
-    async def eth_gasprice(self) -> str:
+    async def eth_gasPrice(self) -> str:
         return await self.rpc_client.post("eth_gasPrice", [], self.rpc_url)
 
-    async def eth_maxpriorityfeepergas(self) -> str:
+    async def eth_feeHistory(
+        self, block_count: str, newest_block: str, reward_percentiles: list[str]
+    ) -> str:
+        return await self.rpc_client.post(
+            "eth_feeHistory", [block_count, newest_block, reward_percentiles], self.rpc_url
+        )
+
+    async def eth_maxPriorityFeePerGas(self) -> str:
         return await self.rpc_client.post("eth_maxPriorityFeePerGas", [], self.rpc_url)
 
-    async def eth_getlogs(self, fromBlock, address, topics) -> str:
-        return await self.rpc_client.post("eth_getLogs", [fromBlock, address, topics], self.rpc_url)
+    async def eth_getBalance(self, address: str, block: str) -> str:
+        return await self.rpc_client.post("eth_getBalance", [address, block], self.rpc_url)
 
-    async def eth_newfilter(self, fromBlock, address, topics) -> str:
+    async def eth_getStorageAt(self, address: str, position: str, block: str) -> str:
         return await self.rpc_client.post(
-            "eth_newFilter", [fromBlock, address, topics], self.rpc_url
+            "eth_getStorageAt", [address, position, block], self.rpc_url
         )
 
-    async def eth_getblockreceipts(self, param1) -> str:
-        return await self.rpc_client.post("eth_getBlockReceipts", [param1], self.rpc_url)
+    async def eth_getTransactionCount(self, address: str, block: str) -> str:
+        return await self.rpc_client.post("eth_getTransactionCount", [address, block], self.rpc_url)
 
-    async def eth_gettransactionbyblockhashandindex(self, param1, param2) -> str:
+    async def eth_getCode(self, address: str, block: str) -> str:
+        return await self.rpc_client.post("eth_getCode", [address, block], self.rpc_url)
+
+    async def eth_call(self, call_object: dict, block: str, overrides: dict = None) -> str:
+        params = [call_object, block]
+        if overrides:
+            params.append(overrides)
+        return await self.rpc_client.post("eth_call", params, self.rpc_url)
+
+    async def eth_estimateGas(self, tx: dict, block: str, overrides: dict = None) -> str:
+        params = [tx, block]
+        if overrides:
+            params.append(overrides)
+        return await self.rpc_client.post("eth_estimateGas", params, self.rpc_url)
+
+    async def eth_getBlockByHash(self, block_hash: str, full_tx: bool) -> str:
+        return await self.rpc_client.post("eth_getBlockByHash", [block_hash, full_tx], self.rpc_url)
+
+    async def eth_getBlockByNumber(self, block_number: str, full_tx: bool) -> str:
         return await self.rpc_client.post(
-            "eth_getTransactionByBlockHashAndIndex", [param1, param2], self.rpc_url
+            "eth_getBlockByNumber", [block_number, full_tx], self.rpc_url
         )
 
-    async def eth_gettransactionbyblocknumberandindex(self, param1, param2) -> str:
+    async def eth_getBlockTransactionCountByHash(self, block_hash: str) -> str:
         return await self.rpc_client.post(
-            "eth_getTransactionByBlockNumberAndIndex", [param1, param2], self.rpc_url
+            "eth_getBlockTransactionCountByHash", [block_hash], self.rpc_url
         )
 
-    async def eth_gettransactionbyhash(self, param1) -> str:
-        return await self.rpc_client.post("eth_getTransactionByHash", [param1], self.rpc_url)
+    async def eth_getBlockTransactionCountByNumber(self, block_number: str) -> str:
+        return await self.rpc_client.post(
+            "eth_getBlockTransactionCountByNumber", [block_number], self.rpc_url
+        )
 
-    async def eth_gettransactionreceipt(self, param1) -> str:
-        return await self.rpc_client.post("eth_getTransactionReceipt", [param1], self.rpc_url)
+    async def eth_getTransactionByHash(self, tx_hash: str) -> str:
+        return await self.rpc_client.post("eth_getTransactionByHash", [tx_hash], self.rpc_url)
 
-    async def eth_newpendingtransactionfilter(self) -> str:
-        return await self.rpc_client.post("eth_newPendingTransactionFilter", [], self.rpc_url)
+    async def eth_getTransactionReceipt(self, tx_hash: str) -> str:
+        return await self.rpc_client.post("eth_getTransactionReceipt", [tx_hash], self.rpc_url)
+
+    async def eth_getLogs(self, filter_params: dict) -> str:
+        return await self.rpc_client.post("eth_getLogs", [filter_params], self.rpc_url)
+
+    async def debug_traceTransaction(self, tx_hash: str, options: dict) -> str:
+        return await self.rpc_client.post(
+            "debug_traceTransaction", [tx_hash, options], self.rpc_url
+        )
+
+    async def debug_traceCall(self, call_object: dict, block: str, options: dict) -> str:
+        return await self.rpc_client.post(
+            "debug_traceCall", [call_object, block, options], self.rpc_url
+        )
+
+    async def debug_traceBlock(self, rlp_encoded_block: str, options: dict) -> str:
+        return await self.rpc_client.post(
+            "debug_traceBlock", [rlp_encoded_block, options], self.rpc_url
+        )
+
+    async def debug_traceBlockByHash(self, block_hash: str, options: dict) -> str:
+        return await self.rpc_client.post(
+            "debug_traceBlockByHash", [block_hash, options], self.rpc_url
+        )
+
+    async def debug_traceBlockByNumber(self, block_number: str, options: dict) -> str:
+        return await self.rpc_client.post(
+            "debug_traceBlockByNumber", [block_number, options], self.rpc_url
+        )
+
+    async def trace_call(self, call_object: dict, trace_types: list[str], block: str) -> str:
+        return await self.rpc_client.post(
+            "trace_call", [call_object, trace_types, block], self.rpc_url
+        )
+
+    async def trace_callMany(self, calls: list[tuple[dict, list[str]]], block: str) -> str:
+        return await self.rpc_client.post("trace_callMany", [calls, block], self.rpc_url)
+
+    async def trace_rawTransaction(self, raw_tx: str, trace_types: list[str]) -> str:
+        return await self.rpc_client.post(
+            "trace_rawTransaction", [raw_tx, trace_types], self.rpc_url
+        )
+
+    async def trace_replayTransaction(self, tx_hash: str, trace_types: list[str]) -> str:
+        return await self.rpc_client.post(
+            "trace_replayTransaction", [tx_hash, trace_types], self.rpc_url
+        )
+
+    async def trace_replayBlockTransactions(self, block_number: str, trace_types: list[str]) -> str:
+        return await self.rpc_client.post(
+            "trace_replayBlockTransactions", [block_number, trace_types], self.rpc_url
+        )
+
+    async def trace_block(self, block_number: str) -> str:
+        return await self.rpc_client.post("trace_block", [block_number], self.rpc_url)

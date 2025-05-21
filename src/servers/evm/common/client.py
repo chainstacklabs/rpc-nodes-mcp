@@ -13,153 +13,141 @@ def _adapter(chain: str):
     return ad
 
 
-async def eth_getbalance(chain, param1, param2):
-    return await _adapter(chain).eth_getbalance(param1, param2)
+async def web3_clientVersion(chain):
+    return await _adapter(chain).web3_clientVersion()
 
 
-async def eth_getcode(chain, param1, param2):
-    return await _adapter(chain).eth_getcode(param1, param2)
+async def web3_sha3(chain, data):
+    return await _adapter(chain).web3_sha3(data)
 
 
-async def eth_getproof(chain, param1, param2):
-    return await _adapter(chain).eth_getproof(param1, param2)
-
-
-async def eth_getstorageat(chain, param1, param2, param3):
-    return await _adapter(chain).eth_getstorageat(param1, param2, param3)
-
-
-async def eth_gettransactioncount(chain, param1, param2):
-    return await _adapter(chain).eth_gettransactioncount(param1, param2)
-
-
-async def eth_blocknumber(chain):
-    return await _adapter(chain).eth_blocknumber()
-
-
-async def eth_getblockbynumber(chain, param1, param2):
-    return await _adapter(chain).eth_getblockbynumber(param1, param2)
-
-
-async def eth_getblocktransactioncountbyhash(chain, param1):
-    return await _adapter(chain).eth_getblocktransactioncountbyhash(param1)
-
-
-async def eth_getblocktransactioncountbynumber(chain, param1):
-    return await _adapter(chain).eth_getblocktransactioncountbynumber(param1)
-
-
-async def eth_newblockfilter(chain):
-    return await _adapter(chain).eth_newblockfilter()
-
-
-async def eth_chainid(chain):
-    return await _adapter(chain).eth_chainid()
-
-
-async def eth_syncing(chain):
-    return await _adapter(chain).eth_syncing()
+async def net_version(chain):
+    return await _adapter(chain).net_version()
 
 
 async def net_listening(chain):
     return await _adapter(chain).net_listening()
 
 
-async def net_peercount(chain):
-    return await _adapter(chain).net_peercount()
+async def net_peerCount(chain):
+    return await _adapter(chain).net_peerCount()
 
 
-async def web3_clientversion(chain):
-    return await _adapter(chain).web3_clientversion()
+async def eth_syncing(chain):
+    return await _adapter(chain).eth_syncing()
 
 
-async def debug_tracetransaction(chain, param1, param2):
-    return await _adapter(chain).debug_tracetransaction(param1, param2)
+async def eth_chainId(chain):
+    return await _adapter(chain).eth_chainId()
 
 
-async def debug_traceblockbyhash(chain, param1, param2):
-    return await _adapter(chain).debug_traceblockbyhash(param1, param2)
+async def eth_blockNumber(chain):
+    return await _adapter(chain).eth_blockNumber()
 
 
-async def debug_traceblockbynumber(chain, param1, param2):
-    return await _adapter(chain).debug_traceblockbynumber(param1, param2)
+async def eth_gasPrice(chain):
+    return await _adapter(chain).eth_gasPrice()
 
 
-async def debug_tracecall(chain, param1, param2, param3):
-    return await _adapter(chain).debug_tracecall(param1, param2, param3)
+async def eth_feeHistory(chain, block_count, newest_block, reward_percentiles):
+    return await _adapter(chain).eth_feeHistory(block_count, newest_block, reward_percentiles)
 
 
-async def debug_tracetransaction(chain, param1, param2):
-    return await _adapter(chain).debug_tracetransaction(param1, param2)
+async def eth_maxPriorityFeePerGas(chain):
+    return await _adapter(chain).eth_maxPriorityFeePerGas()
 
 
-async def trace_block(chain, param1):
-    return await _adapter(chain).trace_block(param1)
+async def eth_getBalance(chain, address, block):
+    return await _adapter(chain).eth_getBalance(address, block)
 
 
-async def trace_transaction(chain, param1):
-    return await _adapter(chain).trace_transaction(param1)
+async def eth_getStorageAt(chain, address, position, block):
+    return await _adapter(chain).eth_getStorageAt(address, position, block)
 
 
-async def eth_call(chain, to_, data):
-    return await _adapter(chain).eth_call(to_, data)
+async def eth_getTransactionCount(chain, address, block):
+    return await _adapter(chain).eth_getTransactionCount(address, block)
 
 
-async def eth_sendrawtransaction(chain, param1):
-    return await _adapter(chain).eth_sendrawtransaction(param1)
+async def eth_getCode(chain, address, block):
+    return await _adapter(chain).eth_getCode(address, block)
 
 
-async def eth_simulatev1(chain, param1, param2):
-    return await _adapter(chain).eth_simulatev1(param1, param2)
+async def eth_call(chain, call_object, block, overrides=None):
+    return await _adapter(chain).eth_call(call_object, block, overrides)
 
 
-async def eth_getfilterchanges(chain, param1):
-    return await _adapter(chain).eth_getfilterchanges(param1)
+async def eth_estimateGas(chain, tx, block, overrides=None):
+    return await _adapter(chain).eth_estimateGas(tx, block, overrides)
 
 
-async def eth_uninstallfilter(chain, param1):
-    return await _adapter(chain).eth_uninstallfilter(param1)
+async def eth_getBlockByHash(chain, block_hash, full_tx):
+    return await _adapter(chain).eth_getBlockByHash(block_hash, full_tx)
 
 
-async def eth_estimategas(chain, from_, to_):
-    return await _adapter(chain).eth_estimategas(from_, to_)
+async def eth_getBlockByNumber(chain, block_number, full_tx):
+    return await _adapter(chain).eth_getBlockByNumber(block_number, full_tx)
 
 
-async def eth_gasprice(chain):
-    return await _adapter(chain).eth_gasprice()
+async def eth_getBlockTransactionCountByHash(chain, block_hash):
+    return await _adapter(chain).eth_getBlockTransactionCountByHash(block_hash)
 
 
-async def eth_maxpriorityfeepergas(chain):
-    return await _adapter(chain).eth_maxpriorityfeepergas()
+async def eth_getBlockTransactionCountByNumber(chain, block_number):
+    return await _adapter(chain).eth_getBlockTransactionCountByNumber(block_number)
 
 
-async def eth_getlogs(chain, fromBlock, address, topics):
-    return await _adapter(chain).eth_getlogs(fromBlock, address, topics)
+async def eth_getTransactionByHash(chain, tx_hash):
+    return await _adapter(chain).eth_getTransactionByHash(tx_hash)
 
 
-async def eth_newfilter(chain, fromBlock, address, topics):
-    return await _adapter(chain).eth_newfilter(fromBlock, address, topics)
+async def eth_getTransactionReceipt(chain, tx_hash):
+    return await _adapter(chain).eth_getTransactionReceipt(tx_hash)
 
 
-async def eth_getblockreceipts(chain, param1):
-    return await _adapter(chain).eth_getblockreceipts(param1)
+async def eth_getLogs(chain, filter_params):
+    return await _adapter(chain).eth_getLogs(filter_params)
 
 
-async def eth_gettransactionbyblockhashandindex(chain, param1, param2):
-    return await _adapter(chain).eth_gettransactionbyblockhashandindex(param1, param2)
+async def debug_traceTransaction(chain, tx_hash, options):
+    return await _adapter(chain).debug_traceTransaction(tx_hash, options)
 
 
-async def eth_gettransactionbyblocknumberandindex(chain, param1, param2):
-    return await _adapter(chain).eth_gettransactionbyblocknumberandindex(param1, param2)
+async def debug_traceCall(chain, call_object, block, options):
+    return await _adapter(chain).debug_traceCall(call_object, block, options)
 
 
-async def eth_gettransactionbyhash(chain, param1):
-    return await _adapter(chain).eth_gettransactionbyhash(param1)
+async def debug_traceBlock(chain, rlp_encoded_block, options):
+    return await _adapter(chain).debug_traceBlock(rlp_encoded_block, options)
 
 
-async def eth_gettransactionreceipt(chain, param1):
-    return await _adapter(chain).eth_gettransactionreceipt(param1)
+async def debug_traceBlockByHash(chain, block_hash, options):
+    return await _adapter(chain).debug_traceBlockByHash(block_hash, options)
 
 
-async def eth_newpendingtransactionfilter(chain):
-    return await _adapter(chain).eth_newpendingtransactionfilter()
+async def debug_traceBlockByNumber(chain, block_number, options):
+    return await _adapter(chain).debug_traceBlockByNumber(block_number, options)
+
+
+async def trace_call(chain, call_object, trace_types, block):
+    return await _adapter(chain).trace_call(call_object, trace_types, block)
+
+
+async def trace_callMany(chain, calls, block):
+    return await _adapter(chain).trace_callMany(calls, block)
+
+
+async def trace_rawTransaction(chain, raw_tx, trace_types):
+    return await _adapter(chain).trace_rawTransaction(raw_tx, trace_types)
+
+
+async def trace_replayTransaction(chain, tx_hash, trace_types):
+    return await _adapter(chain).trace_replayTransaction(tx_hash, trace_types)
+
+
+async def trace_replayBlockTransactions(chain, block_number, trace_types):
+    return await _adapter(chain).trace_replayBlockTransactions(block_number, trace_types)
+
+
+async def trace_block(chain, block_number):
+    return await _adapter(chain).trace_block(block_number)
