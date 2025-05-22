@@ -70,9 +70,3 @@ The `mcp.json` file contains MCP server configurations. For VS Code users, place
 - [Cursor](https://docs.cursor.com/context/model-context-protocol#model-context-protocol)
 - [VS Code](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
 - [Claude Desktop](https://modelcontextprotocol.io/quickstart/user#windows)
-
-### Generate LLM API key
-
-- [Mistral](https://console.mistral.ai/api-keys)
-- [Claude](https://docs.anthropic.com/en/api/overview)
-- [OpenAI](https://platform.openai.com/api-keys)
