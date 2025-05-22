@@ -1,0 +1,22 @@
+{
+    "mcpServers": {
+        "evm-server": {
+            "command": "/home/user/.local/bin/uv",
+            "args": [
+                "--directory",
+                "/home/user/Documents/mcp-v1/",
+                "run",
+                "src/main_evm.py"
+            ]
+        },
+        "solana-server": {
+            "command": "/home/user/.local/bin/uv",
+            "args": [
+                "--directory",
+                "/home/user/Documents/mcp-v1/",
+                "run",
+                "src/main_solana.py"
+            ]
+        }
+    }
+}
