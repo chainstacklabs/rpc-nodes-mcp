@@ -7,7 +7,7 @@
             "password": true
         }
     ],
-    "mcpServers": {
+    "servers": {
         "evm-server": {
             "command": "/home/user/.local/bin/uv",
             "args": [
