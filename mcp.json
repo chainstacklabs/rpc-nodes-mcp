@@ -1,41 +1,27 @@
 {
-    "inputs": [
-        {
-            "type": "promptString",
-            "id": "openai-api-key",
-            "description": "OpenAI API Key",
-            "password": true
-        },
-        {
-            "type": "promptString",
-            "id": "mcp-project-path",
-            "description": "Path to MCP project folder",
-            "password": false
-        }
-    ],
     "servers": {
         "evm-server": {
             "command": "uv",
             "args": [
                 "--directory",
-                "${input:mcp-project-path}",
+                "${workspaceFolder}",
                 "run",
                 "src/main_evm.py"
             ],
             "env": {
-                "OPENAI_API_KEY": "${input:openai-api-key}"
+                "envFile": "${workspaceFolder}/.env"
             }
         },
         "solana-server": {
             "command": "uv",
             "args": [
                 "--directory",
-                "${input:mcp-project-path}",
+                "${workspaceFolder}",
                 "run",
                 "src/main_solana.py"
             ],
             "env": {
-                "OPENAI_API_KEY": "${input:openai-api-key}"
+                "envFile": "${workspaceFolder}/.env"
             }
         }
     }
