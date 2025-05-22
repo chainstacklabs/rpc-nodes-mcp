@@ -17,8 +17,13 @@ from servers.solana.server import mcp
         "Parameters:\n"
         "- chain (str): Must be Solana.\n"
         "- account (str): The base-58 encoded public key of the account to query.\n"
-        "- encoding (str, optional): Encoding format for account data. One of: 'base58', 'base64', 'base64+zstd', 'jsonParsed'. [Example: 'jsonParsed']\n"
-        "- commitment (str, optional): Desired commitment level. [Example: 'finalized']\n"
+        "- encoding (str, optional): Encoding format for account data. One of: 'base58', 'base64', 'base64+zstd', 'jsonParsed'.\n"
+        "    - base58: Slow and limited to Account data less than 129 bytes.\n"
+        "    - base64: Returns base64-encoded data for Account data of any size.\n"
+        "    - base64+zstd: Compresses the Account data using Zstandard, then base64-encodes the result.\n"
+        "    - jsonParsed: Attempts to use program-specific state parsers to return more human-readable and explicit account state data.\n"
+        "      If jsonParsed is requested but a parser cannot be found, the field falls back to base64 encoding. This can be detected when the data field is a string. Default is base64.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- data_slice (dict, optional): A dictionary with optional 'offset' and 'length' integers to specify a slice of the account data.\n"
         "- min_context_slot (str, optional): Minimum slot that the request can be evaluated at.\n\n"
         "Returns: Account information object including lamports, owner, data, executable, rentEpoch, and space.\n\n"
@@ -65,7 +70,7 @@ async def getaccountinfo(
         "Parameters:\n"
         "- chain (str): Must be Solana.\n"
         "- account (str): The base-58 encoded public key of the account. [Example: 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM]\n"
-        "- commitment (str, optional): Desired commitment level. [Example: 'finalized']\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): The minimum slot that the request can be evaluated at.\n\n"
         "Returns: Balance of the account in lamports as a numeric value.\n\n"
         "Example:\n"
@@ -103,8 +108,12 @@ async def getbalance(
         "Parameters:\n"
         "- chain (str): Must be Solana.\n"
         "- slot (int): Slot number of the block to retrieve. [Example: 378967388]\n"
-        "- encoding (str, optional): Encoding for returned transactions. One of: 'json', 'jsonParsed', 'base58', 'base64'. Default is 'json'.\n"
-        "- commitment (str, optional): Commitment level, e.g., 'confirmed' or 'finalized'.\n"
+        "- encoding (str, optional): Encoding for returned transactions. Options:\n"
+        "  - 'json'\n"
+        "  - 'jsonParsed'\n"
+        "  - 'base58'\n"
+        "  - 'base64' (default)\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- transaction_details (str, optional): Level of transaction detail: 'full', 'accounts', 'signatures', or 'none'. Default is 'full'.\n"
         "- max_supported_transaction_version (int, optional): Maximum transaction version to return. Default is 0.\n"
         "- rewards (bool, optional): Whether to include rewards array. Default is True.\n\n"
@@ -131,8 +140,8 @@ async def getbalance(
 async def getblock(
     chain: str,
     slot: int,
-    encoding: str = "json",
-    commitment: str = "confirmed",
+    encoding: str = "base64",
+    commitment: str = "finalized",
     transaction_details: str = "signatures",
     max_supported_transaction_version: int = 0,
     rewards: bool = False,
@@ -187,7 +196,7 @@ async def getblockcommitment(
         "Call the getBlockHeight JSON-RPC method to retrieve the current block height of the node.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum slot at which the request can be evaluated.\n\n"
         "Returns: The current block height.\n"
     ),
@@ -195,7 +204,7 @@ async def getblockcommitment(
 )
 async def getblockheight(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -225,7 +234,7 @@ async def getblockheight(
 )
 async def getblockproduction(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     identity: str = None,
     first_slot: int = None,
     last_slot: int = None,
@@ -253,7 +262,7 @@ async def getblockproduction(
         "- chain (str): Must be 'solana'.\n"
         "- start_slot (int): Start slot (inclusive).\n"
         "- end_slot (int, optional): End slot (inclusive).\n"
-        "- commitment (str, optional): Commitment level, 'confirmed', or 'finalized'. `processed` is not supported.\n\n"
+        "- commitment (str, optional): Desired commitment level (confirmed or finalized). Default is finalized.\n"
         "Returns: An array of confirmed block slots between the specified range.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'\n'
@@ -270,7 +279,7 @@ async def getblocks(
     chain: str,
     start_slot: int,
     end_slot: int = None,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -289,7 +298,7 @@ async def getblocks(
         "- chain (str): Must be 'solana'.\n"
         "- start_slot (int): Start slot (inclusive).\n"
         "- limit (int, optional): Limit on the number of blocks to return (max 500,000).\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: An array of confirmed block slots starting at the specified slot.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'\n'
@@ -306,7 +315,7 @@ async def getblockswithlimit(
     chain: str,
     start_slot: int,
     limit: int = None,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -373,7 +382,7 @@ async def getclusternodes(chain: str) -> CallToolResult:
         "Call the getEpochInfo JSON-RPC method to retrieve information about the current epoch.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum slot for evaluation.\n\n"
         "Returns: Info about the current epoch, including epoch number, slot index, and remaining slots.\n\n"
         "Example:\n"
@@ -383,7 +392,7 @@ async def getclusternodes(chain: str) -> CallToolResult:
 )
 async def getepochinfo(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -423,7 +432,7 @@ async def getepochschedule(chain: str) -> CallToolResult:
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- message (str): Base64-encoded compiled transaction message.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum slot at which the request can be evaluated.\n\n"
         "Returns: Estimated transaction fee in lamports or null if invalid.\n\n"
         "Example:\n"
@@ -439,7 +448,7 @@ async def getepochschedule(chain: str) -> CallToolResult:
 async def getfeeformessage(
     chain: str,
     message: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -562,7 +571,7 @@ async def getidentity(chain: str) -> CallToolResult:
         "Call the getInflationGovernor JSON-RPC method to retrieve the current inflation governor parameters.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: An object containing inflation parameters including foundation and validator rewards.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -575,7 +584,7 @@ async def getidentity(chain: str) -> CallToolResult:
 )
 async def getinflationgovernor(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -617,7 +626,7 @@ async def getinflationrate(chain: str) -> CallToolResult:
         "- chain (str): Must be 'solana'.\n"
         "- addresses (List[str]): List of base-58 encoded account addresses.\n"
         "- epoch (int, optional): Epoch number to query.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: A list of inflation rewards corresponding to the given addresses.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -633,7 +642,7 @@ async def getinflationreward(
     chain: str,
     addresses: list,
     epoch: int = None,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -653,7 +662,7 @@ async def getinflationreward(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- filter (str, optional): Filter by account type, one of: 'circulating', 'nonCirculating'.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: List of the 20 largest accounts and their balances.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -666,7 +675,7 @@ async def getinflationreward(
 async def getlargestaccounts(
     chain: str,
     filter: str = None,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -685,7 +694,7 @@ async def getlargestaccounts(
         "Call the getLatestBlockhash JSON-RPC method to get the most recent blockhash and last valid block height.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot for the blockhash.\n\n"
         "Returns: A blockhash object with value and lastValidBlockHeight.\n\n"
         "Example:\n"
@@ -698,7 +707,7 @@ async def getlargestaccounts(
 )
 async def getlatestblockhash(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -720,7 +729,7 @@ async def getlatestblockhash(
         "- chain (str): Must be 'solana'.\n"
         "- slot (int, optional): Epoch start slot.\n"
         "- identity (str, optional): Validator identity to filter.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: Mapping of leader identity to assigned slot indexes.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -734,7 +743,7 @@ async def getleaderschedule(
     chain: str,
     slot: int = None,
     identity: str = None,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -796,7 +805,7 @@ async def getmaxshredinsertslot(chain: str) -> CallToolResult:
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- data_length (int): Length of the account data in bytes.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: Minimum lamports required for rent exemption.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -809,7 +818,7 @@ async def getmaxshredinsertslot(chain: str) -> CallToolResult:
 async def getminimumbalanceforrentexemption(
     chain: str,
     data_length: int,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -831,8 +840,12 @@ async def getminimumbalanceforrentexemption(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- pubkeys (List[str]): List of base-58 encoded public keys.\n"
-        "- commitment (str, optional): Commitment level.\n"
-        "- encoding (str, optional): Data encoding: 'base58', 'base64', 'base64+zstd', or 'jsonParsed'.\n"
+        "- encoding (str, optional): Data encoding. Options:\n"
+        "  - 'base58'\n"
+        "  - 'base64' (default)\n"
+        "  - 'base64+zstd'\n"
+        "  - 'jsonParsed'\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n"
         "- data_slice (dict, optional): Object with 'offset' and 'length' keys to specify data range.\n\n"
         "Returns: Account information array for the specified pubkeys.\n\n"
@@ -847,8 +860,8 @@ async def getminimumbalanceforrentexemption(
 async def getmultipleaccounts(
     chain: str,
     pubkeys: list,
-    commitment: str = None,
-    encoding: str = None,
+    commitment: str = "finalized",
+    encoding: str = "base64",
     min_context_slot: int = None,
     data_slice: dict = None,
 ) -> CallToolResult:
@@ -874,8 +887,12 @@ async def getmultipleaccounts(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- program_id (str): Base-58 encoded public key of the program.\n"
-        "- commitment (str, optional): Commitment level.\n"
-        "- encoding (str, optional): Data encoding.\n"
+        "- encoding (str, optional): Data encoding. Options:\n"
+        "  - 'base58'\n"
+        "  - 'base64' (default)\n"
+        "  - 'base64+zstd'\n"
+        "  - 'jsonParsed'\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- data_slice (dict, optional): Object with 'offset' and 'length'.\n"
         "- filters (list, optional): List of filter dicts (memcmp or dataSize).\n"
         "- with_context (bool, optional): Whether to include response context.\n\n"
@@ -891,8 +908,8 @@ async def getmultipleaccounts(
 async def getprogramaccounts(
     chain: str,
     program_id: str,
-    commitment: str = None,
-    encoding: str = None,
+    commitment: str = "confirmed",
+    encoding: str = "base64",
     data_slice: dict = None,
     filters: list = None,
     with_context: bool = None,
@@ -976,7 +993,7 @@ async def getrecentprioritizationfees(
         "- limit (int, optional): Maximum number of results to return (max 1,000).\n"
         "- before (str, optional): Start searching backward before this signature.\n"
         "- until (str, optional): Search until this signature is reached.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: A list of transaction signature info objects.\n\n"
         "Example:\n"
@@ -993,7 +1010,7 @@ async def getsignaturesforaddress(
     limit: int = None,
     before: str = None,
     until: str = None,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1033,7 +1050,7 @@ async def getsignaturesforaddress(
 async def getsignaturestatuses(
     chain: str,
     signatures: list,
-    search_transaction_history: bool = None,
+    search_transaction_history: bool = False,
 ) -> CallToolResult:
     try:
         options = {}
@@ -1050,7 +1067,7 @@ async def getsignaturestatuses(
         "Call the getSlot JSON-RPC method to return the current slot the node is processing.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: Current slot number.\n\n"
         "Example:\n"
@@ -1062,7 +1079,7 @@ async def getsignaturestatuses(
 )
 async def getslot(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1082,7 +1099,7 @@ async def getslot(
         "Call the getSlotLeader JSON-RPC method to get the identity of the current slot leader.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: The base-58 encoded public key of the current slot leader.\n\n"
         "Example:\n"
@@ -1094,7 +1111,7 @@ async def getslot(
 )
 async def getslotleader(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1142,7 +1159,7 @@ async def getslotleaders(
         "Call the getStakeMinimumDelegation JSON-RPC method to retrieve the minimum stake amount needed for delegation.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: Minimum number of lamports required for stake delegation.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -1167,7 +1184,7 @@ async def getstakeminimumdelegation(chain: str, commitment: str) -> CallToolResu
         "Call the getSupply JSON-RPC method to return information about the current supply of SOL.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: A JSON object with total, circulating, and non-circulating supply values.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -1179,7 +1196,7 @@ async def getstakeminimumdelegation(chain: str, commitment: str) -> CallToolResu
 )
 async def getsupply(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -1197,7 +1214,7 @@ async def getsupply(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- account (str): Base-58 encoded token account address.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: Token balance object with amount and decimals.\n\n"
         "Example:\n"
@@ -1211,7 +1228,7 @@ async def getsupply(
 async def gettokenaccountbalance(
     chain: str,
     account: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1234,8 +1251,12 @@ async def gettokenaccountbalance(
         "- delegate (str): Base-58 encoded public key of the delegate.\n"
         "- mint (str, optional): Filter by mint address. If it's used, then program_id argument must be skipped.\n"
         "- program_id (str, optional): Override default Token program.  If it's used, then mint argument must be skipped.\n"
-        "- commitment (str, optional): Commitment level.\n"
-        "- encoding (str, optional): Data encoding format.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+        "- encoding (str, optional): Data encoding format. Options:\n"
+        "  - 'base58'\n"
+        "  - 'base64' (default)\n"
+        "  - 'base64+zstd'\n"
+        "  - 'jsonParsed'\n"
         "- data_slice (dict, optional): Optional offset/length object for slicing data.\n\n"
         "Returns: List of token accounts matching the delegate and filters.\n\n"
         "Example:\n"
@@ -1251,7 +1272,7 @@ async def gettokenaccountsbydelegate(
     delegate: str,
     mint: str = None,
     program_id: str = None,
-    commitment: str = None,
+    commitment: str = "finalized",
     encoding: str = "base64",
     data_slice: dict = None,
 ) -> CallToolResult:
@@ -1287,8 +1308,12 @@ async def gettokenaccountsbydelegate(
         "- owner (str): Base-58 encoded public key of the owner.\n"
         "- mint (str, optional): Filter by mint address. If it's used, then program_id argument must be skipped.\n"
         "- program_id (str, optional): Override default Token program.  If it's used, then mint argument must be skipped.\n"
-        "- commitment (str, optional): Commitment level.\n"
-        "- encoding (str, optional): Data encoding format.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+        "- encoding (str, optional): Data encoding format. Options:\n"
+        "  - 'base58'\n"
+        "  - 'base64' (default)\n"
+        "  - 'base64+zstd'\n"
+        "  - 'jsonParsed'\n"
         "- data_slice (dict, optional): Optional offset/length object for slicing data.\n\n"
         "Returns: Token accounts associated with the owner and filters.\n\n"
         "Example:\n"
@@ -1304,7 +1329,7 @@ async def gettokenaccountsbyowner(
     owner: str,
     mint: str = None,
     program_id: str = None,
-    commitment: str = None,
+    commitment: str = "finalized",
     encoding: str = "base64",
     data_slice: dict = None,
 ) -> CallToolResult:
@@ -1336,7 +1361,7 @@ async def gettokenaccountsbyowner(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- mint (str): Base-58 encoded mint address.\n"
-        "- commitment (str, optional): Commitment level.\n\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "Returns: A list of the 20 largest token accounts and their balances.\n\n"
         "Example:\n"
         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
@@ -1349,7 +1374,7 @@ async def gettokenaccountsbyowner(
 async def gettokenlargestaccounts(
     chain: str,
     mint: str,
-    commitment: str = None,
+    commitment: str = "finalized",
 ) -> CallToolResult:
     try:
         options = {}
@@ -1367,7 +1392,7 @@ async def gettokenlargestaccounts(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- mint (str): Base-58 encoded mint address.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: Supply information including total amount and decimals.\n\n"
         "Example:\n"
@@ -1381,7 +1406,7 @@ async def gettokenlargestaccounts(
 async def gettokensupply(
     chain: str,
     mint: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1402,8 +1427,8 @@ async def gettokensupply(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- signature (str): Base-58 encoded transaction signature.\n"
-        "- encoding (str, optional): Encoding format: 'json', 'jsonParsed', 'base58', 'base64'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- encoding (str, optional): Encoding format: 'json', 'jsonParsed', 'base58', 'base64'. Default is base64.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- max_supported_transaction_version (int, optional): Max tx version to return. Currently, the only valid value for this parameter is 0. Setting it to 0 allows you to fetch all transactions, including both Versioned and legacy transactions.\n\n"
         "Returns: Transaction object, optionally parsed.\n\n"
         "Example:\n"
@@ -1417,8 +1442,8 @@ async def gettokensupply(
 async def gettransaction(
     chain: str,
     signature: str,
-    encoding: str = None,
-    commitment: str = None,
+    encoding: str = "base64",
+    commitment: str = "confirmed",
     max_supported_transaction_version: int = 0,
 ) -> CallToolResult:
     try:
@@ -1440,7 +1465,7 @@ async def gettransaction(
         "Call the getTransactionCount JSON-RPC method to retrieve the current transaction count.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Commitment level.\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- min_context_slot (int, optional): Minimum context slot.\n\n"
         "Returns: Total number of transactions processed by the node.\n\n"
         "Example:\n"
@@ -1452,7 +1477,7 @@ async def gettransaction(
 )
 async def gettransactioncount(
     chain: str,
-    commitment: str = None,
+    commitment: str = "finalized",
     min_context_slot: int = None,
 ) -> CallToolResult:
     try:
@@ -1494,8 +1519,10 @@ async def getversion(chain: str) -> CallToolResult:
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- transaction (str): Base64 or base58 encoded transaction string. Must contain a valid blockhash.\n"
-        "- encoding (str, optional): Encoding used for transaction data. One of: 'base64' (recommended), 'base58' (deprecated). Default is 'base58'.\n"
-        "- commitment (str, optional): Commitment level to simulate at. Default is 'finalized'.\n"
+        "- encoding (str, optional): Encoding used for transaction data. Options:\n"
+        "  - 'base64' (default)\n"
+        "  - 'base58' (deprecated)\n"
+        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
         "- sig_verify (bool, optional): Whether to verify signatures. Conflicts with replace_recent_blockhash.\n"
         "- replace_recent_blockhash (bool, optional): Whether to replace recent blockhash with latest. Conflicts with sig_verify.\n"
         "- min_context_slot (int, optional): Minimum slot at which the request can be evaluated.\n"
@@ -1523,8 +1550,8 @@ async def getversion(chain: str) -> CallToolResult:
 async def simulatetransaction(
     chain: str,
     transaction: str,
-    encoding: str = "base58",
-    commitment: str = None,
+    encoding: str = "base64",
+    commitment: str = "finalized",
     sig_verify: bool = None,
     replace_recent_blockhash: bool = None,
     min_context_slot: int = None,
