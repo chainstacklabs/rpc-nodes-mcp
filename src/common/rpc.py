@@ -23,7 +23,7 @@ class HttpxRpcClient(RpcClient):
             logger.debug(f"Request params: {safe_params}")
 
         try:
-            async with httpx.AsyncClient(timeout=30) as client:
+            async with httpx.AsyncClient(timeout=120) as client:
                 logger.debug(f"Sending HTTP request to {endpoint}")
                 start_time = time.time()
                 resp = await client.post(

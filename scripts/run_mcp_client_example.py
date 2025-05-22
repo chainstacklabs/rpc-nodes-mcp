@@ -15,7 +15,7 @@ console = Console()
 model = ChatOpenAI(model="gpt-4o")
 server_params = StdioServerParameters(
     command="python",
-    args=["src/main_evm.py"],
+    args=["src/main_solana.py"],
 )
 
 
