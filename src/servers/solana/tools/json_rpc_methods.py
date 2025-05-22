@@ -1232,8 +1232,8 @@ async def gettokenaccountbalance(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- delegate (str): Base-58 encoded public key of the delegate.\n"
-        "- mint (str, optional): Filter by mint address.\n"
-        "- program_id (str, optional): Override default Token program.\n"
+        "- mint (str, optional): Filter by mint address. If it's used, then program_id argument must be skipped.\n"
+        "- program_id (str, optional): Override default Token program.  If it's used, then mint argument must be skipped.\n"
         "- commitment (str, optional): Commitment level.\n"
         "- encoding (str, optional): Data encoding format.\n"
         "- data_slice (dict, optional): Optional offset/length object for slicing data.\n\n"
@@ -1252,14 +1252,14 @@ async def gettokenaccountsbydelegate(
     mint: str = None,
     program_id: str = None,
     commitment: str = None,
-    encoding: str = None,
+    encoding: str = "base64",
     data_slice: dict = None,
 ) -> CallToolResult:
     try:
         options1 = {}
         if mint:
             options1["mint"] = mint
-        if program_id:
+        elif program_id:
             options1["programId"] = program_id
 
         options2 = {}
@@ -1285,8 +1285,8 @@ async def gettokenaccountsbydelegate(
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
         "- owner (str): Base-58 encoded public key of the owner.\n"
-        "- mint (str, optional): Filter by mint address.\n"
-        "- program_id (str, optional): Override default Token program.\n"
+        "- mint (str, optional): Filter by mint address. If it's used, then program_id argument must be skipped.\n"
+        "- program_id (str, optional): Override default Token program.  If it's used, then mint argument must be skipped.\n"
         "- commitment (str, optional): Commitment level.\n"
         "- encoding (str, optional): Data encoding format.\n"
         "- data_slice (dict, optional): Optional offset/length object for slicing data.\n\n"
@@ -1305,14 +1305,14 @@ async def gettokenaccountsbyowner(
     mint: str = None,
     program_id: str = None,
     commitment: str = None,
-    encoding: str = None,
+    encoding: str = "base64",
     data_slice: dict = None,
 ) -> CallToolResult:
     try:
         options1 = {}
         if mint:
             options1["mint"] = mint
-        if program_id:
+        elif program_id:
             options1["programId"] = program_id
 
         options2 = {}
