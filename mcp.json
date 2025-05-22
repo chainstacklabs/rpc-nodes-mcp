@@ -5,14 +5,20 @@
             "id": "openai-api-key",
             "description": "OpenAI API Key",
             "password": true
+        },
+        {
+            "type": "promptString",
+            "id": "mcp-project-path",
+            "description": "Path to MCP project folder",
+            "password": false
         }
     ],
     "servers": {
         "evm-server": {
-            "command": "/home/user/.local/bin/uv",
+            "command": "uv",
             "args": [
                 "--directory",
-                "/home/user/Documents/mcp-v1/",
+                "${input:mcp-project-path}",
                 "run",
                 "src/main_evm.py"
             ],
@@ -21,10 +27,10 @@
             }
         },
         "solana-server": {
-            "command": "/home/user/.local/bin/uv",
+            "command": "uv",
             "args": [
                 "--directory",
-                "/home/user/Documents/mcp-v1/",
+                "${input:mcp-project-path}",
                 "run",
                 "src/main_solana.py"
             ],
