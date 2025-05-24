@@ -7,10 +7,7 @@
                 "${workspaceFolder}",
                 "run",
                 "src/main_evm.py"
-            ],
-            "env": {
-                "envFile": "${workspaceFolder}/.env"
-            }
+            ]
         },
         "solana-server": {
             "command": "uv",
@@ -19,10 +16,7 @@
                 "${workspaceFolder}",
                 "run",
                 "src/main_solana.py"
-            ],
-            "env": {
-                "envFile": "${workspaceFolder}/.env"
-            }
+            ]
         }
     }
 }

@@ -1,0 +1,22 @@
+{
+    "mcpServers": {
+        "evm": {
+            "command": "full path to uv.exe",
+            "args": [
+                "--directory",
+                "full path to workspace folder",
+                "run",
+                "src\\main_evm.py"
+            ]
+        },
+        "solana": {
+            "command": "full path to uv.exe",
+            "args": [
+                "--directory",
+                "full path to workspace folder",
+                "run",
+                "src\\main_solana.py"
+            ]
+        }
+    }
+}
