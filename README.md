@@ -63,7 +63,7 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 
 The `mcp.json` file contains MCP server configurations. For VS Code users, place this file in the `.vscode` folder within your project directory. GitHub Copilot in Agent Mode will automatically discover and launch the configured servers.
 
-**uv location errors**: If you encounter errors related to `uv` location, specify the full path to `uv` in the `mcp.json` file.
+**uv location errors**: If you encounter errors related to `uv` location, specify the full path to `uv` in the `mcp.json` file. To get the full path, run `where uv` command.
 
 ### References
 
