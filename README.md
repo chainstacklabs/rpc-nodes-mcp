@@ -59,11 +59,19 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 ```
 **Note:** auto-generated tools reuire further improvements, see [here](https://github.com/chainstacklabs/rpc-nodes-mcp/blob/main/scripts/README.md).
 
-## Configuration (VS Code example)
+## Configuration
+
+### VS Code
 
 The `mcp.json` file contains MCP server configurations. For VS Code users, place this file in the `.vscode` folder within your project directory. GitHub Copilot in Agent Mode will automatically discover and launch the configured servers.
 
-**uv location errors**: If you encounter errors related to `uv` location, specify the full path to `uv` in the `mcp.json` file. To get the full path, run `where uv` command.
+### Claude Desktop
+
+The `claude_desktop_config.json` file contains MCP server configurations. For Claude Desktop users, place this file in the Claude Desktop data folder. Claude Desktop will automatically discover and launch the configured servers.
+
+**uv location errors**: specify the full path to `uv` in the `mcp.json` file. To get the full path, run `where uv` command.
+
+**environment variables**: double check you created `.env` file in the MCP servers folder and required endpoints.
 
 ### References
 
