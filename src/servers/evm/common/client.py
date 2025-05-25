@@ -151,3 +151,15 @@ async def trace_replayBlockTransactions(chain, block_number, trace_types):
 
 async def trace_block(chain, block_number):
     return await _adapter(chain).trace_block(block_number)
+
+
+async def eth_getProof(chain, address, storage_keys, block):
+    return await _adapter(chain).eth_getProof(address, storage_keys, block)
+
+
+async def eth_simulateV1(chain, params, block):
+    return await _adapter(chain).eth_simulateV1(params, block)
+
+
+async def eth_getBlockReceipts(chain, block):
+    return await _adapter(chain).eth_getBlockReceipts(block)

@@ -1441,3 +1441,115 @@ async def trace_block(chain: str, block_number: str) -> CallToolResult:
         return _ok(await client.trace_block(chain.lower(), block_number))
     except Exception as e:
         return _err(str(e))
+
+
+@mcp.tool(
+    name="eth_getProof",
+    description=(
+        "Call the eth_getProof JSON-RPC method to get Merkle proof for account and storage values.\n\n"
+        "Description: Returns the account and storage values of the specified account including the Merkle-proof.\n\n"
+        "Parameters:\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+        "- address (str): The address of the account or contract.\n"
+        "- storage_keys (list[str]): Array of storage-keys to be proofed and included.\n"
+        "- block (str): Block number or keyword like 'latest', 'earliest', or 'pending'.\n\n"
+        "Returns: Account proof object with balance, codeHash, nonce, storageHash, accountProof, and storageProof.\n\n"
+        "Example:\n"
+        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+        "{\n"
+        '  "jsonrpc": "2.0",\n'
+        '  "method": "eth_getProof",\n'
+        '  "params": ["0x...", ["0x0000000000000000000000000000000000000000000000000000000000000000"], "latest"],\n'
+        '  "id": 1\n'
+        "}'"
+    ),
+    annotations={"title": "eth_getProof", "readOnlyHint": True},
+)
+async def eth_getProof(
+    chain: str, address: str, storage_keys: list[str], block: str = "latest"
+) -> CallToolResult:
+    try:
+        return _ok(await client.eth_getProof(chain.lower(), address, storage_keys, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="eth_simulateV1",
+    description=(
+        "Call the eth_simulateV1 JSON-RPC method to simulate transaction execution with state overrides.\n\n"
+        "Description: Simulates a list of transactions on top of a block and returns trace data.\n\n"
+        "Parameters:\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+        "- block_state_calls (dict): Object containing blockOverrides, stateOverrides, and calls arrays.\n"
+        "- block (str): Block number or keyword like 'latest'.\n"
+        "- validation (bool, optional): Enable validation. Default is True.\n"
+        "- trace_transfers (bool, optional): Include trace transfers. Default is False.\n\n"
+        "Returns: Simulation result with call results and traces.\n\n"
+        "Example:\n"
+        'curl -X POST https://ethereum-mainnet.core.chainstack.com/key -H "Content-Type: application/json" -d \'\n'
+        "{\n"
+        '  "jsonrpc": "2.0",\n'
+        '  "method": "eth_simulateV1",\n'
+        '  "params": [\n'
+        "    {\n"
+        '      "blockStateCalls": [{\n'
+        '        "calls": [{"from": "0x...", "to": "0x...", "value": "0x1"}]\n'
+        "      }],\n"
+        '      "validation": true\n'
+        "    },\n"
+        '    "latest"\n'
+        "  ],\n"
+        '  "id": 1\n'
+        "}'"
+    ),
+    annotations={"title": "eth_simulateV1", "readOnlyHint": True},
+)
+async def eth_simulateV1(
+    chain: str,
+    block_state_calls: dict,
+    block: str = "latest",
+    validation: bool = True,
+    trace_transfers: bool = False,
+) -> CallToolResult:
+    try:
+        params = {
+            "blockStateCalls": block_state_calls.get("blockStateCalls", []),
+            "validation": validation,
+            "traceTransfers": trace_transfers,
+        }
+        if "stateOverrides" in block_state_calls:
+            params["stateOverrides"] = block_state_calls["stateOverrides"]
+        if "blockOverrides" in block_state_calls:
+            params["blockOverrides"] = block_state_calls["blockOverrides"]
+
+        return _ok(await client.eth_simulateV1(chain.lower(), params, block))
+    except Exception as e:
+        return _err(str(e))
+
+
+@mcp.tool(
+    name="eth_getBlockReceipts",
+    description=(
+        "Call the eth_getBlockReceipts JSON-RPC method to get all transaction receipts for a block.\n\n"
+        "Description: Returns all transaction receipts for a given block.\n\n"
+        "Parameters:\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+        "- block (str): Block number (hex) or keyword like 'latest', 'earliest', or 'pending'.\n\n"
+        "Returns: Array of transaction receipt objects for all transactions in the block.\n\n"
+        "Example:\n"
+        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+        "{\n"
+        '  "jsonrpc": "2.0",\n'
+        '  "method": "eth_getBlockReceipts",\n'
+        '  "params": ["latest"],\n'
+        '  "id": 1\n'
+        "}'"
+    ),
+    annotations={"title": "eth_getBlockReceipts", "readOnlyHint": True},
+)
+async def eth_getBlockReceipts(chain: str, block: str) -> CallToolResult:
+    try:
+        return _ok(await client.eth_getBlockReceipts(chain.lower(), block))
+    except Exception as e:
+        return _err(str(e))

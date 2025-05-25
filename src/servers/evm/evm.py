@@ -152,3 +152,14 @@ class EvmAdapter(BlockchainAdapter):
 
     async def trace_block(self, block_number: str) -> str:
         return await self.rpc_client.post("trace_block", [block_number], self.rpc_url)
+
+    async def eth_getProof(self, address: str, storage_keys: list[str], block: str) -> str:
+        return await self.rpc_client.post(
+            "eth_getProof", [address, storage_keys, block], self.rpc_url
+        )
+
+    async def eth_simulateV1(self, params: dict, block: str) -> str:
+        return await self.rpc_client.post("eth_simulateV1", [params, block], self.rpc_url)
+
+    async def eth_getBlockReceipts(self, block: str) -> str:
+        return await self.rpc_client.post("eth_getBlockReceipts", [block], self.rpc_url)
