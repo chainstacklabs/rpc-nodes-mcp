@@ -6,7 +6,6 @@ from servers.evm.tools import utilities as utilities
 
 
 async def test_web3_client_version():
-    """Test web3_clientVersion method"""
     result = await tools.web3_clientVersion(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -17,7 +16,6 @@ async def test_web3_client_version():
 
 
 async def test_web3_sha3():
-    """Test web3_sha3 method with sample data"""
     data = "0x68656c6c6f20776f726c64"  # "hello world" in hex
     result = await tools.web3_sha3(chain="Ethereum", data=data)
     assert not result.isError, f"Error: {result.content}"
@@ -30,7 +28,6 @@ async def test_web3_sha3():
 
 
 async def test_net_version():
-    """Test net_version method"""
     result = await tools.net_version(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -41,7 +38,6 @@ async def test_net_version():
 
 
 async def test_net_listening():
-    """Test net_listening method"""
     result = await tools.net_listening(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -51,7 +47,6 @@ async def test_net_listening():
 
 
 async def test_net_peer_count():
-    """Test net_peerCount method"""
     result = await tools.net_peerCount(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -64,7 +59,6 @@ async def test_net_peer_count():
 
 
 async def test_eth_syncing():
-    """Test eth_syncing method"""
     result = await tools.eth_syncing(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -75,7 +69,6 @@ async def test_eth_syncing():
 
 
 async def test_eth_chain_id():
-    """Test eth_chainId method"""
     result = await tools.eth_chainId(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -89,7 +82,6 @@ async def test_eth_chain_id():
 
 
 async def test_eth_block_number():
-    """Test eth_blockNumber method"""
     result = await tools.eth_blockNumber(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -103,7 +95,6 @@ async def test_eth_block_number():
 
 
 async def test_eth_gas_price():
-    """Test eth_gasPrice method"""
     result = await tools.eth_gasPrice(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -117,7 +108,6 @@ async def test_eth_gas_price():
 
 
 async def test_eth_max_priority_fee_per_gas():
-    """Test eth_maxPriorityFeePerGas method"""
     result = await tools.eth_maxPriorityFeePerGas(chain="Ethereum")
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -131,7 +121,6 @@ async def test_eth_max_priority_fee_per_gas():
 
 
 async def test_eth_fee_history():
-    """Test eth_feeHistory method"""
     result = await tools.eth_feeHistory(
         chain="Ethereum",
         block_count="5",
