@@ -725,3 +725,63 @@ async def test_eth_get_logs_erc20_transfer():
     text = result.content[0].text
     parsed_result = ast.literal_eval(text)
     assert isinstance(parsed_result, list)
+
+
+async def test_eth_get_proof():
+    result = await tools.eth_getProof(
+        chain="Ethereum",
+        address="0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae",
+        storage_keys=["0x0000000000000000000000000000000000000000000000000000000000000000"],
+        block="latest",
+    )
+    assert not result.isError, f"Error: {result.content}"
+    assert isinstance(result.content, list)
+    assert len(result.content) == 1
+    text = result.content[0].text
+    parsed_result = ast.literal_eval(text)
+    assert isinstance(parsed_result, dict)
+    assert "accountProof" in parsed_result
+    assert "balance" in parsed_result
+    assert "codeHash" in parsed_result
+    assert "nonce" in parsed_result
+    assert "storageHash" in parsed_result
+    assert "storageProof" in parsed_result
+
+
+async def test_eth_simulate_v1():
+    params = {
+        "blockStateCalls": [
+            {
+                "calls": [
+                    {
+                        "from": "0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae",
+                        "to": "0xae2Fc483527B8EF99EB5D9B44875F005ba1FaE13",
+                        "value": "0x1",
+                    }
+                ]
+            }
+        ]
+    }
+    result = await tools.eth_simulateV1(chain="Ethereum", block_state_calls=params, block="latest")
+    assert not result.isError, f"Error: {result.content}"
+    assert isinstance(result.content, list)
+    assert len(result.content) == 1
+    text = result.content[0].text
+    parsed_result = ast.literal_eval(text)
+    assert isinstance(parsed_result, (dict, list))
+
+
+async def test_eth_get_block_receipts():
+    result = await tools.eth_getBlockReceipts(chain="Ethereum", block="latest")
+    assert not result.isError, f"Error: {result.content}"
+    assert isinstance(result.content, list)
+    assert len(result.content) == 1
+    text = result.content[0].text
+    parsed_result = ast.literal_eval(text)
+    assert isinstance(parsed_result, list)
+    for receipt in parsed_result:
+        assert isinstance(receipt, dict)
+        assert "blockHash" in receipt
+        assert "gasUsed" in receipt
+        assert "status" in receipt
+        assert "transactionHash" in receipt
