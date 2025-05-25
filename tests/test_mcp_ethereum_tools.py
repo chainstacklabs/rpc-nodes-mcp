@@ -123,9 +123,9 @@ async def test_eth_max_priority_fee_per_gas():
 async def test_eth_fee_history():
     result = await tools.eth_feeHistory(
         chain="Ethereum",
-        block_count="5",
+        block_count="0x5",  # Changed to hex
         newest_block="latest",
-        reward_percentiles=["10", "50", "90"],
+        reward_percentiles=[10, 50, 90],  # Changed to integers
     )
     assert not result.isError, f"Error: {result.content}"
     assert isinstance(result.content, list)
@@ -537,7 +537,7 @@ async def test_trace_call_many():
 async def test_trace_raw_transaction():
     result = await tools.trace_rawTransaction(
         chain="Ethereum",
-        raw_tx="0xf86c808504a817c800825208945dd25e4e73b24e1d6a0be0b906c3b44ccdd7ce9e880de0b6b3a764000080830151b8a0de0b295669a9fd93d5f28d9ec85e40f4cb697bae5dd25e4e73b24e1d6a0be0b9080",
+        raw_tx="0xf86c808504a817c800825208945dd25e4e73b24e1d6a0be0b906c3b44ccdd7ce9e880de0b6b3a764000080820151a0de0b295669a9fd93d5f28d9ec85e40f4cb697bae5dd25e4e73b24e1d6a0be0b90a05dd25e4e73b24e1d6a0be0b906c3b44ccdd7ce9e88de0b6b3a764000080820151",
         trace_types=["trace"],
     )
     assert not result.isError, f"Error: {result.content}"
@@ -757,6 +757,8 @@ async def test_eth_simulate_v1():
                         "from": "0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae",
                         "to": "0xae2Fc483527B8EF99EB5D9B44875F005ba1FaE13",
                         "value": "0x1",
+                        "gas": "0x5208",  # Added gas limit
+                        "gasPrice": "0x3b9aca00",  # Added gas price (1 gwei)
                     }
                 ]
             }
