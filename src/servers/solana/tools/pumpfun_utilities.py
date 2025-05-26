@@ -137,9 +137,21 @@ def calculate_bonding_curve_price(data: str, encoding: str = "base64") -> CallTo
 def calculate_bonding_curve_progress(data: str, encoding: str = "base64") -> CallToolResult:
     try:
         state = _parse_bonding_curve_data(data, encoding)
-        if state["token_total_supply"] == 0:
+
+        if state["complete"]:
+            return _ok(100.0)
+
+        # Pump.fun constants (with 6 decimals)
+        TOTAL_SUPPLY = 1000000000000000  # 1B tokens with 6 decimals
+        RESERVED_TOKENS = 206900000000000  # 206.9M tokens with 6 decimals reserved for migration
+
+        initial_real_token_reserves = TOTAL_SUPPLY - RESERVED_TOKENS  # 793.1M tokens
+        if initial_real_token_reserves <= 0:
             return _ok(0.0)
-        progress = 100 - (100 * state["real_token_reserves"] / state["token_total_supply"])
-        return _ok(progress)
+
+        left_tokens = state["real_token_reserves"]
+        progress = 100 - (left_tokens * 100) / initial_real_token_reserves
+
+        return _ok(max(0.0, min(100.0, progress)))
     except Exception as e:
         return _err(str(e))
