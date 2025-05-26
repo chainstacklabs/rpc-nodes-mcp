@@ -2,6 +2,10 @@
 
 Minimal, fast, and extensible [MCP servers](https://modelcontextprotocol.io/introduction) for interactions with JSON-RPC blockchain nodes. Support EVM and Solana blockchains.
 
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/f9266d2b-2fc1-48e7-8dad-ef08ad93c07e" alt="Animation">
+</div>
+
 🍒 Extra feature: tools for pump.fun bonding curve calculations and analysis.
 
 🤖 Run the auto-generation script to generate MCP tools for other blockchains using [OpenAPI specifications](https://github.com/chainstack/dev-portal/tree/main/openapi).
