@@ -155,3 +155,39 @@ def calculate_bonding_curve_progress(data: str, encoding: str = "base64") -> Cal
         return _ok(max(0.0, min(100.0, progress)))
     except Exception as e:
         return _err(str(e))
+
+
+@mcp.tool(
+    name="get_graduating_bonding_curves",
+    description="""
+    Returns memcmp filters for Solana getProgramAccounts to find bonding curves
+    that are likely close to graduation. NOTE: This is a coarse filter that may
+    return tokens with up to ~281M tokens remaining. Additional client-side
+    filtering recommended.
+    
+    Filters for:
+    - Bonding curve discriminator
+    - real_token_reserves with top 2 bytes = 0x00 (coarse threshold)  
+    - complete = false
+    """,
+    annotations={"title": "Find graduating Pump.fun tokens (coarse filter)", "readOnlyHint": True},
+)
+def get_graduating_bonding_curves() -> CallToolResult:
+    threshold = 100_000_000_000_000
+    msb_prefix = threshold.to_bytes(8, "little")[6:]
+
+    try:
+        return _ok(
+            [
+                {
+                    "memcmp": {
+                        "offset": 0,
+                        "bytes": base58.b58encode(EXPECTED_DISCRIMINATOR).decode(),
+                    }
+                },
+                {"memcmp": {"offset": 30, "bytes": base58.b58encode(msb_prefix).decode()}},
+                {"memcmp": {"offset": 48, "bytes": base58.b58encode(b"\x00").decode()}},
+            ]
+        )
+    except Exception as e:
+        return _err(str(e))
