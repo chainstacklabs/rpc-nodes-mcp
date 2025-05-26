@@ -2,6 +2,8 @@
 Auto-generated MCP tools for JSON-RPC methods.
 """
 
+import json
+
 from mcp.types import CallToolResult
 
 import servers.solana.common.client as client
@@ -886,22 +888,20 @@ async def getmultipleaccounts(
         "Call the getProgramAccounts JSON-RPC method to get all accounts owned by a program.\n\n"
         "Parameters:\n"
         "- chain (str): Must be 'solana'.\n"
-        "- program_id (str): Base-58 encoded public key of the program.\n"
-        "- encoding (str, optional): Data encoding. Options:\n"
-        "  - 'base58'\n"
-        "  - 'base64' (default)\n"
-        "  - 'base64+zstd'\n"
-        "  - 'jsonParsed'\n"
-        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+        "- program_id (str): Base-58 encoded public key of the program. For graduating bonding curves, use `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P`.\n"
+        "- encoding (str, optional): Data encoding. Default is 'base64'.\n"
+        "- commitment (str, optional): Commitment level. Default is 'confirmed'.\n"
+        "- filters (list, optional): List of filter objects. Each filter can be:\n"
+        "  - memcmp filter: {'memcmp': {'offset': int, 'bytes': 'base58_string'}}\n"
+        "  - dataSize filter: {'dataSize': int}\n"
+        "  Example: [{'memcmp': {'offset': 0, 'bytes': '4y6pru6YvC7'}}]\n"
+        "  Use output from get_graduating_bonding_curves() directly.\n"
         "- data_slice (dict, optional): Object with 'offset' and 'length'.\n"
-        "- filters (list, optional): List of filter dicts (memcmp or dataSize).\n"
         "- with_context (bool, optional): Whether to include response context.\n\n"
-        "Returns: Array of account info owned by the given program.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getProgramAccounts",\n'
-        '  "params": ["Tokenkeg...", {"encoding": "base64"}]\n'
-        "}'"
+        "Usage:\n"
+        "1. filters_list = get_graduating_bonding_curves()  # Returns filter list\n"
+        "2. getprogramaccounts('solana', program_id, filters=filters_list)\n\n"
+        "Returns: Array of account info owned by the given program."
     ),
     annotations={"title": "getProgramAccounts", "readOnlyHint": True},
 )
@@ -910,8 +910,8 @@ async def getprogramaccounts(
     program_id: str,
     commitment: str = "confirmed",
     encoding: str = "base64",
-    data_slice: dict = None,
     filters: list = None,
+    data_slice: dict = None,
     with_context: bool = None,
 ) -> CallToolResult:
     try:
@@ -920,13 +920,14 @@ async def getprogramaccounts(
             options["commitment"] = commitment
         if encoding:
             options["encoding"] = encoding
-        if data_slice:
-            options["dataSlice"] = data_slice
         if filters:
             options["filters"] = filters
+        if data_slice:
+            options["dataSlice"] = data_slice
         if with_context is not None:
             options["withContext"] = with_context
-        return _ok(await client.getprogramaccounts(chain.lower(), program_id, options or None))
+
+        return _ok(await client.getprogramaccounts(chain, program_id, options))
     except Exception as e:
         return _err(str(e))
 

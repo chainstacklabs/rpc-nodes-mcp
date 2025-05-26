@@ -1,4 +1,5 @@
 import base64
+import json
 import struct
 
 import base58
@@ -177,17 +178,12 @@ def get_graduating_bonding_curves() -> CallToolResult:
     msb_prefix = threshold.to_bytes(8, "little")[6:]
 
     try:
-        return _ok(
-            [
-                {
-                    "memcmp": {
-                        "offset": 0,
-                        "bytes": base58.b58encode(EXPECTED_DISCRIMINATOR).decode(),
-                    }
-                },
-                {"memcmp": {"offset": 30, "bytes": base58.b58encode(msb_prefix).decode()}},
-                {"memcmp": {"offset": 48, "bytes": base58.b58encode(b"\x00").decode()}},
-            ]
-        )
+        filters = [
+            {"memcmp": {"offset": 0, "bytes": base58.b58encode(EXPECTED_DISCRIMINATOR).decode()}},
+            {"memcmp": {"offset": 30, "bytes": base58.b58encode(msb_prefix).decode()}},
+            {"memcmp": {"offset": 48, "bytes": base58.b58encode(b"\x00").decode()}},
+        ]
+        return _ok(json.dumps(filters))
+
     except Exception as e:
         return _err(str(e))
