@@ -63,7 +63,7 @@ Tool for auto-generating MCP interfaces and implementations (_only tools current
 ```bash
 uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
 ```
-**Note:** auto-generated tools reuire further improvements, see [here](https://github.com/chainstacklabs/rpc-nodes-mcp/blob/main/scripts/README.md).
+**Note:** auto-generated tools require further improvements, see [here](https://github.com/chainstacklabs/rpc-nodes-mcp/blob/main/scripts/README.md).
 
 ## Configuration
 
