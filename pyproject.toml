@@ -11,6 +11,10 @@ dependencies = [
     "solders>=0.26.0",
 ]
 
+[project.scripts]
+mcp-evm = "src.main_evm:main"
+mcp-solana = "src.main_solana:main"
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
