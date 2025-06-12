@@ -2,10 +2,10 @@
 Ethereum-specific implementation of the BlockchainAdapter using EVM base logic.
 """
 
-from src.common.config import settings
-from src.common.interfaces import RpcClient
-from src.servers.evm.common.adapter_registry import register_adapter
-from src.servers.evm.evm import EvmAdapter
+from common.config import settings
+from common.interfaces import RpcClient
+from servers.evm.common.adapter_registry import register_adapter
+from servers.evm.evm import EvmAdapter
 
 
 @register_adapter("ethereum")

@@ -3,8 +3,8 @@ import base64
 import base58
 from mcp.types import CallToolResult
 
-from src.common.utils import _err, _ok
-from src.servers.solana.server import mcp
+from common.utils import _err, _ok
+from servers.solana.server import mcp
 
 LAMPORTS_PER_SOL = 10**9
 

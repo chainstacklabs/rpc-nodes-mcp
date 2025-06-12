@@ -2,10 +2,10 @@
 Solana-specific implementation of the BlockchainAdapter.
 """
 
-from src.common.config import settings
-from src.common.interfaces import RpcClient
-from src.servers.solana.common.adapter_registry import register_adapter
-from src.servers.solana.solana import SolanaAdapter
+from common.config import settings
+from common.interfaces import RpcClient
+from servers.solana.common.adapter_registry import register_adapter
+from servers.solana.solana import SolanaAdapter
 
 
 @register_adapter("solana")

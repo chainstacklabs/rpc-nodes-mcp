@@ -2,9 +2,9 @@
 
 from mcp.types import CallToolResult
 
-import src.servers.evm.common.client as client
-from src.common.utils import _err, _ok
-from src.servers.evm.server import mcp
+import servers.evm.common.client as client
+from common.utils import _err, _ok
+from servers.evm.server import mcp
 
 
 @mcp.tool(

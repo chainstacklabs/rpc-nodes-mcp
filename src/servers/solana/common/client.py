@@ -3,7 +3,7 @@ Client dispatcher that routes blockchain transaction requests
 through registered BlockchainAdapter instances.
 """
 
-from src.servers.solana.common.adapter_registry import registry
+from servers.solana.common.adapter_registry import registry
 
 
 def _adapter(chain: str):

@@ -8,8 +8,8 @@ import time
 
 import httpx
 
-from src.common.interfaces import RpcClient
-from src.common.logger import get_logger
+from common.interfaces import RpcClient
+from common.logger import get_logger
 
 logger = get_logger(__name__)
 

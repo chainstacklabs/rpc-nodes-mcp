@@ -1,9 +1,9 @@
 import logging
 
-import src.servers.solana.chains
-import src.servers.solana.tools
-from src.common.logger import setup_file_logging
-from src.servers.solana.server import mcp
+import servers.solana.chains
+import servers.solana.tools
+from common.logger import setup_file_logging
+from servers.solana.server import mcp
 
 
 def main():

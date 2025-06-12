@@ -2,9 +2,9 @@
 Auto-generated adapter class for solana-compatible blockchain.
 """
 
-from src.common.interfaces import RpcClient
-from src.common.rpc import HttpxRpcClient
-from src.servers.solana.common.interfaces import BlockchainAdapter
+from common.interfaces import RpcClient
+from common.rpc import HttpxRpcClient
+from servers.solana.common.interfaces import BlockchainAdapter
 
 
 class SolanaAdapter(BlockchainAdapter):

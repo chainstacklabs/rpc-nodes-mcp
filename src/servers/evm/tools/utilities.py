@@ -4,9 +4,9 @@ import datetime
 
 from mcp.types import CallToolResult
 
-from src.common.utils import _err, _ok
-from src.servers.evm.common.adapter_registry import registry
-from src.servers.evm.server import mcp
+from common.utils import _err, _ok
+from servers.evm.common.adapter_registry import registry
+from servers.evm.server import mcp
 
 
 @mcp.tool(

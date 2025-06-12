@@ -2,7 +2,7 @@
 Decorator-based registry for automatically registering blockchain adapters.
 """
 
-from src.servers.solana.common.interfaces import BlockchainAdapter
+from servers.solana.common.interfaces import BlockchainAdapter
 
 registry: dict[str, BlockchainAdapter] = {}
 

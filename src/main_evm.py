@@ -1,9 +1,9 @@
 import logging
 
-import src.servers.evm.chains
-import src.servers.evm.tools
-from src.common.logger import setup_file_logging
-from src.servers.evm.server import mcp
+import servers.evm.chains
+import servers.evm.tools
+from common.logger import setup_file_logging
+from servers.evm.server import mcp
 
 
 def main():

@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "mcp-v1"
 version = "0.1.0"
-description = "MCP server to interact with EVM and Solana blockchains"
+description = "MCP server to interact with EVM blockchains"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -20,11 +20,10 @@ mcp-evm = "main_evm:main"
 mcp-solana = "main_solana:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["main_*", "src*"]
+where = ["src"]
 
 [tool.setuptools.package-dir]
-"" = "."
+"" = "src"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
