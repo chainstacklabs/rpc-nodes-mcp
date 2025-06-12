@@ -6,8 +6,8 @@ import base58
 from mcp.types import CallToolResult
 from solders.pubkey import Pubkey
 
-from common.utils import _err, _ok
-from servers.solana.server import mcp
+from src.common.utils import _err, _ok
+from src.servers.solana.server import mcp
 
 LAMPORTS_PER_SOL = 1_000_000_000
 TOKEN_DECIMALS = 6

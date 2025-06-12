@@ -6,9 +6,9 @@ import json
 
 from mcp.types import CallToolResult
 
-import servers.solana.common.client as client
-from common.utils import _err, _ok
-from servers.solana.server import mcp
+import src.servers.solana.common.client as client
+from src.common.utils import _err, _ok
+from src.servers.solana.server import mcp
 
 
 @mcp.tool(
