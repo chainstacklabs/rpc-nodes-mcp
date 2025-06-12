@@ -19,11 +19,12 @@ dependencies = [
 mcp-evm = "main_evm:main"
 mcp-solana = "main_solana:main"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+py-modules = ["main_evm", "main_solana"]
 
-[tool.setuptools.package-dir]
-"" = "src"
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
