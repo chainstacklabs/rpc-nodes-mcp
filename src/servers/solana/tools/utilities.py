@@ -4,7 +4,7 @@ import base58
 from mcp.types import CallToolResult
 
 from common.utils import _err, _ok
-from servers.solana.server import mcp
+from servers.solana.tool_registry import mcp
 
 LAMPORTS_PER_SOL = 10**9
 

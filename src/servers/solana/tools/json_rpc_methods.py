@@ -8,7 +8,7 @@ from mcp.types import CallToolResult
 
 import servers.solana.common.client as client
 from common.utils import _err, _ok
-from servers.solana.server import mcp
+from servers.solana.tool_registry import mcp
 
 
 @mcp.tool(

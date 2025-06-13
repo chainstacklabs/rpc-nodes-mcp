@@ -1,3 +1,5 @@
-from mcp.server.fastmcp import FastMCP
+# src/servers/solana/server.py
+from servers.solana.tool_registry import mcp
 
-mcp = FastMCP("SolanaJsonRpcNodeMCP")
+# Export the mcp instance
+__all__ = ["mcp"]

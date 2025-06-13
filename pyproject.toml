@@ -11,7 +11,7 @@ requires-python = ">=3.13"
 dependencies = [
     "base58>=2.1.1",
     "httpx>=0.28.1",
-    "mcp[cli]>=1.8.1",
+    "mcp[cli]>=1.9.0",
     "solders>=0.26.0",
 ]
 
