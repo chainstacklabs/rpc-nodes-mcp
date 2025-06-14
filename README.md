@@ -22,7 +22,7 @@ git clone https://github.com/chainstacklabs/rpc-nodes-mcp.git
 cd rpc-nodes-mcp
 ```
 
-### 2. Install dependencies with `uv`
+### 2. Install dependencies with [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
 | Mode       | Command                                           |
 |------------|---------------------------------------------------|
 | Base       | `uv pip install -r pyproject.toml`                |
@@ -46,7 +46,7 @@ OPENAI_API_KEY=
 
 ### ▶️ Run MCP server
 ```bash
-npx @modelcontextprotocol/inspector uv run src/main_evm.py
+npx @modelcontextprotocol/inspector uv run main_evm.py
 ```
 For more details, visit [Model Context Inspector](https://modelcontextprotocol.io/docs/tools/inspector).
 
