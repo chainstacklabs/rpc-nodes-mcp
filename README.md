@@ -1,5 +1,11 @@
 # MCP to access blockchain RPC nodes
 
+### EVM chains
+[![Install EVM MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=rpc-nodes-evm&config=eyJjb21tYW5kIjoidXZ4IC0tZnJvbSBnaXQraHR0cHM6Ly9naXRodWIuY29tL2NoYWluc3RhY2tsYWJzL3JwYy1ub2Rlcy1tY3AuZ2l0IG1jcC1ldm0ifQ%3D%3D)
+
+### Solana 
+[![Install Solana MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=rpc-nodes-solana&config=eyJjb21tYW5kIjoidXZ4IC0tZnJvbSBnaXQraHR0cHM6Ly9naXRodWIuY29tL2NoYWluc3RhY2tsYWJzL3JwYy1ub2Rlcy1tY3AuZ2l0IG1jcC1zb2xhbmEifQ%3D%3D)
+
 Minimal, fast, and extensible [MCP servers](https://modelcontextprotocol.io/introduction) for interactions with JSON-RPC blockchain nodes. Support EVM and Solana blockchains.
 
 <div align="center">
@@ -7,14 +13,6 @@ Minimal, fast, and extensible [MCP servers](https://modelcontextprotocol.io/intr
 </div>
 
 🍒 Extra feature: tools for pump.fun bonding curve calculations and analysis.
-
-🤖 Run the auto-generation script to generate MCP tools for other blockchains using [OpenAPI specifications](https://github.com/chainstack/dev-portal/tree/main/openapi).
-```bash
-uv run scripts/generate_mcp_tools.py <openapi_path> <output_dir> <blockchain_name>
-
-# Example
-uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts/generated evm
-```
 
 ## 🚀 Quick start
 
@@ -66,6 +64,17 @@ uv run scripts/generate_mcp_tools.py scripts/openapi_specs/ethereum.json scripts
 **Note:** auto-generated tools require further improvements, see [here](https://github.com/chainstacklabs/rpc-nodes-mcp/blob/main/scripts/README.md).
 
 ## Configuration
+
+### Cursor
+
+**EVM chains**
+
+[![Install EVM MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=rpc-nodes-evm&config=eyJjb21tYW5kIjoidXZ4IC0tZnJvbSBnaXQraHR0cHM6Ly9naXRodWIuY29tL2NoYWluc3RhY2tsYWJzL3JwYy1ub2Rlcy1tY3AuZ2l0IG1jcC1ldm0ifQ%3D%3D)
+
+**Solana** 
+
+[![Install Solana MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=rpc-nodes-solana&config=eyJjb21tYW5kIjoidXZ4IC0tZnJvbSBnaXQraHR0cHM6Ly9naXRodWIuY29tL2NoYWluc3RhY2tsYWJzL3JwYy1ub2Rlcy1tY3AuZ2l0IG1jcC1zb2xhbmEifQ%3D%3D)
+
 
 ### VS Code
 
