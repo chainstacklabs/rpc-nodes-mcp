@@ -6,7 +6,7 @@
                 "--directory",
                 "full path to workspace folder",
                 "run",
-                "src\\main_evm.py"
+                "main_evm.py"
             ]
         },
         "solana": {
@@ -15,7 +15,7 @@
                 "--directory",
                 "full path to workspace folder",
                 "run",
-                "src\\main_solana.py"
+                "main_solana.py"
             ]
         }
     }
