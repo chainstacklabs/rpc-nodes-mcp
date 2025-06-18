@@ -220,40 +220,40 @@ async def getblockheight(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getblockproduction",
-    description=(
-        "Call the getBlockProduction JSON-RPC method to get recent block production stats.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional)\n"
-        "- identity (str, optional)\n"
-        "- first_slot (int, optional)\n"
-        "- last_slot (int, optional)\n"
-        "Returns: Validator block production info.\n"
-    ),
-    annotations={"title": "getBlockProduction", "readOnlyHint": True},
-)
-async def getblockproduction(
-    chain: str,
-    commitment: str = "finalized",
-    identity: str = None,
-    first_slot: int = None,
-    last_slot: int = None,
-) -> CallToolResult:
-    try:
-        options = {}
-        if commitment:
-            options["commitment"] = commitment
-        if identity:
-            options["identity"] = identity
-        if first_slot is not None:
-            options["range"] = {"firstSlot": first_slot}
-            if last_slot is not None:
-                options["range"]["lastSlot"] = last_slot
-        return _ok(await client.getblockproduction(chain.lower(), options))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getblockproduction",
+#     description=(
+#         "Call the getBlockProduction JSON-RPC method to get recent block production stats.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n"
+#         "- commitment (str, optional)\n"
+#         "- identity (str, optional)\n"
+#         "- first_slot (int, optional)\n"
+#         "- last_slot (int, optional)\n"
+#         "Returns: Validator block production info.\n"
+#     ),
+#     annotations={"title": "getBlockProduction", "readOnlyHint": True},
+# )
+# async def getblockproduction(
+#     chain: str,
+#     commitment: str = "finalized",
+#     identity: str = None,
+#     first_slot: int = None,
+#     last_slot: int = None,
+# ) -> CallToolResult:
+#     try:
+#         options = {}
+#         if commitment:
+#             options["commitment"] = commitment
+#         if identity:
+#             options["identity"] = identity
+#         if first_slot is not None:
+#             options["range"] = {"firstSlot": first_slot}
+#             if last_slot is not None:
+#                 options["range"]["lastSlot"] = last_slot
+#         return _ok(await client.getblockproduction(chain.lower(), options))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -483,23 +483,23 @@ async def getfirstavailableblock(chain: str) -> CallToolResult:
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getgenesishash",
-    description=(
-        "Call the getGenesisHash JSON-RPC method to retrieve the genesis hash of the current network.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: The genesis hash as a base-58 encoded string.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getGenesisHash"}\''
-    ),
-    annotations={"title": "getGenesisHash", "readOnlyHint": True},
-)
-async def getgenesishash(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getgenesishash(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getgenesishash",
+#     description=(
+#         "Call the getGenesisHash JSON-RPC method to retrieve the genesis hash of the current network.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: The genesis hash as a base-58 encoded string.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getGenesisHash"}\''
+#     ),
+#     annotations={"title": "getGenesisHash", "readOnlyHint": True},
+# )
+# async def getgenesishash(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getgenesishash(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -544,57 +544,57 @@ async def gethighestsnapshotslot(chain: str) -> CallToolResult:
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getidentity",
-    description=(
-        "Call the getIdentity JSON-RPC method to retrieve the identity public key for the current node.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: A JSON object containing the node's identity public key.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0",\n'
-        '  "id": 1,\n'
-        '  "method": "getIdentity"\n'
-        "}'"
-    ),
-    annotations={"title": "getIdentity", "readOnlyHint": True},
-)
-async def getidentity(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getidentity(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getidentity",
+#     description=(
+#         "Call the getIdentity JSON-RPC method to retrieve the identity public key for the current node.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: A JSON object containing the node's identity public key.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0",\n'
+#         '  "id": 1,\n'
+#         '  "method": "getIdentity"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getIdentity", "readOnlyHint": True},
+# )
+# async def getidentity(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getidentity(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="getinflationgovernor",
-    description=(
-        "Call the getInflationGovernor JSON-RPC method to retrieve the current inflation governor parameters.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n"
-        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
-        "Returns: An object containing inflation parameters including foundation and validator rewards.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0",\n'
-        '  "id": 1,\n'
-        '  "method": "getInflationGovernor"\n'
-        "}'"
-    ),
-    annotations={"title": "getInflationGovernor", "readOnlyHint": True},
-)
-async def getinflationgovernor(
-    chain: str,
-    commitment: str = "finalized",
-) -> CallToolResult:
-    try:
-        options = {}
-        if commitment:
-            options["commitment"] = commitment
-        return _ok(await client.getinflationgovernor(chain.lower(), options))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getinflationgovernor",
+#     description=(
+#         "Call the getInflationGovernor JSON-RPC method to retrieve the current inflation governor parameters.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n"
+#         "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+#         "Returns: An object containing inflation parameters including foundation and validator rewards.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0",\n'
+#         '  "id": 1,\n'
+#         '  "method": "getInflationGovernor"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getInflationGovernor", "readOnlyHint": True},
+# )
+# async def getinflationgovernor(
+#     chain: str,
+#     commitment: str = "finalized",
+# ) -> CallToolResult:
+#     try:
+#         options = {}
+#         if commitment:
+#             options["commitment"] = commitment
+#         return _ok(await client.getinflationgovernor(chain.lower(), options))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
