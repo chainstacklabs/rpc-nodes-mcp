@@ -359,23 +359,23 @@ async def getblocktime(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getclusternodes",
-    description=(
-        "Call the getClusterNodes JSON-RPC method to retrieve information about all nodes in the cluster.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: A list of nodes, including their public key, gossip, TPU, RPC addresses, and software version.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getClusterNodes"}\''
-    ),
-    annotations={"title": "getClusterNodes", "readOnlyHint": True},
-)
-async def getclusternodes(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getclusternodes(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getclusternodes",
+#     description=(
+#         "Call the getClusterNodes JSON-RPC method to retrieve information about all nodes in the cluster.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: A list of nodes, including their public key, gossip, TPU, RPC addresses, and software version.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getClusterNodes"}\''
+#     ),
+#     annotations={"title": "getClusterNodes", "readOnlyHint": True},
+# )
+# async def getclusternodes(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getclusternodes(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -408,23 +408,23 @@ async def getepochinfo(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getepochschedule",
-    description=(
-        "Call the getEpochSchedule JSON-RPC method to retrieve epoch scheduling parameters.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: Epoch schedule details including slots per epoch, warmup phase, and first normal epoch.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getEpochSchedule"}\''
-    ),
-    annotations={"title": "getEpochSchedule", "readOnlyHint": True},
-)
-async def getepochschedule(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getepochschedule(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getepochschedule",
+#     description=(
+#         "Call the getEpochSchedule JSON-RPC method to retrieve epoch scheduling parameters.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: Epoch schedule details including slots per epoch, warmup phase, and first normal epoch.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{"jsonrpc":"2.0","id":1,"method":"getEpochSchedule"}\''
+#     ),
+#     annotations={"title": "getEpochSchedule", "readOnlyHint": True},
+# )
+# async def getepochschedule(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getepochschedule(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -597,64 +597,64 @@ async def gethighestsnapshotslot(chain: str) -> CallToolResult:
 #         return _err(str(e))
 
 
-@mcp.tool(
-    name="getinflationrate",
-    description=(
-        "Call the getInflationRate JSON-RPC method to retrieve the current inflation rate.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: A JSON object with current inflation rate details including total yearly percentage and validator rewards.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0",\n'
-        '  "id": 1,\n'
-        '  "method": "getInflationRate"\n'
-        "}'"
-    ),
-    annotations={"title": "getInflationRate", "readOnlyHint": True},
-)
-async def getinflationrate(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getinflationrate(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getinflationrate",
+#     description=(
+#         "Call the getInflationRate JSON-RPC method to retrieve the current inflation rate.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: A JSON object with current inflation rate details including total yearly percentage and validator rewards.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0",\n'
+#         '  "id": 1,\n'
+#         '  "method": "getInflationRate"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getInflationRate", "readOnlyHint": True},
+# )
+# async def getinflationrate(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getinflationrate(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="getinflationreward",
-    description=(
-        "Call the getInflationReward JSON-RPC method to fetch the inflation reward for a list of addresses.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n"
-        "- addresses (List[str]): List of base-58 encoded account addresses.\n"
-        "- epoch (int, optional): Epoch number to query.\n"
-        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
-        "Returns: A list of inflation rewards corresponding to the given addresses.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0",\n'
-        '  "id": 1,\n'
-        '  "method": "getInflationReward",\n'
-        '  "params": [["vote111111111111111111111111111111111111111"], {"epoch": 345, "commitment": "finalized"}]\n'
-        "}'"
-    ),
-    annotations={"title": "getInflationReward", "readOnlyHint": True},
-)
-async def getinflationreward(
-    chain: str,
-    addresses: list,
-    epoch: int = None,
-    commitment: str = "finalized",
-) -> CallToolResult:
-    try:
-        options = {}
-        if epoch is not None:
-            options["epoch"] = epoch
-        if commitment:
-            options["commitment"] = commitment
-        return _ok(await client.getinflationreward(chain.lower(), addresses, options or None))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getinflationreward",
+#     description=(
+#         "Call the getInflationReward JSON-RPC method to fetch the inflation reward for a list of addresses.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n"
+#         "- addresses (List[str]): List of base-58 encoded account addresses.\n"
+#         "- epoch (int, optional): Epoch number to query.\n"
+#         "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+#         "Returns: A list of inflation rewards corresponding to the given addresses.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0",\n'
+#         '  "id": 1,\n'
+#         '  "method": "getInflationReward",\n'
+#         '  "params": [["vote111111111111111111111111111111111111111"], {"epoch": 345, "commitment": "finalized"}]\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getInflationReward", "readOnlyHint": True},
+# )
+# async def getinflationreward(
+#     chain: str,
+#     addresses: list,
+#     epoch: int = None,
+#     commitment: str = "finalized",
+# ) -> CallToolResult:
+#     try:
+#         options = {}
+#         if epoch is not None:
+#             options["epoch"] = epoch
+#         if commitment:
+#             options["commitment"] = commitment
+#         return _ok(await client.getinflationreward(chain.lower(), addresses, options or None))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -758,81 +758,81 @@ async def getleaderschedule(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getmaxretransmitslot",
-    description=(
-        "Call the getMaxRetransmitSlot JSON-RPC method to get the current max retransmit slot the node has seen.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: Slot number of the max retransmit slot.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getMaxRetransmitSlot"\n'
-        "}'"
-    ),
-    annotations={"title": "getMaxRetransmitSlot", "readOnlyHint": True},
-)
-async def getmaxretransmitslot(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getmaxretransmitslot(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getmaxretransmitslot",
+#     description=(
+#         "Call the getMaxRetransmitSlot JSON-RPC method to get the current max retransmit slot the node has seen.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: Slot number of the max retransmit slot.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0", "id": 1, "method": "getMaxRetransmitSlot"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getMaxRetransmitSlot", "readOnlyHint": True},
+# )
+# async def getmaxretransmitslot(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getmaxretransmitslot(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="getmaxshredinsertslot",
-    description=(
-        "Call the getMaxShredInsertSlot JSON-RPC method to get the highest slot for shred insertion.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "Returns: Slot number of the max shred insert slot.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getMaxShredInsertSlot"\n'
-        "}'"
-    ),
-    annotations={"title": "getMaxShredInsertSlot", "readOnlyHint": True},
-)
-async def getmaxshredinsertslot(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.getmaxshredinsertslot(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getmaxshredinsertslot",
+#     description=(
+#         "Call the getMaxShredInsertSlot JSON-RPC method to get the highest slot for shred insertion.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "Returns: Slot number of the max shred insert slot.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0", "id": 1, "method": "getMaxShredInsertSlot"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getMaxShredInsertSlot", "readOnlyHint": True},
+# )
+# async def getmaxshredinsertslot(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.getmaxshredinsertslot(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="getminimumbalanceforrentexemption",
-    description=(
-        "Call the getMinimumBalanceForRentExemption JSON-RPC method to calculate the minimum balance needed for rent exemption.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n"
-        "- data_length (int): Length of the account data in bytes.\n"
-        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
-        "Returns: Minimum lamports required for rent exemption.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getMinimumBalanceForRentExemption",\n'
-        '  "params": [128, {"commitment": "finalized"}]\n'
-        "}'"
-    ),
-    annotations={"title": "getMinimumBalanceForRentExemption", "readOnlyHint": True},
-)
-async def getminimumbalanceforrentexemption(
-    chain: str,
-    data_length: int,
-    commitment: str = "finalized",
-) -> CallToolResult:
-    try:
-        options = {}
-        if commitment:
-            options["commitment"] = commitment
-        return _ok(
-            await client.getminimumbalanceforrentexemption(
-                chain.lower(), data_length, options or None
-            )
-        )
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getminimumbalanceforrentexemption",
+#     description=(
+#         "Call the getMinimumBalanceForRentExemption JSON-RPC method to calculate the minimum balance needed for rent exemption.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n"
+#         "- data_length (int): Length of the account data in bytes.\n"
+#         "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+#         "Returns: Minimum lamports required for rent exemption.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0", "id": 1, "method": "getMinimumBalanceForRentExemption",\n'
+#         '  "params": [128, {"commitment": "finalized"}]\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getMinimumBalanceForRentExemption", "readOnlyHint": True},
+# )
+# async def getminimumbalanceforrentexemption(
+#     chain: str,
+#     data_length: int,
+#     commitment: str = "finalized",
+# ) -> CallToolResult:
+#     try:
+#         options = {}
+#         if commitment:
+#             options["commitment"] = commitment
+#         return _ok(
+#             await client.getminimumbalanceforrentexemption(
+#                 chain.lower(), data_length, options or None
+#             )
+#         )
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -932,30 +932,30 @@ async def getprogramaccounts(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getrecentperformancesamples",
-    description=(
-        "Call the getRecentPerformanceSamples JSON-RPC method to fetch recent performance metrics.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n"
-        "- limit (int, optional): Number of samples to return (max 720).\n\n"
-        "Returns: A list of performance sample objects (numSlots, numTransactions, etc).\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getRecentPerformanceSamples",\n'
-        '  "params": [10]\n'
-        "}'"
-    ),
-    annotations={"title": "getRecentPerformanceSamples", "readOnlyHint": True},
-)
-async def getrecentperformancesamples(
-    chain: str,
-    limit: int = None,
-) -> CallToolResult:
-    try:
-        return _ok(await client.getrecentperformancesamples(chain.lower(), limit))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getrecentperformancesamples",
+#     description=(
+#         "Call the getRecentPerformanceSamples JSON-RPC method to fetch recent performance metrics.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n"
+#         "- limit (int, optional): Number of samples to return (max 720).\n\n"
+#         "Returns: A list of performance sample objects (numSlots, numTransactions, etc).\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0", "id": 1, "method": "getRecentPerformanceSamples",\n'
+#         '  "params": [10]\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getRecentPerformanceSamples", "readOnlyHint": True},
+# )
+# async def getrecentperformancesamples(
+#     chain: str,
+#     limit: int = None,
+# ) -> CallToolResult:
+#     try:
+#         return _ok(await client.getrecentperformancesamples(chain.lower(), limit))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -1154,29 +1154,29 @@ async def getslotleaders(
         return _err(str(e))
 
 
-@mcp.tool(
-    name="getstakeminimumdelegation",
-    description=(
-        "Call the getStakeMinimumDelegation JSON-RPC method to retrieve the minimum stake amount needed for delegation.\n\n"
-        "Parameters:\n"
-        "- chain (str): Must be 'solana'.\n\n"
-        "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
-        "Returns: Minimum number of lamports required for stake delegation.\n\n"
-        "Example:\n"
-        'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
-        '  "jsonrpc": "2.0", "id": 1, "method": "getStakeMinimumDelegation"\n'
-        "}'"
-    ),
-    annotations={"title": "getStakeMinimumDelegation", "readOnlyHint": True},
-)
-async def getstakeminimumdelegation(chain: str, commitment: str) -> CallToolResult:
-    try:
-        options = {}
-        if commitment:
-            options["commitment"] = commitment
-        return _ok(await client.getstakeminimumdelegation(chain.lower(), options or None))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="getstakeminimumdelegation",
+#     description=(
+#         "Call the getStakeMinimumDelegation JSON-RPC method to retrieve the minimum stake amount needed for delegation.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Must be 'solana'.\n\n"
+#         "- commitment (str, optional): Desired commitment level (processed, confirmed or finalized). Default is finalized.\n"
+#         "Returns: Minimum number of lamports required for stake delegation.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://api.mainnet-beta.solana.com -H "Content-Type: application/json" -d \'{\n'
+#         '  "jsonrpc": "2.0", "id": 1, "method": "getStakeMinimumDelegation"\n'
+#         "}'"
+#     ),
+#     annotations={"title": "getStakeMinimumDelegation", "readOnlyHint": True},
+# )
+# async def getstakeminimumdelegation(chain: str, commitment: str) -> CallToolResult:
+#     try:
+#         options = {}
+#         if commitment:
+#             options["commitment"] = commitment
+#         return _ok(await client.getstakeminimumdelegation(chain.lower(), options or None))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
