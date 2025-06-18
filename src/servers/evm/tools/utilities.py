@@ -28,7 +28,7 @@ def convert_wei_to_eth(wei: str) -> CallToolResult:
     name="get_supported_blockchains",
     description="Returns the list of blockchain names supported by the MCP server.",
     annotations={
-        "title": "",
+        "title": "Get EVM blockchain names suported the MCP server",
         "readOnlyHint": True,
     },
 )
