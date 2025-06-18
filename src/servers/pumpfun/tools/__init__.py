@@ -12,6 +12,6 @@ for mod in pkgutil.iter_modules(__path__):
         __all__.append(mod.name)
 
         # Log successful import for debugging
-        print(f"Successfully imported Solana tool module: {mod.name}")
+        print(f"Successfully imported PumpFun tool module: {mod.name}")
     except ImportError as e:
-        print(f"Failed to import Solana tool module {mod.name}: {e}")
+        print(f"Failed to import PumpFun tool module {mod.name}: {e}")
