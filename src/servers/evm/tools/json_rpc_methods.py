@@ -13,7 +13,7 @@ from servers.evm.tool_registry import mcp
         "Call the web3_clientVersion JSON-RPC method to retrieve the current client version of the Ethereum node.\n\n"
         "Description: Returns the current client version of the Ethereum node.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A string representing the Ethereum client version.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -39,7 +39,7 @@ async def web3_clientVersion(chain: str) -> CallToolResult:
         "Call the web3_sha3 JSON-RPC method to compute the Keccak-256 (not the standardized SHA3-256) hash of the provided data.\n\n"
         "Description: Returns Keccak-256 (not the standardized SHA3-256) of the given data.\n\n"
         "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains..\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "- data (str): The data to convert into a SHA3 hash (must be a hex string with 0x prefix).\n\n"
         "Returns: A hex string containing the SHA3 result.\n\n"
         "Example:\n"
@@ -66,7 +66,7 @@ async def web3_sha3(chain: str, data: str) -> CallToolResult:
         "Call the net_version JSON-RPC method to retrieve the current network ID.\n\n"
         "Description: Returns the current network ID used by the client.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A string representing the network ID.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -92,7 +92,7 @@ async def net_version(chain: str) -> CallToolResult:
         "Call the net_listening JSON-RPC method to determine if the client is actively listening for network connections.\n\n"
         "Description: Returns true if the client is actively listening for network connections, otherwise false.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A boolean value indicating if the client is listening.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -118,7 +118,7 @@ async def net_listening(chain: str) -> CallToolResult:
         "Call the net_peerCount JSON-RPC method to retrieve the number of peers currently connected to the client.\n\n"
         "Description: Returns the number of peers currently connected to the client as a hexadecimal string.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A hex string representing the number of connected peers.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -144,7 +144,7 @@ async def net_peerCount(chain: str) -> CallToolResult:
         "Call the eth_syncing JSON-RPC method to check if the node is syncing.\n\n"
         "Description: Returns an object with data about the sync status or false if the node is not syncing.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: An object with sync status or false.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -170,7 +170,7 @@ async def eth_syncing(chain: str) -> CallToolResult:
         "Call the eth_chainId JSON-RPC method to retrieve the chain ID.\n\n"
         "Description: Returns the chain ID used by the current network.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A hex string representing the chain ID.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -196,7 +196,7 @@ async def eth_chainId(chain: str) -> CallToolResult:
         "Call the eth_blockNumber JSON-RPC method to retrieve the current block number.\n\n"
         "Description: Returns the number of the most recent block.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A hex string representing the latest block number.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -222,7 +222,7 @@ async def eth_blockNumber(chain: str) -> CallToolResult:
         "Call the eth_gasPrice JSON-RPC method to retrieve the current gas price in wei.\n\n"
         "Description: Returns the current price per gas in wei.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A hex string of the current gas price in wei.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
@@ -286,7 +286,7 @@ async def eth_feeHistory(
         "Call the eth_maxPriorityFeePerGas JSON-RPC method to get the suggested max priority fee per gas.\n\n"
         "Description: Returns a suggested max priority fee per gas in wei.\n\n"
         "Parameters:\n"
-        "- chain (str): Must be Ethereum.\n\n"
+        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
         "Returns: A hex string representing the priority fee per gas.\n\n"
         "Example:\n"
         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
