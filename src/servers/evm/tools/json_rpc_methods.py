@@ -60,82 +60,82 @@ async def web3_sha3(chain: str, data: str) -> CallToolResult:
         return _err(str(e))
 
 
-@mcp.tool(
-    name="net_version",
-    description=(
-        "Call the net_version JSON-RPC method to retrieve the current network ID.\n\n"
-        "Description: Returns the current network ID used by the client.\n\n"
-        "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
-        "Returns: A string representing the network ID.\n\n"
-        "Example:\n"
-        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
-        "{\n"
-        '  "jsonrpc": "2.0",\n'
-        '  "method": "net_version",\n'
-        '  "params": [],\n'
-        '  "id": 1\n'
-        "}'"
-    ),
-    annotations={"title": "net_version", "readOnlyHint": True},
-)
-async def net_version(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.net_version(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="net_version",
+#     description=(
+#         "Call the net_version JSON-RPC method to retrieve the current network ID.\n\n"
+#         "Description: Returns the current network ID used by the client.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+#         "Returns: A string representing the network ID.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+#         "{\n"
+#         '  "jsonrpc": "2.0",\n'
+#         '  "method": "net_version",\n'
+#         '  "params": [],\n'
+#         '  "id": 1\n'
+#         "}'"
+#     ),
+#     annotations={"title": "net_version", "readOnlyHint": True},
+# )
+# async def net_version(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.net_version(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="net_listening",
-    description=(
-        "Call the net_listening JSON-RPC method to determine if the client is actively listening for network connections.\n\n"
-        "Description: Returns true if the client is actively listening for network connections, otherwise false.\n\n"
-        "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
-        "Returns: A boolean value indicating if the client is listening.\n\n"
-        "Example:\n"
-        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
-        "{\n"
-        '  "jsonrpc": "2.0",\n'
-        '  "method": "net_listening",\n'
-        '  "params": [],\n'
-        '  "id": 1\n'
-        "}'"
-    ),
-    annotations={"title": "net_listening", "readOnlyHint": True},
-)
-async def net_listening(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.net_listening(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="net_listening",
+#     description=(
+#         "Call the net_listening JSON-RPC method to determine if the client is actively listening for network connections.\n\n"
+#         "Description: Returns true if the client is actively listening for network connections, otherwise false.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+#         "Returns: A boolean value indicating if the client is listening.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+#         "{\n"
+#         '  "jsonrpc": "2.0",\n'
+#         '  "method": "net_listening",\n'
+#         '  "params": [],\n'
+#         '  "id": 1\n'
+#         "}'"
+#     ),
+#     annotations={"title": "net_listening", "readOnlyHint": True},
+# )
+# async def net_listening(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.net_listening(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
-@mcp.tool(
-    name="net_peerCount",
-    description=(
-        "Call the net_peerCount JSON-RPC method to retrieve the number of peers currently connected to the client.\n\n"
-        "Description: Returns the number of peers currently connected to the client as a hexadecimal string.\n\n"
-        "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
-        "Returns: A hex string representing the number of connected peers.\n\n"
-        "Example:\n"
-        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
-        "{\n"
-        '  "jsonrpc": "2.0",\n'
-        '  "method": "net_peerCount",\n'
-        '  "params": [],\n'
-        '  "id": 1\n'
-        "}'"
-    ),
-    annotations={"title": "net_peerCount", "readOnlyHint": True},
-)
-async def net_peerCount(chain: str) -> CallToolResult:
-    try:
-        return _ok(await client.net_peerCount(chain.lower()))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="net_peerCount",
+#     description=(
+#         "Call the net_peerCount JSON-RPC method to retrieve the number of peers currently connected to the client.\n\n"
+#         "Description: Returns the number of peers currently connected to the client as a hexadecimal string.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+#         "Returns: A hex string representing the number of connected peers.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+#         "{\n"
+#         '  "jsonrpc": "2.0",\n'
+#         '  "method": "net_peerCount",\n'
+#         '  "params": [],\n'
+#         '  "id": 1\n'
+#         "}'"
+#     ),
+#     annotations={"title": "net_peerCount", "readOnlyHint": True},
+# )
+# async def net_peerCount(chain: str) -> CallToolResult:
+#     try:
+#         return _ok(await client.net_peerCount(chain.lower()))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
@@ -1443,35 +1443,35 @@ async def trace_block(chain: str, block_number: str) -> CallToolResult:
         return _err(str(e))
 
 
-@mcp.tool(
-    name="eth_getProof",
-    description=(
-        "Call the eth_getProof JSON-RPC method to get Merkle proof for account and storage values.\n\n"
-        "Description: Returns the account and storage values of the specified account including the Merkle-proof.\n\n"
-        "Parameters:\n"
-        "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
-        "- address (str): The address of the account or contract.\n"
-        "- storage_keys (list[str]): Array of storage-keys to be proofed and included.\n"
-        "- block (str): Block number or keyword like 'latest', 'earliest', or 'pending'.\n\n"
-        "Returns: Account proof object with balance, codeHash, nonce, storageHash, accountProof, and storageProof.\n\n"
-        "Example:\n"
-        'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
-        "{\n"
-        '  "jsonrpc": "2.0",\n'
-        '  "method": "eth_getProof",\n'
-        '  "params": ["0x...", ["0x0000000000000000000000000000000000000000000000000000000000000000"], "latest"],\n'
-        '  "id": 1\n'
-        "}'"
-    ),
-    annotations={"title": "eth_getProof", "readOnlyHint": True},
-)
-async def eth_getProof(
-    chain: str, address: str, storage_keys: list[str], block: str = "latest"
-) -> CallToolResult:
-    try:
-        return _ok(await client.eth_getProof(chain.lower(), address, storage_keys, block))
-    except Exception as e:
-        return _err(str(e))
+# @mcp.tool(
+#     name="eth_getProof",
+#     description=(
+#         "Call the eth_getProof JSON-RPC method to get Merkle proof for account and storage values.\n\n"
+#         "Description: Returns the account and storage values of the specified account including the Merkle-proof.\n\n"
+#         "Parameters:\n"
+#         "- chain (str): Blockchain name. Run get_supported_blockchains tool to get the list of supported blockchains.\n"
+#         "- address (str): The address of the account or contract.\n"
+#         "- storage_keys (list[str]): Array of storage-keys to be proofed and included.\n"
+#         "- block (str): Block number or keyword like 'latest', 'earliest', or 'pending'.\n\n"
+#         "Returns: Account proof object with balance, codeHash, nonce, storageHash, accountProof, and storageProof.\n\n"
+#         "Example:\n"
+#         'curl -X POST https://nd-422-757-666.p2pify.com/key -H "Content-Type: application/json" -d \'\n'
+#         "{\n"
+#         '  "jsonrpc": "2.0",\n'
+#         '  "method": "eth_getProof",\n'
+#         '  "params": ["0x...", ["0x0000000000000000000000000000000000000000000000000000000000000000"], "latest"],\n'
+#         '  "id": 1\n'
+#         "}'"
+#     ),
+#     annotations={"title": "eth_getProof", "readOnlyHint": True},
+# )
+# async def eth_getProof(
+#     chain: str, address: str, storage_keys: list[str], block: str = "latest"
+# ) -> CallToolResult:
+#     try:
+#         return _ok(await client.eth_getProof(chain.lower(), address, storage_keys, block))
+#     except Exception as e:
+#         return _err(str(e))
 
 
 @mcp.tool(
