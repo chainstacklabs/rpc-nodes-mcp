@@ -18,9 +18,10 @@ dependencies = [
 [project.scripts]
 mcp-evm = "main_evm:main"
 mcp-solana = "main_solana:main"
+mcp-pumpfun = "main_pumpfun:main"
 
 [tool.setuptools]
-py-modules = ["main_evm", "main_solana"]
+py-modules = ["main_evm", "main_solana", "main_pumpfun"]
 
 [tool.setuptools.packages.find]
 where = ["."]
