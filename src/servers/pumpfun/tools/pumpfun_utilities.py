@@ -57,7 +57,7 @@ def calculate_bonding_curve_address(mint: str) -> CallToolResult:
 
 
 @mcp.tool(
-    name="calculate_associated_bonding_curve_address",
+    name="calc_associated_bonding_curve_addr",
     description="""
     Calculate the associated bonding curve token account address for a mint.
     This is for Pump.fun tokens on bonding curve operations.
@@ -69,7 +69,7 @@ def calculate_bonding_curve_address(mint: str) -> CallToolResult:
     """,
     annotations={"title": "Associated bonding curve ATA", "readOnlyHint": True},
 )
-def calculate_associated_bonding_curve_address(mint: str) -> CallToolResult:
+def calc_associated_bonding_curve_addr(mint: str) -> CallToolResult:
     try:
         token_program = Pubkey.from_string(TOKEN_PROGRAM_ID)
         ata_program = Pubkey.from_string(ATA_PROGRAM_ID)
