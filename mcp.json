@@ -1,6 +1,6 @@
 {
     "servers": {
-        "evm-server": {
+        "chainstack-evm-node": {
             "command": "uv",
             "args": [
                 "--directory",
@@ -9,13 +9,22 @@
                 "main_evm.py"
             ]
         },
-        "solana-server": {
+        "chainstack-solana-node": {
             "command": "uv",
             "args": [
                 "--directory",
                 "${workspaceFolder}",
                 "run",
                 "main_solana.py"
+            ]
+        },
+        "chainstack-pumpfun-tools": {
+            "command": "uv",
+            "args": [
+                "--directory",
+                "${workspaceFolder}",
+                "run",
+                "main_pumpfun.py"
             ]
         }
     }

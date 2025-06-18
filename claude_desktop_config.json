@@ -1,6 +1,6 @@
 {
     "mcpServers": {
-        "evm": {
+        "chainstack-evm-node": {
             "command": "full path to uv.exe",
             "args": [
                 "--directory",
@@ -9,13 +9,22 @@
                 "main_evm.py"
             ]
         },
-        "solana": {
+        "chainstack-solana-node": {
             "command": "full path to uv.exe",
             "args": [
                 "--directory",
                 "full path to workspace folder",
                 "run",
                 "main_solana.py"
+            ]
+        },
+        "chainstack-pumpfun-tools": {
+            "command": "full path to uv.exe",
+            "args": [
+                "--directory",
+                "full path to workspace folder",
+                "run",
+                "main_pumpfun.py"
             ]
         }
     }
