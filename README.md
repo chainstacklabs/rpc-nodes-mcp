@@ -23,7 +23,10 @@ cd rpc-nodes-mcp
 | Dev        | `uv pip install -r pyproject.toml -e '.[dev]'`    |
 | Test       | `uv pip install -r pyproject.toml -e '.[test]'`   |
 
-### 3. Set environment variables
+### 3. Set environment variables (optional)
+
+Default Chainstack endpoints are already provided, but if you'd like to use different ones, please add them to `.env`. The complete list of environment variables:
+
 ```
 ARBITRUM_RPC_URL=
 BASE_RPC_URL=
