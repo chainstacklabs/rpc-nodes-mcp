@@ -9,22 +9,28 @@ class Settings:
     def __init__(self):
         # Set default RPC URLs
         self.ARBITRUM_RPC_URL = os.getenv(
-            "ARBITRUM_RPC_URL", "https://nd-000-364-211.p2pify.com/5b8d22690a57f293b3a1ed8758014e35"
+            "ARBITRUM_RPC_URL",
+            "https://arbitrum-mainnet.core.chainstack.com/fbc89075f67357ebc91140b9327b414e",
         )
         self.BASE_RPC_URL = os.getenv(
             "BASE_RPC_URL",
-            "https://base-mainnet.core.chainstack.com/2fc1de7f08c0465f6a28e3c355e0cb14",
+            "https://base-mainnet.core.chainstack.com/4d9c1f91e76f25d6095138096ce006b2",
         )
         self.BINANCE_SMART_CHAIN_RPC_URL = os.getenv(
             "BINANCE_SMART_CHAIN_RPC_URL",
-            "https://bsc-mainnet.core.chainstack.com/35848e183f3e3303c8cfeacbea831cab",
+            "https://bsc-mainnet.core.chainstack.com/9ba68ca151306ade5d3307dfd4437d4a",
         )
         self.ETHEREUM_RPC_URL = os.getenv(
-            "ETHEREUM_RPC_URL", "https://nd-422-757-666.p2pify.com/0a9d79d93fb2f4a4b1e04695da2b77a7"
+            "ETHEREUM_RPC_URL",
+            "https://ethereum-mainnet.core.chainstack.com/9668d156902a4a323163ec5bd652278e",
         )
-        self.SONIC_RPC_URL = os.getenv("SONIC_RPC_URL", "https://rpc.soniclabs.com")
+        self.SONIC_RPC_URL = os.getenv(
+            "SONIC_RPC_URL",
+            "https://sonic-mainnet.core.chainstack.com/461f2690f6239ecb0f1640fa3224027b",
+        )
         self.SOLANA_RPC_URL = os.getenv(
-            "SOLANA_RPC_URL", "https://nd-326-444-187.p2pify.com/9de47db917d4f69168e3fed02217d15b"
+            "SOLANA_RPC_URL",
+            "https://solana-mainnet.core.chainstack.com/c1f70bbc35644bd95ae98c944984230a",
         )
 
         for key, value in os.environ.items():
