@@ -20,9 +20,9 @@ npx @modelcontextprotocol/inspector uv run main_pumpfun.py
 
 If you update dependencies:
 
-1. Use uv to manage packages: `uv pip install -r pyproject.toml`.
-2. For development: `uv pip install -r pyproject.toml -e '.[dev]'`.
-3. For testing: `uv pip install -r pyproject.toml -e '.[test]'`.
+1. Use uv to sync packages: `uv sync`.
+2. For development: `uv sync --extra dev` or `uv run pip install -e '.[dev]'`.
+3. For testing: `uv sync --extra test` or `uv run pip install -e '.[test]'`.
 4. Verify compatibility with Python 3.13+ as specified in the project.
 
 ## 3. Environment Configuration
